@@ -63,14 +63,14 @@ class UserController extends Controller
         $this->middleware('auth:user');
         $this->middleware('user.approval.status')->only('interest','showInterest','interestRequestUpdate','sendMessage','chatListing','memberDetails');
     }
-    
+
     //members
     public function members(Request $request){
-        
+
         $data = array();
         if($request->ajax())
         {
-            
+
             //$interstIds = MemberInterest::where('member_id', auth()->user()->id)->pluck('member_interested_id')->all();
             /*$db_record = Member::select(array('id','first_name','last_name','gender','marital_status_id','on_behalf_id','date_of_birth','country_id','occupation_id','nationality_id','caste_id','height','profile_image','education_id','picture_privacy'))->whereNotIn('id', $interstIds);*/
             $db_record = Member::select(array('id','first_name','last_name','gender','marital_status_id','on_behalf_id','date_of_birth','country_id','occupation_id','nationality_id','caste_id','height','profile_image','education_id','picture_privacy'));
@@ -80,17 +80,17 @@ class UserController extends Controller
             $db_record = $db_record->where('gender', '!=', auth()->user()->gender);
 
             $db_record = $db_record->orderBy('created_at','DESC');
-            
+
             $datatable = Datatables::of($db_record);
             $datatable = $datatable->editColumn('last_name', function($row)
             {
-                return  getUserName($row->first_name.' '.$row->last_name); 
+                return  getUserName($row->first_name.' '.$row->last_name);
             });
 
             // $datatable = $datatable->editColumn('education_id', function($row)
             // {
             //     $education = Education::where(['id' => $row->education_id])->first();
-            //     return $education ? $education->name : ''; 
+            //     return $education ? $education->name : '';
             // });
 
             return  $datatable->addColumn('customer_html', function($member)
@@ -108,7 +108,8 @@ class UserController extends Controller
                         $member['gender'] = 'Transgender';
                         break;
                 }
-                $member['hash_id'] = \Hashids::encode($member['id']);
+//                $member['hash_id'] = \Hashids::encode($member['id']);
+                $member['hash_id'] = $member['id'];
                 $member['date_of_birth'] = \Carbon\Carbon::createFromTimeStamp(strtotime($member['date_of_birth']), "UTC")->format('d M, Y');
 
                 return view('frontend.partials.members_list_row', compact('member'))->render();
@@ -119,13 +120,13 @@ class UserController extends Controller
             ->filter(function ($query) use ($request) {
                 $searchAr = explode(' ',$request->first_name);
                 /*if (count($searchAr) >= 2) {
-                    
+
                     $query->Where('first_name','LIKE', "%$searchAr[0]%")
                             ->orWhere('last_name','LIKE',"%$searchAr[1]%")
                             ->orWhere('email','LIKE',"%$request->first_name%")
                             ->orWhere('id','LIKE',"%$request->first_name%");
-                            
-                   
+
+
                 }else{*/
 
                     if ($request->first_name) {
@@ -139,7 +140,7 @@ class UserController extends Controller
                         /*$query->WhereRaw("concat(first_name, ' ', last_name) LIKE '%".$request->first_name."%'")
                             ->orWhere('email','LIKE',"%$request->first_name%")
                             ->orWhere('id','LIKE',"%$request->first_name%");*/
-                            
+
                     }
                // }
                 if ($request->partner_age) {
@@ -176,24 +177,24 @@ class UserController extends Controller
     }
     //member details
     public function memberDetails($id){
-        
+
         //$id = Hashids::decode($id)[0]; die();
         $member = Member::findOrFail($id);
-       
-       
+
+
         //$memb = $member->toArray();
-        
+
 
         /*$memb['profile_image'] = checkImage(asset('storage/members/profile-image/' . $member->profile_image),'',$member->profile_image,1);
         $memb['date_of_birth'] = \Carbon\Carbon::createFromTimeStamp(strtotime($member->date_of_birth), "UTC")->format('d M, Y');*/
 
         $data['user_images'] = UserImage::where('member_id', $id)->get();
-        $data['member'] = $member; 
+        $data['member'] = $member;
         return view('frontend.member_details')->with($data);
     }
     //send interest request
     public function interestRequest(Request $request ){
-        
+
 
         $messages = [
             'member_interested_id' => 'interested member id field is required',
@@ -210,7 +211,7 @@ class UserController extends Controller
                 'message' => "Your account is under admin approval. You'll not be able to perform any actions until your profile is approved. Thanks for your patience.",
                 'success_data' => NULL
             ]));
-            
+
         }elseif (auth()->user()->is_approved != 1 ) {
             return die(json_encode([
                 'status' => 0,
@@ -219,9 +220,9 @@ class UserController extends Controller
                 'success_data' => NULL
             ]));
         }
-       
+
         $request->validate($validation_rules,$messages);
-        
+
         $member = Member::where('id', $request->input('member_interested_id') )->first();
 
         if (!$member) {
@@ -248,7 +249,7 @@ class UserController extends Controller
                     'title' => 'Already Sent',
                 ]));
             }
-            
+
 
         }
 
@@ -359,7 +360,7 @@ class UserController extends Controller
 
             $social_links = GeneralSetting::find(1);
 
-            sendEmail($email, $subject, $content, '', '', 'en','',$social_links); 
+            sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
 
             if (isset($s_data) && !empty($s_data)) {
                 //login memeber
@@ -375,7 +376,7 @@ class UserController extends Controller
                 $s_data1 =  MemberResource::collection( $db_record1 );
             }
             $req_message = '';
-           
+
             $likes_count = 1;
 
             if (Session::has('likes')) {
@@ -391,7 +392,7 @@ class UserController extends Controller
                 Session::put('likes',$likes_count);
             }
             Session::save();
-            
+
             if ($likes_count == 15) {
                 $req_message = "Here you can send the message directly. Click here";
             }
@@ -413,7 +414,7 @@ class UserController extends Controller
     }
 
     public function reportUser(Request $request ){
-        
+
 
         $messages = [
             'memberId' => 'member id field is required',
@@ -424,7 +425,7 @@ class UserController extends Controller
             'reasonList' => 'required'
         );
         if (auth()->user()->is_approved != 1 && auth()->user()->status != 1) {
-            
+
             return die(json_encode([
                 'status' => 0,
                 'message' => "Your account verification is required. Please complete your profile and submit it for admin approval. After your profile is approved you ll receive a verified user badge to continue your search.",
@@ -432,8 +433,8 @@ class UserController extends Controller
             ]));
         }
         $request->validate($validation_rules,$messages);
-        $reason = str_replace("_"," ",$request->input('reasonList'));  
-        $other_comment = $request->input('comment') ? 'Other Comment:- '.$request->input('comment') : '';  
+        $reason = str_replace("_"," ",$request->input('reasonList'));
+        $other_comment = $request->input('comment') ? 'Other Comment:- '.$request->input('comment') : '';
         $member = Member::where('id', $request->input('memberId') )->first();
 
         if (!$member) {
@@ -524,7 +525,7 @@ class UserController extends Controller
                 $s_data1 =  MemberResource::collection( $db_record1 );
             }
             $req_message = ucwords($reason).' request has been send successfully';
-           
+
             $likes_count = 1;
 
             if (Session::has('likes')) {
@@ -539,7 +540,7 @@ class UserController extends Controller
                 Session::put('likes',$likes_count);
             }
             Session::save();
-            
+
             if ($likes_count == 2) {
                 $req_message = ucwords($reason)." request has been sent successfully";
             }
@@ -587,8 +588,8 @@ class UserController extends Controller
                             });
             }
 
-            
-            
+
+
             if ( $request->has('status') &&  !empty( $request->input('status') ) ) {
                 $db_record = $db_record->where('member_interests.status',$request->input('status') );
             }
@@ -607,7 +608,7 @@ class UserController extends Controller
     }
     // accept request OR reject
     public function interestRequestUpdate(Request $request ){
-        
+
         $messages = [
             'member_id' => 'member id field is required',
             'status' => 'status field is required',
@@ -616,9 +617,9 @@ class UserController extends Controller
             'member_id' => 'required|integer',
             'status' => 'required|integer'
         );
-        
+
         $request->validate($validation_rules,$messages);
-        
+
         $memberRequest = MemberInterest::where(['member_id' =>  $request->input('member_id'), 'member_interested_id' => auth()->user()->id ] )->first();
         if (!$memberRequest) {
             return response()->json([
@@ -643,7 +644,7 @@ class UserController extends Controller
         $data['plans'] = Plan::where(['status' => 1, 'deleted_at' => NULL])->get();
         $data['countries'] = Country::where(['status' => 1])->get();
 
-       
+
         $statesAr = array();
         $cityAr = array();
         $states = State::where(['status' => 1])->get();
@@ -653,13 +654,13 @@ class UserController extends Controller
 
         $data['states'] = $states;
         $data['states_ar'] =  json_encode($statesAr);
-        
+
 
         $cities = City::where(['status' => 1])->get();
         foreach ($cities as $K => $V) {
             $citiesAr[$V->state_id][] =  ['id' => $V->id, 'name' => $V->name];
         }
-        
+
         $data['cities_ar']  = json_encode($citiesAr);
         $data['cities']  = $cities;
 
@@ -680,7 +681,7 @@ class UserController extends Controller
         }elseif( $data['user']->is_approved != 1 ){
             Session::flash('flash_danger', 'Please fill in the basic information and upload your image to get the admin approval, otherwise you will not be able to perform any action on this website. Thank you!');
         }
-        return view('frontend.user.edit_profile')->with($data); 
+        return view('frontend.user.edit_profile')->with($data);
     }
 
     public function picture_privacy(){
@@ -692,14 +693,14 @@ class UserController extends Controller
         if ($data['user']->is_approved != 1 && $data['user']->status == 4 ) {
             Session::flash('flash_danger', 'Your account is not approved yet, please wait for approval.');
         }
-        return view('frontend.user.profile_privacy')->with($data); 
+        return view('frontend.user.profile_privacy')->with($data);
     }
     public function profile(Request $request){
-         
+
         $data['member'] = Member::findOrFail(auth()->user()->id);
-    
+
         $data['user_images'] = UserImage::where('member_id', auth()->user()->id)->get();
-        
+
         return view('frontend.user.view_profile')->with($data);
     }
     public function profileUpdate(Request $request){
@@ -709,7 +710,7 @@ class UserController extends Controller
             'first_name' => ['required','max:100','string'],
             'last_name' => ['required','max:100','string'],
             //'email' => ['required','max:100','string',Rule::unique('members')],
-           
+
             'date_of_birth' => ['required','date'],
             'gender' => ['required','integer'],
             'marital_status_id' => ['required','integer'],
@@ -732,11 +733,11 @@ class UserController extends Controller
 
         if(!isset(auth()->user()->social_id) || empty(auth()->user()->social_id) ){
             $input['original_password'] = $input['password'];
-            $input['password'] = Hash::make($input['password']);    
+            $input['password'] = Hash::make($input['password']);
         }
-        
+
         $model = Member::findOrFail($input['id']);
-        
+
         $flash_message = 'Member has been updated successfully.';
         $model->fill($input);
         $model->save();
@@ -758,9 +759,9 @@ class UserController extends Controller
             Session::flash('flash_danger', $validator->messages());
             return redirect()->back()->withInput();
         }
-        
+
         $model = Member::findOrFail($input['id']);
-        
+
         $flash_message = 'Privacy has been updated successfully.';
         $model->fill($input);
         $model->save();
@@ -796,12 +797,12 @@ class UserController extends Controller
 
         if(!isset(auth()->user()->social_id) || empty(auth()->user()->social_id) ){
             $input['original_password'] = $input['password'];
-            $input['password'] = Hash::make($input['password']);    
+            $input['password'] = Hash::make($input['password']);
         }
-        
+
 
         $input['status'] = 4; //send for approval
-        
+
         $model = Member::findOrFail($input['id']);
         if (!isset($model->profile_image) && empty($model->profile_image)) {
             Session::flash('flash_danger', 'Profile picture is required!');
@@ -837,7 +838,7 @@ class UserController extends Controller
         $email_template = EmailTemplate::where('type','user_send_profile_for_approval')->first();
         //$email_template = transformEmailTemplateModel($email_template,$lang);
         $subject = $email_template['subject'];
-       
+
         $content = $email_template['content'];
         $search = array("{{name}}","{{app_name}}");
         $replace = array($name,env('APP_NAME'));
@@ -849,11 +850,11 @@ class UserController extends Controller
         Session::flash('flash_success', $flash_message);
         return redirect('user/profile');
     }
-    
+
     public function change_photo(Request $request)
     {
        try {
-            
+
             $user = Member::findOrFail( auth()->user()->id );
 
             // Delete previous avatar
@@ -861,7 +862,7 @@ class UserController extends Controller
                 Storage::delete($user->profile_image);
 
                 $old_file = public_path() . '/storage/members/profile-image/' . $user->profile_image;
-                
+
                 if (file_exists($old_file) && !empty($user->profile_image))
                 {
                     $target_path = '/storage/members/profile-image';
@@ -889,16 +890,16 @@ class UserController extends Controller
                 return [
                     'status' => 1,
                     'file_url' => $_url
-                ]; 
+                ];
             }else{
                 return [
                     'status' => 2,
                     'file_url' => 'not saved here'
-                ]; 
+                ];
             }
             //$patht = $image->storeAs($path, $filename);
 
-            
+
         } catch (\Exception $e) {
             return [
                 'status' => 2,
@@ -932,16 +933,16 @@ class UserController extends Controller
                 return [
                     'status' => 1,
                     'file_url' => $_url
-                ]; 
+                ];
             }else{
                 return [
                     'status' => 2,
                     'file_url' => 'not saved here'
-                ]; 
+                ];
             }
             //$patht = $image->storeAs($path, $filename);
 
-            
+
         } catch (\Exception $e) {
             return [
                 'status' => 2,
@@ -957,7 +958,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'image_action' => ['required','integer'],
             'id' => ['required','integer']
-            
+
         ]);
         if ($validator->fails())
         {
@@ -995,11 +996,11 @@ class UserController extends Controller
                     return redirect('user/edit-profile');
                 }
                 //UserImage::destroy($input['id']);
-                
+
                 break;
-            
+
             default:
-                
+
                 break;
         }
         $request->session()->flash('flash_success', 'Action perform successful');
@@ -1010,7 +1011,7 @@ class UserController extends Controller
         $id = auth()->user()->id;
         $active_plan =MemberPlan::where('member_id',$id)->first();
         //$s_data = ChatListingResource::collection( $db_record );
-        
+
         //$data['users'] = json_decode( json_encode($s_data) );
         //new code for datatable..
         if($request->ajax())
@@ -1018,14 +1019,14 @@ class UserController extends Controller
             $member = '';
             $sql = "select chat_messages.id, chat_messages.message, chat_messages.msg_file, chat_messages.ip_address, chat_messages.instant_count, chat_messages.un_red, chat_messages.is_video, chat_messages.chat_user_id, chat_messages.created_at, chat_messages.updated_at, user_chats.user_id, user_chats.user_receiver from user_chats inner join chat_messages on user_chats.id = chat_messages.chat_user_id where chat_messages.id in (select MAX(chat_messages.id) AS msg_id from chat_messages group by chat_user_id) and (user_chats.user_id = $id or user_chats.user_receiver = $id) and chat_messages.id not in (select chat_message_id from delete_messages where (user_id = $id ) ORDER BY chat_messages.id DESC)";
 
-            $db_record = DB::select($sql);   
+            $db_record = DB::select($sql);
             $db_record = array_reverse($db_record);
 
             $datatable = Datatables::of($db_record);
             $datatable = $datatable->addIndexColumn();
             $datatable = $datatable->editColumn('created_at', function($row)
             {
-               
+
                 return \Carbon\Carbon::createFromTimeStamp(strtotime($row->created_at), "UTC")->format('Y-m-d h:i:s');
 
             });
@@ -1033,11 +1034,11 @@ class UserController extends Controller
             {
                 if ( auth()->user()->id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
                 }
-                
+
                 return Str::title($member->first_name.' '.substr($member->last_name, 0, 1) );
             });
 
@@ -1047,7 +1048,7 @@ class UserController extends Controller
 
                 if ( auth()->user()->id == $row->user_id ) {
                     $otherUserId = $row->user_receiver;
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $otherUserId = $row->user_id;
                 }
@@ -1068,23 +1069,23 @@ class UserController extends Controller
 
                 if ( auth()->user()->id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
                 }
-                
+
                 return $oneHavePlan;
             });
-            
-           
+
+
             $datatable = $datatable->addColumn('member_id', function($row)
             {
                 if ( auth()->user()->id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                 return $member->id;
             });
@@ -1092,10 +1093,10 @@ class UserController extends Controller
             {
                 if ( auth()->user()->id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                $id = $member->id;
                return  \Hashids::encode($id);
@@ -1106,7 +1107,7 @@ class UserController extends Controller
                if(isset($active_plan) && !empty($active_plan) && $active_plan->end_date >= $current_date){
                     if ( isset($row->message) && !empty($row->message) ) {
                        return truncatedStr($row->message,'message');
-                        
+
                     }elseif(isset($row->msg_file) && !empty($row->msg_file)){
                        return $row->msg_file;
                     }
@@ -1118,10 +1119,10 @@ class UserController extends Controller
             {
                 if ( auth()->user()->id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                 $profile_image = $member->profile_image;
                 return checkImage(asset('storage/members/profile-image/' . $profile_image),'placeholder.png',$profile_image,1);
@@ -1131,10 +1132,10 @@ class UserController extends Controller
             {
                 if ( auth()->user()->id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( auth()->user()->id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                 return $member->picture_privacy;
             });
@@ -1154,7 +1155,7 @@ class UserController extends Controller
         }
 
         $input = $request->all();
-        
+
         $chat_user = '';
         $data['page'] = 'chat';
         $data['chat_user_id'] = 0;
@@ -1212,7 +1213,7 @@ class UserController extends Controller
 
                 $ss_data = ConversationResource::collection( $db_record );
                 $data['chat'] = json_decode( json_encode($ss_data) );
-                
+
 
             }else{
 
@@ -1241,11 +1242,11 @@ class UserController extends Controller
 
                 $ss_data = ConversationResource::collection( $db_record );
                 $data['chat'] = json_decode( json_encode($ss_data) );
-            }      
+            }
         }else{
             $data['active_plan'] = 0;
         }
-        
+
         return view('frontend.user.chats')->with($data);
     }
     public function eventApply(Request $request){
@@ -1275,7 +1276,7 @@ class UserController extends Controller
             //intent
             Stripe\Stripe::setApiKey( env('STRIPE_SECRET') );
             $customer = Stripe\Customer::create();
-            
+
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
             $data['intent'] = $stripe->setupIntents->create(
@@ -1289,7 +1290,7 @@ class UserController extends Controller
 
             Stripe\Stripe::setApiKey( env('STRIPE_SECRET') );
             $customer = Stripe\Customer::create();
-            
+
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
             $data['intent'] = $stripe->setupIntents->create(
@@ -1298,19 +1299,19 @@ class UserController extends Controller
                 'payment_method_types' => [ 'card'],
               ]
             );
-            
+
         }
 
         $id = $request->id;
         $db_record = Event::where(['status' => 1, 'id' => $id, 'type' => 1])->first();
         if ( empty($db_record) ) {
-            
+
         }
         //echo $db_record->siblings; die();
         $data['siblings'] = Sibling::whereIn('id', explode(',',$db_record->siblings))->get();
-        
+
         $data['events'] = $db_record;
-        
+
         $data['user'] = $member;
         /*check already apply*/
         $alreadyApply = EventAudience::where([
@@ -1343,7 +1344,7 @@ class UserController extends Controller
         $input = $request->all();
         $validator = Validator::make($request->all(), [
             'event_id' => ['required','integer']
-            
+
         ]);
         if ($validator->fails())
         {
@@ -1394,9 +1395,9 @@ class UserController extends Controller
                         'title' => 'Limit Acceeded',
                         'message' => 'Your allow limit is acceeded, you can add more. Please contact admin',
                         'success_data' => NULL
-                    ]);  
+                    ]);
             }
-            
+
             if (isset($input['guests']) && !empty($input['guests'])) {
                 if (isset($input['guests']) && !empty($input['guests'])) {
                     $guests = json_decode($input['guests']);
@@ -1464,15 +1465,15 @@ class UserController extends Controller
             'total_price' => $total_cost,
             'stripe_customer_id' => $member->stripe_customer
         ]);
-        
+
 
         /*$en_coded = json_decode($input['guests'],true);
-        
+
         $mainAr = array();
         foreach ($en_coded as $K => $V) {
             $mainAr[] = json_encode($V);
         }
-        
+
         $guests = implode(',', $mainAr);*/
 
         //$guests = implode(',', $mainAr);
@@ -1491,9 +1492,9 @@ class UserController extends Controller
         $name = $model->first_name.' '.$model->last_name;
 
         $email = $model->email;
-        
+
         $email_template = EmailTemplate::where('type','user_apply_event')->first();
-        
+
         $subject = $email_template['subject'];
         $content = $email_template['content'];
         $search = array("{{name}}","{{app_name}}");
@@ -1517,7 +1518,7 @@ class UserController extends Controller
         $firebaseToken['to'] = $model->firebase_token;
         firebasePushNotification($firebaseToken,$notificationAr);
         $notificationAr['image'] =  $model->profile_image;
-        
+
         $notification = Notification::create($notificationAr);
 
         // ************************* //
@@ -1531,7 +1532,7 @@ class UserController extends Controller
         $search = array("{{name}}","{{app_name}}");
         $replace = array(ucwords($name),env('APP_NAME'));
         $content  = str_replace($search,$replace,$content);
-        
+
         sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);
 
         return die(json_encode([
@@ -1547,12 +1548,12 @@ class UserController extends Controller
 	        ));*/
 
         /*} catch (\Exception $e) {
-           
+
             return $e->getMessage();
         }*/
     }
     public function thankYou(Request $request,$msg){
-        
+
         //$data['message'] = 'Thank you, You have been successfully registered for event';
         $data['message'] = '<h2>'.$msg.'</h2><p>Thank you for applying for the event. You will be notified by admin once your request has been approved for the event. Thank you!</p>';
         $data['message'] = '<h2>'.$msg.'</h2><p>Thanks for registering. You will be only charged if your requets has been approved by admin.</p>';
@@ -1561,14 +1562,14 @@ class UserController extends Controller
     }
 
     public function thank_you(Request $request,$msg){
-        
+
         //$data['message'] = 'Thank you, You have been successfully registered for event';
         $data['message'] = '<h2>'.$msg.'</h2>';
 
         return view('frontend.thankyou')->with($data);
     }
     public function settings(Request $request){
-        
+
         $data['active'] = 'index';
         $member = Member::findOrFail(auth()->user()->id);
         $data['name'] = '';
@@ -1595,7 +1596,7 @@ class UserController extends Controller
 
             Stripe\Stripe::setApiKey( env('STRIPE_SECRET') );
             $customer = Stripe\Customer::create();
-            
+
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
             $data['intent'] = $stripe->setupIntents->create(
@@ -1604,7 +1605,7 @@ class UserController extends Controller
                 'payment_method_types' => [ 'card'],
               ]
             );
-            
+
         }
         if($request->ajax())
         {
@@ -1649,7 +1650,7 @@ class UserController extends Controller
                   return 'Register Event, ('.$row->getEventName($row->event_id).')';
                 }
 
-                
+
 
             });
             $datatable = $datatable->editColumn('created_at', function($row)
@@ -1674,7 +1675,7 @@ class UserController extends Controller
     //add stripe customer and payment method into members table
     public function addMemberStripeCustomerField(Request $request){
         try {
-            
+
             $user = Member::findOrFail( auth()->user()->id );
 
             if( ($request->has('payment_method') && !empty($request->input('payment_method'))) && ($request->has('customer') && !empty($request->input('customer')))  ){
@@ -1692,17 +1693,17 @@ class UserController extends Controller
                     'status' => 1,
                     'url' => $returnRedirectURL,
                     'message' => array('message' => ['Apply successfully! ']),
-                   
+
                 ]));
-                
+
             }else{
                 return die(json_encode([
                     'status' => 2,
                     'url' => '',
                     'message' => array('message' => ['Something Went Wrong ']),
-                   
+
                 ]));
-                
+
             }
         } catch (\Exception $e) {
             return die(json_encode([
@@ -1712,20 +1713,20 @@ class UserController extends Controller
             ]));
         }
     }
-    //Delete Payment method 
+    //Delete Payment method
     public function deletePaymentMethod(){
-        
+
         $user = Member::findOrFail(auth()->user()->id);
 
         if (!empty($user->stripe_customer) && !empty($user->stripe_payment_method)) {
-        
+
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-            
+
             $stripe->paymentMethods->detach(
               $user->stripe_payment_method,
               []
             );
-           
+
             $deleted =  $stripe->customers->delete(
               $user->stripe_customer,
               []
@@ -1742,16 +1743,16 @@ class UserController extends Controller
                 'status' => 1,
                 'url' => url('/user/settings'),
                 'message' => 'Deleted successfully!'
-                
+
             ]));
-            
+
         }
         else{
             return die(json_encode([
                 'status' => 0,
                 'url' => '',
                 'message' => 'Not found'
-                
+
             ]));
         }
     }
@@ -1773,7 +1774,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'password' => 'required|string|min:6|max:30|confirmed',
             'current_original_password' => 'required|string|min:6|max:30',
-           
+
         ]);
         if ($validator->fails())
         {
@@ -1789,17 +1790,17 @@ class UserController extends Controller
         $member->password = Hash::make($input['password']);
         $member->save();
         Session::flash('flash_success', 'Password updated successfully');
-        
+
         return view('frontend.user.settings.change_password')->with($data);
     }
     public function postFeedback(Request $request){
         $input = $request->all();
-        
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required',
             'image' => 'required|file|image|mimes:jpg,jpeg,png,svg'
-           
+
         ]);
         if ($validator->fails())
         {
@@ -1817,7 +1818,7 @@ class UserController extends Controller
             $target_path = 'public/members/feedback/';
             $file = $request->file('image');
             $image = 'feedback-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            
+
             $path = $file->storeAs($target_path, $image);
             $feedback->image = $image;
         }
@@ -1834,7 +1835,7 @@ class UserController extends Controller
             'description' => 'required',
             'partner_name' => 'required',
             'image' => 'required|file|image|mimes:jpg,jpeg,png,svg'
-           
+
         ]);
         if ($validator->fails())
         {
@@ -1850,11 +1851,11 @@ class UserController extends Controller
             // *********** //
             // Upload File //
             // *********** //
-            
+
             $target_path = storage_path('app/public').'/stories';
             $file = $request->file('image');
             $image = 'story-image-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            
+
             $path = $file->storeAs('stories', $image);
             $story->image = $image;
         }
@@ -1882,7 +1883,7 @@ class UserController extends Controller
     }
     public function deleteAccount(Request $request){
         $input = $request->all();
-        
+
         $validator = Validator::make($request->all(), [
             'reason_termination' => 'required',
         ]);
@@ -1903,9 +1904,9 @@ class UserController extends Controller
         $name = $model->first_name.' '.$model->last_name;
 
         $email = $model->email;
-        
+
         $email_template = EmailTemplate::where('type','closed_account')->first();
-        
+
         $subject = $email_template['subject'];
         $content = $email_template['content'];
         $search = array("{{name}}","{{user}}","{{app_name}}","{{reason}}");
@@ -1926,13 +1927,13 @@ class UserController extends Controller
         $search = array("{{name}}","{{user}}","{{app_name}}","{{reason}}");
         $replace = array(ucwords($admin),ucwords($name),env('APP_NAME'),$input['reason_termination'] );
         $content  = str_replace($search,$replace,$content);
-        
+
         sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);
 
         Auth::guard('user')->logout();
 
         //Member::destroy(auth()->user()->id);
-        
+
         return redirect('/');
     }
     // send message..
@@ -1940,7 +1941,7 @@ class UserController extends Controller
 
         $input = $request->all();
         $id = auth()->user()->id;
-        $rid = $input['user_id_receiver'];    
+        $rid = $input['user_id_receiver'];
         $member = Member::where('id', $rid )->first();
 
         if (!$member) {
@@ -1983,7 +1984,7 @@ class UserController extends Controller
 
         if ($canMsg == 1) {
             $is_free = 0;
-            
+
             if ( isset($active_plan) && !empty($active_plan) && $active_plan->end_date >= $current_date) {
                 $is_free = 0;
             }elseif ( $fee_count < 1 ) {
@@ -2016,7 +2017,7 @@ class UserController extends Controller
 
                 $inst_already = InstantCount::where(['member_id' => $id ,'receiver_member' => $rid])->first();
                 if (isset($inst_already) && !empty($inst_already)) {
-                    
+
                 }elseif (isset($pln) && !($inst_count < $pln->instant_messages_count )  ) {
                    return die(json_encode([
                         'status' => 0,
@@ -2027,7 +2028,7 @@ class UserController extends Controller
                 }
             //}
 
-            $rid = $input['user_id_receiver'];    
+            $rid = $input['user_id_receiver'];
             $member = Member::where('id', $rid )->first();
 
             if (!$member) {
@@ -2060,25 +2061,25 @@ class UserController extends Controller
             $filename = '';
             $_url ='';
             if( $input['file'] != '' )
-            {      
+            {
                 // *********** //
                 // Upload File //
                 // *********** //
-               
+
                 //NEWWW
 
-                $image = base64_decode( $input['file'] ); 
-               
+                $image = base64_decode( $input['file'] );
+
                 $filename = 'image-' . uniqid() . '.PNG';
                 $path = 'members/chat/'. $filename;
 
                 if( Storage::disk('public')->put($path, $image, 'public') ){
 
-                   $_url = checkImage(asset('storage/members/chat/' . $filename),'avatar.png',$filename,1); 
+                   $_url = checkImage(asset('storage/members/chat/' . $filename),'avatar.png',$filename,1);
                 }
-                
+
             }
-            
+
             $chat = ChatMessage::create([
                 'user_id' => auth()->user()->id,
                 'chat_user_id' => $user_chat_id,
@@ -2117,13 +2118,13 @@ class UserController extends Controller
             $has_id = Hashids::encode(Auth()->user()->id);
 
             $profile_link = url('user/chats?id='.$has_id );
-            
+
             $email = $member->email;
-            
-            
+
+
             $email_template = EmailTemplate::where('type','send_message')->first();
             //$email_template = transformEmailTemplateModel($email_template,$lang);
-            $subject = getUserName(Auth()->user()->first_name.' '.Auth()->user()->last_name).' '.$email_template['subject']; 
+            $subject = getUserName(Auth()->user()->first_name.' '.Auth()->user()->last_name).' '.$email_template['subject'];
             $content = $email_template['content'];
             $search = array("{{name}}","{{user}}","{{app_name}}","{{link}}");
             $replace = array($name,$user,env('APP_NAME'),$profile_link);
@@ -2132,7 +2133,7 @@ class UserController extends Controller
 
             // ************************* //
             // firbase notification
-            // ************************* //   
+            // ************************* //
             $notificationAr['user_id'] = $request->input('user_id_receiver');
             $notificationAr['chat_id'] = $user_chat_id;
             $notificationAr['event_id'] = NULL;
@@ -2238,7 +2239,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'plan_id' => ['required','integer']
-            
+
         ]);
         if ($validator->fails())
         {
@@ -2252,13 +2253,13 @@ class UserController extends Controller
             return die(json_encode([
                 'status' => 0,
                 'message' => 'Plan does not exist.'
-                
+
             ]));
         }
         //MemberPlan::where(['member_id' => $member->id])->delete();
         $id = auth()->user()->id;
         $mplan = MemberPlan::where('member_id',$id )->first();
-        
+
         $current_date = date('Y-m-d');
         $inst_count = InstantCount::select('id')
                    ->where('member_id',$id)
@@ -2266,23 +2267,23 @@ class UserController extends Controller
                    ->groupBy(['receiver_member'])
                    ->get()
                    ->count();
-                   
+
         //echo "$mplan->end_date >= $current_date"; die();
         if(isset($mplan) && !empty($mplan) && $mplan->end_date >= $current_date && $mplan->instant_messages_count >= $inst_count )
         {
             return die(json_encode([
                 'status' => 0,
                 'message' => 'You have already active plan. Please contact admin'
-                
+
             ]));
         }
-        
+
         /*if (isset($mplan) && !empty($mplan)) {
             if($mplan->status == 1 ){
                 return die(json_encode([
                     'status' => 0,
                     'message' => 'You have already active plan. Please contact to admin'
-                    
+
                 ]));
            }
         }*/
@@ -2291,7 +2292,7 @@ class UserController extends Controller
         $newDateTime = \Carbon\Carbon::now()->addDays($plan->period);
 
         $end_plan_date = \Carbon\Carbon::createFromTimeStamp(strtotime($newDateTime), "UTC")->format('Y-m-d');
-        
+
         try {
           Stripe\Stripe::setApiKey( env('STRIPE_SECRET') );
           $charge = Stripe\PaymentIntent::create([
@@ -2302,24 +2303,24 @@ class UserController extends Controller
             'off_session' => true,
             'confirm' => true,
           ]);
-         
+
         } catch (\Stripe\Exception\CardException $e) {
           // Error code will be authentication_required if authentication is needed
           echo 'Error code is:' . $e->getError()->code;
           $payment_intent_id = $e->getError()->payment_intent->id;
           $payment_intent = \Stripe\PaymentIntent::retrieve($payment_intent_id);
         }
-      
+
         if (empty($charge->id)) {
             return die(json_encode([
                 'status' => 0,
                 'message' => 'Payment does not charged'
             ]));
         }
-        
+
         $total_cost = $plan->price;
         if ( empty($mplan)  ) {
-            
+
             $apply = MemberPlan::create([
                 'member_id' => auth()->user()->id,
                 'plan_id' => $input['plan_id'],
@@ -2330,16 +2331,16 @@ class UserController extends Controller
                 'status' => 1
             ]);
             $payments = Payments::create([
-                
+
                 'members_plan_id' => $apply->id,
-                
+
                 'plan_id' => $input['plan_id'],
                 'amoun_paid' => $total_cost,
                 'payment_id' => $charge->id,
                 'plan_end_date' => $end_plan_date,
                 'stripe_status' => 'Payment complete',
                 'status' => 1
-            ]); 
+            ]);
             $mmbr = auth()->user();
             $mmbr->update([
                'plan_id' => $input['plan_id']
@@ -2352,7 +2353,7 @@ class UserController extends Controller
         }else{
             //update
             $mplan->update([
-               
+
                 'plan_id' => $input['plan_id'],
                 'total_price' => $total_cost,
                 'payment_id' => $charge->id,
@@ -2361,7 +2362,7 @@ class UserController extends Controller
                 'status' => 1
             ]);
             $payments = Payments::create([
-                
+
                 'members_plan_id' => $mplan->id,
                 'plan_id' => $input['plan_id'],
                 'amoun_paid' => $total_cost,
@@ -2372,11 +2373,11 @@ class UserController extends Controller
             ]);
             $mmbr = auth()->user();
             $mmbr->update([
-               'plan_id' => $input['plan_id'] 
+               'plan_id' => $input['plan_id']
             ]);
             InstantCount::where('member_id', $mmbr->id)->update(['is_active' => 0 ]);
         }
-        
+
         // ************************* //
         // Send mail to user
         // ************************* //
@@ -2384,9 +2385,9 @@ class UserController extends Controller
         $name = $model->first_name.' '.$model->last_name;
 
         $email = $model->email;
-        
+
         $email_template = EmailTemplate::where('type','user_apply_plan')->first();
-        
+
         $subject = $email_template['subject'];
         $content = $email_template['content'];
         $search = array("{{name}}","{{days}}","{{messages}}","{{app_name}}");
@@ -2411,7 +2412,7 @@ class UserController extends Controller
         $firebaseToken['to'] = $model->firebase_token;
         firebasePushNotification($firebaseToken,$notificationAr);
         $notificationAr['image'] =  $model->profile_image;
-        
+
         $notification = Notification::create($notificationAr);
 
         // ************************* //
@@ -2425,7 +2426,7 @@ class UserController extends Controller
         $search = array("{{name}}","{{app_name}}");
         $replace = array(ucwords($name),env('APP_NAME'));
         $content  = str_replace($search,$replace,$content);
-        
+
         sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);
 
         // return die(json_encode([
@@ -2454,12 +2455,12 @@ class UserController extends Controller
 
 
         /*} catch (\Exception $e) {
-           
+
             return $e->getMessage();
         }*/
     }
     public function transactions(Request $request){
-        
+
         $data = array();
         $data['active'] = 'index';
         if($request->ajax())
@@ -2471,7 +2472,7 @@ class UserController extends Controller
             $datatable = $datatable->addColumn('type', function($row)
             {
                if (isset($row->members_plan_id) && !empty($row->members_plan_id)) {
-                  return 'Plan Buy, '.getPlanName($row->members_plan_id); 
+                  return 'Plan Buy, '.getPlanName($row->members_plan_id);
                }elseif (isset($row->event_audiences_d) && !empty($row->event_audiences_d)) {
                   return 'Register Event, '.getEventName($row->event_audiences_d);
                }
@@ -2494,11 +2495,11 @@ class UserController extends Controller
             return $datatable;
         }
         return view('frontend.user.settings.index', $data);
-    } 
+    }
 
     //Notification
     public function my_notifications(Request $request){
-        
+
         $data = array();
         if($request->ajax())
         {
@@ -2510,11 +2511,11 @@ class UserController extends Controller
 
             $db_record = $db_record->where('user_id', '=', auth()->user()->id);
             $db_record = $db_record->orderBy('created_at','DESC');
-            
+
             $datatable = Datatables::of($db_record);
             /*$datatable = $datatable->editColumn('last_name', function($row)
             {
-                return  getUserName($row->first_name.' '.$row->last_name); 
+                return  getUserName($row->first_name.' '.$row->last_name);
             });*/
 
             return  $datatable->addColumn('customer_html', function($member)
@@ -2526,14 +2527,14 @@ class UserController extends Controller
             ])
             ->filter(function ($query) use ($request) {
                 $searchAr = explode(' ',$request->first_name);
-                
+
                 if ($request->first_name) {
 
                     $query->where(function($q) use ($request) {
                         $q->WhereRaw("concat(first_name, ' ', last_name) LIKE '%".$request->first_name."%'");
                         $q->orWhere('email','LIKE',"%$request->first_name%");
                         $q->orWhere('id','LIKE',"%$request->first_name%");
-                    });                            
+                    });
                 }
 
                 if ($request->partner_age) {
@@ -2587,5 +2588,5 @@ class UserController extends Controller
             return response()->json($response, 200);
         }
     }
-    
+
 }

@@ -67,7 +67,6 @@ class MemberController extends Controller
         $data = [];
         if($request->ajax())
         {
-
             $db_record = Member::orderBy('created_at','DESC');
             $datatable = Datatables::of($db_record);
             $datatable = $datatable->addIndexColumn();
@@ -78,7 +77,7 @@ class MemberController extends Controller
                 }else{
                     return '---';
                 }
-                
+
             });
 
             $datatable = $datatable->editColumn('name', function($row)
@@ -116,7 +115,7 @@ class MemberController extends Controller
                 }if ($row->status == 4){
                     $status = '<span class="badge rounded-pill bg-info">Submitted for Approval</span>';
                 }
-                
+
                 return $status;
             });
             $datatable = $datatable->editColumn('created_at', function($row)
@@ -126,10 +125,16 @@ class MemberController extends Controller
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                $actions .= '<a class="download_btn" style="border: 1px solid #145be9;" target="_blank" href="'.url("admin/members/" . Hashids::encode($row->id).'/download').'" title="Download"><i class="fa fa-download" aria-hidden="true"></i></a>';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/members/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
-                
-                $actions .= '&nbsp;<form method="POST" action="'.url("admin/members/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+//                $actions .= '<a class="download_btn" style="border: 1px solid #145be9;" target="_blank" href="'.url("admin/members/" . Hashids::encode($row->id).'/download').'" title="Download"><i class="fa fa-download" aria-hidden="true"></i></a>';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/members/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+//
+//                $actions .= '&nbsp;<form method="POST" action="'.url("admin/members/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+
+                $actions .= '<a class="download_btn" style="border: 1px solid #145be9;" target="_blank" href="'.url("admin/members/" . $row->id.'/download').'" title="Download"><i class="fa fa-download" aria-hidden="true"></i></a>';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/members/" . $row->id.'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+
+                $actions .= '&nbsp;<form method="POST" action="'.url("admin/members/" . $row->id).'" accept-charset="UTF-8" style="display:inline">';
+
                 $actions .= '<input type="hidden" name="_method" value="DELETE">';
                 $actions .= '<input name="_token" type="hidden" value="'.csrf_token().'">';
                 $actions .= '<button class="btn-danger del_btn" onclick="return confirm(\'Are you sure you want to delete this record?\');" title="Delete">';
@@ -147,9 +152,9 @@ class MemberController extends Controller
             $datatable = $datatable->make(true);
             return $datatable;
         }
-        
+
         $data['country'] =  Country::orderBy('created_at','DESC')->get();
-        
+
         return view('admin.members.index',$data);
     }
 
@@ -164,7 +169,7 @@ class MemberController extends Controller
        /* $data['plans'] = Plan::where(['status' => 1, 'deleted_at' => NULL])->get();*/
         $data['countries'] = Country::where(['status' => 1])->get();
 
-       
+
         $statesAr = array();
         $cityAr = array();
         $states = State::where(['status' => 1])->get();
@@ -174,13 +179,13 @@ class MemberController extends Controller
 
         $data['states'] = $states;
         $data['states_ar'] =  json_encode($statesAr);
-        
+
 
         $cities = City::where(['status' => 1])->get();
         foreach ($cities as $K => $V) {
             $citiesAr[$V->state_id][] =  ['id' => $V->id, 'name' => $V->name];
         }
-        
+
         $data['cities_ar']  = json_encode($citiesAr);
         $data['cities']  = $cities;
 
@@ -193,7 +198,7 @@ class MemberController extends Controller
         $data['languages'] = Language::where(['status' => 1])->get();
         $data['castes'] = Caste::where(['status' => 1])->get();
         $data['onbehalf'] = Onbehalf::where(['status' => 1])->get();
-        
+
         $data['action'] = "Add";
         return view('admin.members.form')->with($data);
     }
@@ -205,7 +210,7 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         try{
             $befor_status = '';
             $befor_active_status = '';
@@ -220,7 +225,7 @@ class MemberController extends Controller
                     'date_of_birth' => ['required','date'],
                     'gender' => ['required','integer'],
                     'on_behalf_id' => ['required','integer'],
-                    
+
                     'profile_image' => 'file|mimes:jpeg,jpg,png,svg|max:'.config('constants.file_size'),
 
                 ]);
@@ -231,7 +236,7 @@ class MemberController extends Controller
                 }*/
                 $input['original_password'] = $input['password'];
                 $input['password'] = Hash::make($input['password']);
-                
+
                 $model = new Member();
                 $flash_message = 'Member has been created successfully.';
             }
@@ -248,7 +253,7 @@ class MemberController extends Controller
                     'first_name' => ['required','max:100','string'],
                     'last_name' => ['required','max:100','string'],
                     'email' => ['required','max:100','string',Rule::unique('admins')],$pw,
-                    
+
                     'date_of_birth' => ['required','date'],
                     'gender' => ['required','integer'],
                     'on_behalf_id' => ['required','integer'],
@@ -259,7 +264,7 @@ class MemberController extends Controller
                     Session::flash('flash_danger', $validator->messages());
                     return redirect()->back()->withInput();
                 }*/
-                
+
                 $befor_status = $model->is_approved;
                 $befor_active_status = $model->status;
                 $flash_message = 'Member has been updated successfully.';
@@ -309,7 +314,7 @@ class MemberController extends Controller
                     case 3:
                         $status = 'rejected';
                         break;
-                    
+
                     default:
                         $status = 'pending';
                         break;
@@ -342,9 +347,9 @@ class MemberController extends Controller
                 $link = url('/');
 
                 if ($request->is_approved == 2) {
-                    
+
                     $email_template = EmailTemplate::where('type','profile_blocked')->first();
-                    
+
                     $subject = $email_template['subject'];
                     $content = $email_template['content'];
                     $search = array("{{name}}","{{status}}","{{link}}","{{app_name}}");
@@ -356,7 +361,7 @@ class MemberController extends Controller
 
                 }elseif($request->is_approved == 1) {
                     $email_template = EmailTemplate::where('type','now_verified')->first();
-                    
+
                     $subject = $email_template['subject'];
                     $content = $email_template['content'];
                     $search = array("{{name}}","{{status}}","{{link}}","{{app_name}}");
@@ -367,7 +372,7 @@ class MemberController extends Controller
                     sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
                 }else {
                     $email_template = EmailTemplate::where('type','profile_approval_status')->first();
-                    
+
                     $subject = str_replace("{{status}}",$status,$email_template['subject']);
                     $content = $email_template['content'];
                     $search = array("{{name}}","{{status}}","{{link}}","{{app_name}}");
@@ -400,7 +405,7 @@ class MemberController extends Controller
                 $email = $model->email;
                 $link = url('/');
                 $email_template = EmailTemplate::where('type','profile_approval_status')->first();
-                    
+
                 $subject = str_replace("{{status}}",$bstatus,$email_template['subject']);
                 $content = $email_template['content'];
                 $search = array("{{name}}","{{status}}","{{link}}","{{app_name}}");
@@ -419,7 +424,7 @@ class MemberController extends Controller
                 $name = $model->first_name.' '.$model->last_name;
 
                 $email = $model->email;
-                
+
                 $email_template = EmailTemplate::where('type','user_welcome')->first();
                 //$email_template = transformEmailTemplateModel($email_template,$lang);
                 $subject = $email_template['subject'];
@@ -428,7 +433,7 @@ class MemberController extends Controller
                 $replace = array(ucwords($name),env('APP_NAME'));
                 $content  = str_replace($search,$replace,$content);
                 $social_links = GeneralSetting::find(1);
-                
+
                 sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
                 // ************************* //
                 //    Send email to admin
@@ -441,7 +446,7 @@ class MemberController extends Controller
                 $search = array("{{name}}","{{app_name}}");
                 $replace = array(ucwords($name),env('APP_NAME'));
                 $content  = str_replace($search,$replace,$content);
-                
+
                 sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);
             }
             $request->session()->flash('flash_success', $flash_message);
@@ -461,7 +466,7 @@ class MemberController extends Controller
     public function edit($id)
     {
 
-        $id = Hashids::decode($id)[0];
+//        $id = Hashids::decode($id)[0];
 
         //if($id == 1)
         //access_denied();
@@ -470,7 +475,7 @@ class MemberController extends Controller
         /*$data['plans'] = Plan::where(['status' => 1, 'deleted_at' => NULL])->get();*/
         $data['countries'] = Country::where(['status' => 1])->get();
 
-       
+
         $statesAr = array();
         $cityAr = array();
         $states = State::where(['status' => 1])->get();
@@ -480,7 +485,7 @@ class MemberController extends Controller
 
         $data['states'] = $states;
         $data['states_ar'] =  json_encode($statesAr);
-        
+
 
         $cities = City::where(['status' => 1])->get();
         foreach ($cities as $K => $V) {
@@ -506,7 +511,7 @@ class MemberController extends Controller
 
     public function download($id)
     {
-        
+
         $id = Hashids::decode($id)[0];
 
         $member = Member::findOrFail($id);
@@ -518,7 +523,7 @@ class MemberController extends Controller
         $data['city'] = (isset($member->city) && !empty($member->city)) ? $member->city->name : '---';
         $data['country'] = (isset($member->country) && !empty($member->country)) ? $member->country->name : '---';
         $data['partner_prefered_country'] = (isset($member->partner_prefered_country_id) && !empty($member->partner_prefered_country_id)) ? $member->partner_prefered_country->name : '---';
-        
+
         $data['caste'] = (isset($member->caste) && !empty($member->caste)) ? $member->caste->name : '---';
         $data['partner_caste'] = (isset($member->partner_caste_id) && !empty($member->partner_caste_id)) ? $member->partner_caste->name : '---';
         $gender = '---';
@@ -536,7 +541,7 @@ class MemberController extends Controller
         $data['gender'] = $gender;
         $data['age'] = (isset($member->date_of_birth) && !empty($member->date_of_birth)) ? Carbon::parse($member->date_of_birth)->diff(Carbon::now())->y : '---';
         $data['partner_age'] =(isset($member->partner_age) && !empty($member->partner_age)) ? $member->partner_age : '---';
-        $data['marital_status'] =(isset($member->martial_status) && !empty($member->martial_status)) ? $member->marital_status->name : '---'; 
+        $data['marital_status'] =(isset($member->martial_status) && !empty($member->martial_status)) ? $member->marital_status->name : '---';
         $data['partner_marital_status'] = (isset($member->partner_marital_status) && !empty($member->partner_marital_status)) ? $member->partner_marital_status->name : '---'; ;
         $data['mobile'] =(isset($member->mobile) && !empty($member->mobile)) ? $member->mobile : '---';
         $data['email'] =(isset($member->email) && !empty($member->email)) ? $member->email : '---';
@@ -545,17 +550,17 @@ class MemberController extends Controller
         $data['height'] =(isset($member->height) && !empty($member->height)) ? $member->height : '---';
         $data['partner_height'] =(isset($member->partner_height) && !empty($member->partner_height)) ? $member->partner_height : '---';
         $data['family_status'] =(isset($member->family_status_id) && !empty($member->family_status_id)) ? $member->family_status->name : '---';
-        $data['partner_family_status'] = '';//(isset($member->partner_prefered_status) && !empty($member->partner_prefered_status)) ? $member->partner_family_status->name : '---'; 
-        $data['kids'] =(isset($member->kids) && !empty($member->kids)) ? $member->kids : '---'; 
-        $data['partner_with_children_acceptable'] =(isset($member->partner_with_children_acceptable) && !empty($member->partner_with_children_acceptable)) ? $member->partner_with_children_acceptable : '---'; 
-        $data['on_behalf'] =(isset($member->on_behalf_id) && !empty($member->on_behalf_id)) ? $member->on_behalf->name : '---'; 
+        $data['partner_family_status'] = '';//(isset($member->partner_prefered_status) && !empty($member->partner_prefered_status)) ? $member->partner_family_status->name : '---';
+        $data['kids'] =(isset($member->kids) && !empty($member->kids)) ? $member->kids : '---';
+        $data['partner_with_children_acceptable'] =(isset($member->partner_with_children_acceptable) && !empty($member->partner_with_children_acceptable)) ? $member->partner_with_children_acceptable : '---';
+        $data['on_behalf'] =(isset($member->on_behalf_id) && !empty($member->on_behalf_id)) ? $member->on_behalf->name : '---';
         $data['specialisation'] =(isset($member->working_with_id) && !empty($member->working_with_id)) ? $member->specialisation->name : '---';
         $data['working'] =(isset($member->working_with_id) && !empty($member->working_with_id)) ? $member->working->name : '---';
         $data['religion'] =(isset($member->religion_id) && !empty($member->religion_id)) ? $member->religion->name : '---';
-        $data['partner_religion'] =(isset($member->partner_religion_id) && !empty($member->partner_religion_id)) ? $member->partner_religion->name : '---'; 
+        $data['partner_religion'] =(isset($member->partner_religion_id) && !empty($member->partner_religion_id)) ? $member->partner_religion->name : '---';
 
         $data['mother_language'] =(isset($member->mother_language_id) && !empty($member->mother_language_id)) ? $member->mother_language->name : '---';
-        $data['partner_mother_language'] =(isset($member->partner_mother_language_id) && !empty($member->partner_mother_language_id)) ? $member->partner_mother_language->name : '---'; 
+        $data['partner_mother_language'] =(isset($member->partner_mother_language_id) && !empty($member->partner_mother_language_id)) ? $member->partner_mother_language->name : '---';
         $data['state'] =(isset($member->state_id) && !empty($member->state_id)) ? $member->state->name : '---';
         $data['partner_prefered_state'] =(isset($member->partner_prefered_state_id) && !empty($member->partner_prefered_state_id)) ? $member->partner_prefered_state->name : '---';
 
@@ -564,9 +569,9 @@ class MemberController extends Controller
         $pdf = \App::make('dompdf.wrapper');
         $pdf = PDF::loadView('admin.members.pdf', $data);
         return $pdf->stream();
-        
-        
-    }    
+
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -583,7 +588,7 @@ class MemberController extends Controller
     }
     public function export(Request $request){
         $input = $request->all();
-       
+
 
         $db_record = Member::orderBy('created_at','DESC');
 
@@ -607,14 +612,14 @@ class MemberController extends Controller
             $member = '';
             $sql = "select chat_messages.id, chat_messages.message, chat_messages.msg_file, chat_messages.ip_address, chat_messages.instant_count, chat_messages.un_red, chat_messages.is_video, chat_messages.chat_user_id, chat_messages.created_at, chat_messages.updated_at, user_chats.user_id, user_chats.user_receiver from user_chats inner join chat_messages on user_chats.id = chat_messages.chat_user_id where chat_messages.id in (select MAX(chat_messages.id) AS msg_id from chat_messages group by chat_user_id) and (user_chats.user_id = $id or user_chats.user_receiver = $id) and chat_messages.id not in (select chat_message_id from delete_messages where (user_id = $id ) ORDER BY chat_messages.id DESC)";
 
-            $db_record = DB::select($sql);   
+            $db_record = DB::select($sql);
             $db_record = array_reverse($db_record);
 
             $datatable = Datatables::of($db_record);
             $datatable = $datatable->addIndexColumn();
             $datatable = $datatable->editColumn('created_at', function($row)
             {
-               
+
                 return \Carbon\Carbon::createFromTimeStamp(strtotime($row->created_at), "UTC")->format('Y-m-d h:i:s');
 
             });
@@ -624,22 +629,22 @@ class MemberController extends Controller
                 if ( $id == $row->user_id ) {
 
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( $id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
                 }
-                
+
                 return $member->first_name.' '.$member->last_name;
             });
-           
+
             $datatable = $datatable->addColumn('member_id', function($row) use($id)
             {
                 if ( $id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( $id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                 return $member->id;
             });
@@ -647,20 +652,20 @@ class MemberController extends Controller
             {
                 if ( $id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( $id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                $rid = $member->id;
                return  \Hashids::encode($rid);
             });
             $datatable = $datatable->editColumn('message', function($row) use($id)
-            { 
-               
+            {
+
                 if ( isset($row->message) && !empty($row->message) ) {
                    return truncatedStr($row->message,'message');
-                    
+
                 }elseif(isset($row->msg_file) && !empty($row->msg_file)){
                    return $row->msg_file;
                 }
@@ -669,10 +674,10 @@ class MemberController extends Controller
             {
                 if ( $id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( $id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                 $profile_image = $member->profile_image;
                 $pi =  checkImage(asset('storage/members/profile-image/' . $profile_image),'placeholder.png',$profile_image,1);
@@ -683,20 +688,20 @@ class MemberController extends Controller
             {
                 if ( $id == $row->user_id ) {
                     $member = Member::findOrFail($row->user_receiver);
-                    
+
                 }elseif( $id == $row->user_receiver ){
                     $member = Member::findOrFail($row->user_id);
-                    
+
                 }
                 return $member->email;
             });
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                
+
                 $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/members/15/view").'" title="View"><img src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
-                
-               
+
+
                 $actions .= '</div>';
                 return $actions;
             });

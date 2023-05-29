@@ -41,7 +41,7 @@ class LoginController extends Controller
     public function __construct()
     {
       $this->middleware('guest:user')->except('logout','firebasePhoneAuthentication','verifyMobileCode');
-      
+
     }
 
     /**
@@ -70,7 +70,7 @@ class LoginController extends Controller
         'confirm_password' => 'same:password',
         'terms_conditions' => 'required|numeric'
       ]);
-     
+
       if ($validator->fails())
       {
         \Illuminate\Support\Facades\Session::flash('flash_danger', $validator->messages());
@@ -82,33 +82,33 @@ class LoginController extends Controller
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'gender' => $request->input('gender'),
-            
+
             'password' => Hash::make($request->input('password')),
             'original_password' => $request->input('password'),
             'terms_conditions' => $request->input('terms_conditions'),
-            'status' => 2,
+            'status' => 1,
             'plan_id' => 0,
         ]);
         if($member)
         {
-            
+
             // ************************* //
             // Send Verify Link To User
             // ************************* //
-            $name = $member->first_name.' '.$member->last_name;
-
-            $email = $member->email;
-            $link = url('/verify-account/'.Hashids::encode($member->id));
-            $email_template = EmailTemplate::where('type','sign_up_confirmation')->first();
-            //$email_template = transformEmailTemplateModel($email_template,'en');
-            $subject = $email_template['subject'];
-            $content = $email_template['content'];
-            $search = array("{{name}}","{{link}}","{{app_name}}");
-            $replace = array(ucwords($name),$link,env('APP_NAME'));
-            $content  = str_replace($search,$replace,$content);
-            $social_links = GeneralSetting::find(1);
-
-            sendEmailNew($email, $subject, $content, '', '', '','',$social_links);
+//            $name = $member->first_name.' '.$member->last_name;
+//
+//            $email = $member->email;
+//            $link = url('/verify-account/'.Hashids::encode($member->id));
+//            $email_template = EmailTemplate::where('type','sign_up_confirmation')->first();
+//            //$email_template = transformEmailTemplateModel($email_template,'en');
+//            $subject = $email_template['subject'];
+//            $content = $email_template['content'];
+//            $search = array("{{name}}","{{link}}","{{app_name}}");
+//            $replace = array(ucwords($name),$link,env('APP_NAME'));
+//            $content  = str_replace($search,$replace,$content);
+//            $social_links = GeneralSetting::find(1);
+//
+//            sendEmailNew($email, $subject, $content, '', '', '','',$social_links);
 
             // ************************* //
             //    Send email to admin
@@ -120,19 +120,19 @@ class LoginController extends Controller
             $search = array("{{name}}","{{app_name}}");
             $replace = array(ucwords($name),env('APP_NAME'));
             $content  = str_replace($search,$replace,$content);
-            
+
             sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);*/
 
             $request->session()->flash('flash_success', 'Your account is now successfully registered. Kindly check your email / spam or junck folder to varify.');
-            return redirect('login');  
-            
+            return redirect('login');
+
         }
         else
         {
           return redirect()->back()->withErrors(['error' => 'Some thing went wrong try again.']);
         }
-     
-     
+
+
     }
     public function loginUser(Request $request)
     {
@@ -142,7 +142,7 @@ class LoginController extends Controller
         'email'   => 'required|email',
         'password' => 'required|min:6'
       ]);
-      
+
       // Attempt to log the user in
       if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password] )) {
         // if successful, then redirect to their intended location
@@ -173,7 +173,7 @@ class LoginController extends Controller
                 $name = $user->first_name.' '.$user->last_name;
 
                 $email = $user->email;
-                
+
                 $email_template = EmailTemplate::where('type','user_welcome')->first();
                 $subject = $email_template['subject'];
                 $content = $email_template['content'];
@@ -181,9 +181,9 @@ class LoginController extends Controller
                 $replace = array(ucwords($name),env('APP_NAME'));
                 $content  = str_replace($search,$replace,$content);
                 $social_links = GeneralSetting::find(1);
-                
+
                 sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
-                
+
                 break;
         }
         if($is_user_active == false)
@@ -213,7 +213,7 @@ class LoginController extends Controller
     public function handleGoogleCallback(){
       try {
         $user = Socialite::driver('google')->user();
-        
+
         $finduser = Member::where('social_id', $user->id)->first();
 
         $is_user_active = true;
@@ -238,7 +238,7 @@ class LoginController extends Controller
                     $name = $finduser->first_name.' '.$finduser->last_name;
 
                     $email = $finduser->email;
-                    
+
                     $email_template = EmailTemplate::where('type','user_welcome')->first();
                     $subject = $email_template['subject'];
                     $content = $email_template['content'];
@@ -246,9 +246,9 @@ class LoginController extends Controller
                     $replace = array(ucwords($name),env('APP_NAME'));
                     $content  = str_replace($search,$replace,$content);
                     $social_links = GeneralSetting::find(1);
-                    
+
                     sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
-                    
+
                     break;
             }
             if($is_user_active == false)
@@ -288,7 +288,7 @@ class LoginController extends Controller
                   $name = $finduser->first_name.' '.$finduser->last_name;
 
                   $email = $finduser->email;
-                  
+
                   $email_template = EmailTemplate::where('type','user_welcome')->first();
                   //$email_template = transformEmailTemplateModel($email_template,$lang);
                   $subject = $email_template['subject'];
@@ -297,7 +297,7 @@ class LoginController extends Controller
                   $replace = array(ucwords($name),env('APP_NAME'));
                   $content  = str_replace($search,$replace,$content);
                   $social_links = GeneralSetting::find(1);
-                  
+
                   sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
                   // ************************* //
                   //    Send email to admin
@@ -309,7 +309,7 @@ class LoginController extends Controller
                   $search = array("{{name}}","{{app_name}}");
                   $replace = array(ucwords($name),env('APP_NAME'));
                   $content  = str_replace($search,$replace,$content);
-                  
+
                   sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);
 
               }else{
@@ -331,7 +331,7 @@ class LoginController extends Controller
                     $name = $finduser->first_name.' '.$finduser->last_name;
 
                     $email = $finduser->email;
-                    
+
                     $email_template = EmailTemplate::where('type','user_welcome')->first();
                     $subject = $email_template['subject'];
                     $content = $email_template['content'];
@@ -339,11 +339,11 @@ class LoginController extends Controller
                     $replace = array(ucwords($name),env('APP_NAME'));
                     $content  = str_replace($search,$replace,$content);
                     $social_links = GeneralSetting::find(1);
-                    
+
                     sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
                     break;
                 }
-              
+
                 if($is_user_active == false)
                 {
                   Auth::guard('user')->logout();
@@ -367,7 +367,7 @@ class LoginController extends Controller
         session(['user' => $finduser]);
         //$token =  Auth::login($finduser);
         $token =  Auth::guard('user')->login($finduser);
-        
+
         if ( !$token )
         {
           \Illuminate\Support\Facades\Session::flash('flash_danger', 'Something went wrong try again please !!');
@@ -376,11 +376,11 @@ class LoginController extends Controller
 
         //$finduser = Member::where(['email' => $user->email ])->first();
         if (auth()->user()->is_approved != 1 && auth()->user()->status == 4) {
-          return redirect()->intended(route('user.members'));  
+          return redirect()->intended(route('user.members'));
         }elseif(auth()->user()->is_approved != 1 && auth()->user()->status != 4){
           return redirect()->intended(route('user.edit-profile'));
         }
-        
+
       } catch (Exception $e) {
         dd($e->getMessage());
       }
@@ -420,7 +420,7 @@ class LoginController extends Controller
                     $name = $finduser->first_name.' '.$finduser->last_name;
 
                     $email = $finduser->email;
-                    
+
                     $email_template = EmailTemplate::where('type','user_welcome')->first();
                     $subject = $email_template['subject'];
                     $content = $email_template['content'];
@@ -428,9 +428,9 @@ class LoginController extends Controller
                     $replace = array(ucwords($name),env('APP_NAME'));
                     $content  = str_replace($search,$replace,$content);
                     $social_links = GeneralSetting::find(1);
-                    
+
                     sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
-                    
+
                     break;
             }
             if($is_user_active == false)
@@ -449,7 +449,7 @@ class LoginController extends Controller
         else{
            $finduser_exist = Member::where( 'email', $user->email )->first();
             //if ( $user->email ) {
-              
+
               if (!$finduser_exist) {
 
                   //$plan = Plan::where(['id' => 1, 'status' => 1])->first(); // Trial Plan
@@ -495,7 +495,7 @@ class LoginController extends Controller
                   $search = array("{{name}}","{{app_name}}");
                   $replace = array(ucwords($name),env('APP_NAME'));
                   $content  = str_replace($search,$replace,$content);
-                  
+
                   sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);*/
 
               }else{
@@ -517,7 +517,7 @@ class LoginController extends Controller
                     $name = $finduser_exist->first_name.' '.$finduser_exist->last_name;
 
                     $email = $finduser_exist->email;
-                    
+
                     $email_template = EmailTemplate::where('type','user_welcome')->first();
                     $subject = $email_template['subject'];
                     $content = $email_template['content'];
@@ -525,11 +525,11 @@ class LoginController extends Controller
                     $replace = array(ucwords($name),env('APP_NAME'));
                     $content  = str_replace($search,$replace,$content);
                     $social_links = GeneralSetting::find(1);
-                    
+
                     sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
                     break;
                 }
-              
+
                 if($is_user_active == false)
                 {
                   Auth::guard('user')->logout();
@@ -573,7 +573,7 @@ class LoginController extends Controller
     }
     public function verifyMobileCode(Request $request){
         $input = $request->all();
-       
+
         /*$this->validate($request, [
             'code'   => 'required',
             'mobile'   => 'required|unique:members'
@@ -582,26 +582,26 @@ class LoginController extends Controller
           'code'   => 'required',
           'mobile'   => 'required|unique:members'
         ],
-        [ 
+        [
           'mobile.required' => 'Mobile number field is required.',
           'mobile.unique' => 'The mobile number is already used.',
 
         ]);
-       
+
         if ($validator->fails())
         {
           \Illuminate\Support\Facades\Session::flash('flash_danger', $validator->messages());
           return redirect()->back()->withInput();
         }
         $model = Member::findOrFail(Auth::id());
-        
+
         $model->update([
                 'status' => 1,
                 'code'   =>  $input['code'],
                 'mobile'   =>  $input['mobile'],
-                'mobile_verified' => 1 
+                'mobile_verified' => 1
             ]);
         Auth::setUser($model);
         return redirect('/user/edit-profile');
     }
-}   
+}

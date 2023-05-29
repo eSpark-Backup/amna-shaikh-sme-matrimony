@@ -35,7 +35,7 @@
                                     <span>Export</span>
                                 </button>
                             </a> -->
-                           
+
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                               Export
@@ -103,9 +103,9 @@
                         <select name="is_approved"  class="form-control">
                             <option value="">All</option>
                             <option value="0">Pending</option>
-                            <option value="1">Approved</option>     
-                            <option value="2">Blocked</option>     
-                            <option value="3">Canceled</option>     
+                            <option value="1">Approved</option>
+                            <option value="2">Blocked</option>
+                            <option value="3">Canceled</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -219,7 +219,7 @@
                 },
                 {data: 'id', name: 'id'},
                 {data: 'profile_image', name: 'profile_image'},
-                
+
                 {data: 'name', name: 'first_name'},
                 {data: 'plan', name: 'plan'},
                 {
