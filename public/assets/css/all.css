@@ -307,7 +307,7 @@ a.u_cht.u_cht_active li {
 }
 
 .wedding-top-row {
-  align-items: flex-end;
+  /* align-items: flex-end; */
 }
 
 .weddingBg a {
@@ -5576,7 +5576,7 @@ p.MsoNormal {
   }
   .wedding_image1 {
     height: 260px;
-    margin: 0;
+    margin: 2;
   }
   .couples-content {
     margin-top: 0px
@@ -5635,10 +5635,6 @@ p.MsoNormal {
   }
 
 
- /* .wedding_image1 {
-    width: 60%;
-    height: 160px;
-  }*/
 
   .wedding_image2 {
     width: 37%;
@@ -6334,6 +6330,20 @@ p.MsoNormal {
   .upgrade_msg p {
     font-size: 14px;
   }
+.couples-content{
+      max-width: 100%;
+  
+    }
+    /* .weddingBg a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transition: 0.3s ease;
+    } */
+    .wedding_image1 {
+      height: 300px;
+      width:  50%;
+    }
 }
 @media screen and (max-width: 420px) {
 	.btn_action a {
@@ -6360,6 +6370,12 @@ p.MsoNormal {
     flex: 0 0 100%;
     max-width: 100%
   }
+    .wedding_image1 {
+      height: 250px;
+      /*width: 55%;*/
+      width: 100%;
+      margin: 7px;
+    }
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {

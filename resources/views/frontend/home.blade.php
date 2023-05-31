@@ -54,18 +54,18 @@
             <p>{!! settings()->happy_couple_description !!}</p>
         </div>
         @if(isset($stories) && count($stories) > 0)
-        <div class="couples-content">
+        <div class="couples-content col-lg-4 col-md-2 col-sm-1">
             <div class="owl-carousel members-slider">
 
                 @foreach(@$stories as $K => $V)
-                <div class="wedding-top-row flex">
+                <div class="wedding-top-row flex ">
                     <div class="wedding_image1 weddingBg" style="background-image: url({{ getImage($V['image'],'stories') }}" );><a href="{{ url('/stories/'.$V['id']) }}"></a>
 
                     </div>
                     <div class="story_details"> <a href="{{ url('/stories/'.$V['id']) }}">
                             <!-- <img src="assets/images/link_icon.svg" alt="icon"> -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="31" height="26" viewBox="0 0 31 26" fill="none">
-                                <style xmlns=""   media="screen">
+                                <style xmlns="" media="screen">
                                     html::before {
                                         content: " ";
                                         z-index: 2147483647;
