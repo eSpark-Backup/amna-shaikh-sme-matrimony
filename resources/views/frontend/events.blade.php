@@ -61,8 +61,8 @@
 
             @endforeach
             @else
-            <div class="data_not_found">
-                <img src="{{ URL::asset('images/Data_not_found.png')}}" alt="">
+            <div class="coming_soon">
+                <img src="{{ URL::asset('images/Coming_Soon.png')}}" alt="">
             </div>
             @endif
         </div>
