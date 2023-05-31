@@ -439,21 +439,17 @@ a.u_cht.u_cht_active li {
   width: 100%;
   padding-left: 36%;
   padding-top: 10px;
-  fill: #2E7584;
+  
 }
 .story_details a {
   display: flex;
   align-items: center;
   max-width: fit-content;
-  color: #2E7584;
+  color: #04ABCE;
   font-size: 15px;
   text-decoration: underline;
 }
-.story_details img{
- /* color: #2E7584; */
- stroke:#2E7584 ;
- /* fill:#2E7584; */
-}
+
 .event_details a img {
   margin-right: 6px;
   max-width: 25px;
