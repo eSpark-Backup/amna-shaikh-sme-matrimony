@@ -264,7 +264,7 @@ a.u_cht.u_cht_active li {
   bottom: -8px;
   height: 2px;
   width: 155px;
-  background-color: #white;
+  background-color: white;
 }
 
 .weddingBg {
@@ -439,14 +439,20 @@ a.u_cht.u_cht_active li {
   width: 100%;
   padding-left: 36%;
   padding-top: 10px;
+  fill: #2E7584;
 }
 .story_details a {
   display: flex;
   align-items: center;
   max-width: fit-content;
-  color: #e9147b;
-  font-size: 14px;
+  color: #2E7584;
+  font-size: 15px;
   text-decoration: underline;
+}
+.story_details img{
+ /* color: #2E7584; */
+ stroke:#2E7584 ;
+ /* fill:#2E7584; */
 }
 .event_details a img {
   margin-right: 6px;
@@ -553,7 +559,7 @@ a.u_cht.u_cht_active li {
   margin: 50px auto 30px !important;
   margin-top: 0 !important;
 }
-. .owl-item .member-info img{
+.owl-item .member-info img{
   width: unset !important;
 }
 .member-info {
