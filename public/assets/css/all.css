@@ -1286,16 +1286,11 @@ label.error {
 }
 
 .filters-section {
-    padding: 60px 0;
-    opacity: 0.95;
-    background: linear-gradient(
-        90.48deg,
-        #e11d1e -73.27%,
-        #ea147e -11.03%,
-        #573675 99.61%
-    );
-    /*z-index: 111111111;*/
-    position: relative;
+  padding: 60px 0;
+  opacity: 0.95;
+  background: linear-gradient(90.48deg, #e11d1e -73.27%, #ea147e -11.03%, #573675 99.61%);
+  z-index: 111111111;
+  position: relative;
 }
 .filters-content form {
     display: flex;
@@ -3555,6 +3550,7 @@ section.chat-section {
 h2#swal2-title {
     font-size: 20px;
     margin-bottom: 0;
+    color: #212529;
 }
 
 div#swal2-html-container {

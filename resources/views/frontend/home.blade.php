@@ -255,7 +255,7 @@
                   <div class="modal-body">
                     <div class="icon-show">!</div>
                     <h2> Please Login</h2>
-                    <p>Please Login To View Full Profile Of This Member</p>
+                    <p>Please login to view full profile of this member</p>
                     <div class="alert-action">
                         
                     </div>
@@ -281,7 +281,7 @@
         $('body').on('click','.custom_modal',function(){
             Swal.fire({
               title: 'Please Login',
-              text: "Please Login To View Full Profile Of This Member!",
+              text: "Please login to view full profile of this member!",
               icon: 'info',
               showCancelButton: true,
               confirmButtonColor: '#21c2d6',
