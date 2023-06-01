@@ -614,17 +614,17 @@ h2 {
     font-weight: 400;
     fill: #ffffff;
     color: #ffffff;
-    background: linear-gradient(#1eddf5, #21c2d6) padding-box,
-        linear-gradient(to bottom, #1eddf5, #21c2d6) border-box;
-
+    /* background: linear-gradient(#1eddf5, #21c2d6) padding-box,
+        linear-gradient(to bottom, #1eddf5, #21c2d6) border-box; */
+    background-color: #04abce;
     border-width: 1px 1px 1px 1px;
-    border-color: #1eddf5;
+    border-color: #04abce;
     border-radius: 5px 5px 5px 5px;
     padding: 10px 25px 10px 25px;
     margin-top: 15px;
 }
 .btn-custom-secondary:hover {
-    color: #1eddf5;
+    color: #04abce;
     background: #df175600;
     border-style: solid;
 }
