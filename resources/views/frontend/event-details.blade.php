@@ -43,6 +43,9 @@
                     <span class="separator"></span>
                     <p>{!! $events->long_description !!}</p>
                 </div>
+                <div class="section-head">
+                <a href="{{url('user/events/apply/'.$events->id )}}" class="btn-custom-primary">Apply Now</a>
+</div>
             </div>
         </section>
         <section class="video-section" style="margin-bottom:120px">

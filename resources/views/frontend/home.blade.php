@@ -181,40 +181,46 @@
     </section> -->
     <!-- Matrimonial Events -->
     <section class="events-section">
-        <div class="container">
-            <div class="section-head">
-                <h2>{{ settings()->events_title }}</h2>
-                <p>{!! settings()->events_description !!}</p>
+    <div class="container">
+        <div class="section-head">
+            <h2>{{ settings()->events_title }}</h2>
+            {!! settings()->events_description !!}
+        </div>
+
+        <div class="events-content flex">
+            @if(count($events))
+            @foreach($events as $K => $V)
+
+            <div class="single-event">
+                <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
+                <div class="event_details">
+                    <h4>{{ $V->title }}</h4>
+                    <p>{!! truncatedStr($V->short_description) !!} </p>
+                    <strong><a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View details</a></strong>
+                    <div class="event_info">
+                        <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
+                        <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+                    </div>
+                </div>
             </div>
+
+            @endforeach
+            @else
+            <div class="coming_soon">
+                <img src="{{ URL::asset('images/Coming_Soon.png')}}" alt="">
+            </div>
+            @endif
+        </div>
             
-            <div class="owl-carousel events-section">
-                <!-- <div class="owl-carousel members-slider"> -->
-                    @foreach($events as $K => $V)
-                        <div class="single-event-home" >
-                            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
-                            <div class="event_details resize">
-                                <h4>{{ $V->title }}</h4>
-                                <p>{!! truncatedStr($V->short_description) !!} </p>
-                                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
-                                <div class="event_info">
-                                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
-                                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
-                                </div>
-                            </div>
-                            @if($V->type == 1)
-                                <span class="tag">Upcoming</span>
-                            @endif
-                        </div>
-                    @endforeach
-                <!-- </div> -->
-            </div>
 
             @if(count($events))
                 <div class="events-link">
                     <a href="{{ route('events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
                 </div>
             @endif
-
+            <div class="section-head">
+                    <h2>Our Past Events</h2>
+                </div>
             <!-- Past Events -->
             <div class="owl-carousel events-section">
                 <!-- <div class="owl-carousel members-slider"> -->
@@ -281,7 +287,7 @@
         $('body').on('click','.custom_modal',function(){
             Swal.fire({
               title: 'Please Login',
-              text: "Please login to view full profile of this member!",
+              text: "Please login to view Full Profile Of This Member!",
               icon: 'info',
               showCancelButton: true,
               confirmButtonColor: '#21c2d6',
