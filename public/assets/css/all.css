@@ -1529,7 +1529,8 @@ div#members_table_wrapper {
     min-width: 85px;
 }*/
 .prof-actions a {
-    margin: 0 5px;
+    margin: 0 3px;
+    width: auto;
 }
 .basic-info.with_line.members-basic-info td {
     padding: 6px 10px;
@@ -1541,14 +1542,23 @@ div#members_table_wrapper {
     justify-content: center;
     border-top: solid 1px #dee2e6;
     padding-top: 20px;
+    /* gap: 7px; */
+    /* padding-right: 20px; */
 }
 .profile_inner {
     padding: 0 15px;
 }
-
 .prof-actions a img {
     margin-right: 0;
     margin-bottom: 0;
+    width: 35px;
+}
+.prof-actions button {
+    border: 0px;
+    background-color: #d31f1f00;
+    cursor: pointer;
+}
+.prof-actions button img {
     width: 35px;
 }
 .prof-actions a.favorite-btn {
@@ -4517,12 +4527,19 @@ p.MsoNormal {
     display: flex;
     margin-bottom: 5px;
 }
-.profile_info_cls .btn-custom-primary {
+.profile_info_cls .View_Pro {
     margin-left: auto;
     padding: 9px 20px;
     font-size: 14px;
-    border-width: 2px !important;
+    padding: 1px;
+    border-bottom: 2px solid #04abce;
+    border-width: 1px !important;
+    color: #04abce;
 }
+.profile_info_cls .View_Pro a {
+    font-weight: bold;
+}
+
 .profile_info_cls h5 {
     margin-bottom: 0;
 }
