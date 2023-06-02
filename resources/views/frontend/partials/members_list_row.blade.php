@@ -147,7 +147,7 @@
 
         <div class="d-flex col-12 col-md-2 col-lg-3 col-6 order-sm-1 order-2">
             <!-- <button class="warning sendMe">Send Message</button> -->
-            <a href="#" class="btn-custom-primary w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Message</a>
+            <a href="#" class="btn-custom-primary w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
         </div>
         <div class="d-flex col-12 col-md-10 col-lg-9 justify-content-end  col-6 order-sm-2 order-1">
             <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="../../../../public/images/Heart.png" alt=""></button>
