@@ -262,13 +262,13 @@ a.u_cht.u_cht_active li {
 }
 
 .section-head h2::after {
-  content: "";
-  position: absolute;
-  right: -72px;
-  bottom: -8px;
-  height: 2px;
-  width: 155px;
-  background-color: white;
+    content: "";
+    position: absolute;
+    right: -72px;
+    bottom: -8px;
+    height: 2px;
+    width: 155px;
+    background-color: white;
 }
 
 .weddingBg {
@@ -310,7 +310,7 @@ a.u_cht.u_cht_active li {
 }
 
 .wedding-top-row {
-  /* align-items: flex-end; */
+    /* align-items: flex-end; */
 }
 
 .weddingBg a {
@@ -434,19 +434,18 @@ a.u_cht.u_cht_active li {
     text-decoration: underline;
 }
 /*story details button*/
-.story_details{
-  width: 100%;
-  padding-left: 36%;
-  padding-top: 10px;
-  
+.story_details {
+    width: 100%;
+    padding-left: 36%;
+    padding-top: 10px;
 }
 .story_details a {
-  display: flex;
-  align-items: center;
-  max-width: fit-content;
-  color: #04ABCE;
-  font-size: 15px;
-  text-decoration: underline;
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    color: #04abce;
+    font-size: 15px;
+    text-decoration: underline;
 }
 
 .event_details a img {
@@ -554,8 +553,8 @@ h2 {
     margin: 50px auto 30px !important;
     margin-top: 0 !important;
 }
-.owl-item .member-info img{
-  width: unset !important;
+.owl-item .member-info img {
+    width: unset !important;
 }
 .member-info {
     text-align: center;
@@ -592,18 +591,19 @@ h2 {
     font-weight: 400;
     fill: #ffffff;
     color: #ffffff;
-    background: linear-gradient(#e20f43, #6c2f75) padding-box,
-        linear-gradient(to bottom, #6c2f75, #be0c53) border-box;
+    /* background: linear-gradient(#e20f43, #6c2f75) padding-box,
+        linear-gradient(to bottom, #6c2f75, #be0c53) border-box; */
     /*border-style: solid;*/
+    background-color: #ea147e;
     border-width: 1px 1px 1px 1px;
-    border-color: #ff5a60;
+    border-color: #ea147e;
     border-radius: 5px 5px 5px 5px;
     padding: 10px 25px 10px 25px;
     margin-top: 15px;
     /*display: flex;*/
 }
 .btn-custom-primary:hover {
-    color: #ff5a60;
+    color: #ea147e;
     background: #df175600;
     border-style: solid;
 }
@@ -613,17 +613,17 @@ h2 {
     font-weight: 400;
     fill: #ffffff;
     color: #ffffff;
-    background: linear-gradient(#1eddf5, #21c2d6) padding-box,
-        linear-gradient(to bottom, #1eddf5, #21c2d6) border-box;
-
+    /* background: linear-gradient(#1eddf5, #21c2d6) padding-box,
+        linear-gradient(to bottom, #1eddf5, #21c2d6) border-box; */
+    background-color: #04abce;
     border-width: 1px 1px 1px 1px;
-    border-color: #1eddf5;
+    border-color: #04abce;
     border-radius: 5px 5px 5px 5px;
     padding: 10px 25px 10px 25px;
     margin-top: 15px;
 }
 .btn-custom-secondary:hover {
-    color: #1eddf5;
+    color: #04abce;
     background: #df175600;
     border-style: solid;
 }
@@ -1523,7 +1523,8 @@ div#members_table_wrapper {
     min-width: 85px;
 }*/
 .prof-actions a {
-    margin: 0 5px;
+    margin: 0 3px;
+    width: auto;
 }
 .basic-info.with_line.members-basic-info td {
     padding: 6px 10px;
@@ -1535,14 +1536,23 @@ div#members_table_wrapper {
     justify-content: center;
     border-top: solid 1px #dee2e6;
     padding-top: 20px;
+    /* gap: 7px; */
+    /* padding-right: 20px; */
 }
 .profile_inner {
     padding: 0 15px;
 }
-
 .prof-actions a img {
     margin-right: 0;
     margin-bottom: 0;
+    width: 35px;
+}
+.prof-actions button {
+    border: 0px;
+    background-color: #d31f1f00;
+    cursor: pointer;
+}
+.prof-actions button img {
     width: 35px;
 }
 .prof-actions a.favorite-btn {
@@ -4515,12 +4525,19 @@ p.MsoNormal {
     display: flex;
     margin-bottom: 5px;
 }
-.profile_info_cls .btn-custom-primary {
+.profile_info_cls .View_Pro {
     margin-left: auto;
     padding: 9px 20px;
     font-size: 14px;
-    border-width: 2px !important;
+    padding: 1px;
+    border-bottom: 2px solid #04abce;
+    border-width: 1px !important;
+    color: #04abce;
 }
+.profile_info_cls .View_Pro a {
+    font-weight: bold;
+}
+
 .profile_info_cls h5 {
     margin-bottom: 0;
 }
@@ -5560,64 +5577,64 @@ p.MsoNormal {
         padding-top: 0px !important;
     }
 
-  .profile-main-body .field-btn {
-    margin-top: 0px;
-  }
-  .single-plan {
-      flex: 0 0 50%;
-      max-width: 50%;
-  }
-  .single-hero {
-    align-items: flex-end;
-      padding-bottom: 30px !important;
-  }
-  .parallax-section-lg {
-    padding: 30px 0 !important
-  }
-  .couples-section {
-    padding: 30px 0 !important
-  }
-  .members-content {
-    padding-bottom: 30px !important
-  }
-  .event_details h4 {
-      font-size: 20px;
-  }
-  .filters-section {
-    padding: 30px 0;
-  }
-  .event-filter-search {
-    width: 100%;
-  }
-  .ft-menu li a {
-      font-size: 13px;
-  }
-  .fluid-paragraph {
-    padding: 0 !important;
-    margin:0 !important;   
-  }
-  #parallax_txt {
-    font-size: 16px;
-  }
-  .wedding_image1 {
-    height: 260px;
-    margin: 2;
-  }
-  .couples-content {
-    margin-top: 0px
-  }
-  .ft-menu li {
-      margin-left: 10px;
-  }
-  .event_info span {
-    margin-left: 0;
-    display: flex;
-    width: 100%;
-    margin-bottom: 5px;
-  }
-  h2 {
-    font-size: 22px;
-  }
+    .profile-main-body .field-btn {
+        margin-top: 0px;
+    }
+    .single-plan {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .single-hero {
+        align-items: flex-end;
+        padding-bottom: 30px !important;
+    }
+    .parallax-section-lg {
+        padding: 30px 0 !important;
+    }
+    .couples-section {
+        padding: 30px 0 !important;
+    }
+    .members-content {
+        padding-bottom: 30px !important;
+    }
+    .event_details h4 {
+        font-size: 20px;
+    }
+    .filters-section {
+        padding: 30px 0;
+    }
+    .event-filter-search {
+        width: 100%;
+    }
+    .ft-menu li a {
+        font-size: 13px;
+    }
+    .fluid-paragraph {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    #parallax_txt {
+        font-size: 16px;
+    }
+    .wedding_image1 {
+        height: 260px;
+        margin: 2;
+    }
+    .couples-content {
+        margin-top: 0px;
+    }
+    .ft-menu li {
+        margin-left: 10px;
+    }
+    .event_info span {
+        margin-left: 0;
+        display: flex;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    h2 {
+        font-size: 22px;
+    }
 
     .couples-content {
         max-width: 100%;
@@ -5658,7 +5675,6 @@ p.MsoNormal {
         display: flex;
         justify-content: center;
     }
-
 
     .wedding_image2 {
         width: 37%;
@@ -6280,82 +6296,82 @@ p.MsoNormal {
         font-size: 11px;
     }
 
-  .basic-row h4 {
-      font-size: 18px;
-  }
-  .chat_top_fix_cls a.btn.btn-secondary {
-    margin: 5px auto 0;
-    font-size: 10px;
-
-  }
-  .data_not_found img {
-      max-width: 240px;
-  }
-  .data_not_found p {
-      font-size: 13px;
-  }
-  .receiving-mesg {
-      border-radius: 5px;
-      padding: 5px 10px;
-      margin: 5px 0;
-      margin-right: auto;
-  }
-  .receiving-sms {
-      margin: 0;
-  }
-  .current-chat-head .currently-active .current-active-info p {
-      font-size: 10px;
-  }
-  .send-field .encrypt-send.instant_message {
-      height: 38px;
-  }
-  .current-chat-footer {
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-      position: fixed;
-      width: calc(100% - 30px);
-      bottom: 0;
-      height: 55px;
-  }
-  .current-chat-footer button {
-      font-size: 12px;
-      width: unset;
-      padding: 6px 10px;
-      border-width: 2px !important
-  }
-  .current-chat-footer button img {
-      max-width: 15px;
-  }
-  .receiving-mesg span, .sender-sms span {
-      font-size: 9px;
-      margin-top: 5px !important;
-      display: block;
-  }
-  .msg_left_cls {
-    padding: 5px 10px;
-    margin: 5px 0;
-    margin-left: auto;
-  }
-  .receiving-mesg p, .sender-sms p {
-    font-size: 17px;
-    margin-bottom: 0;
-  }
-  .sms-status {
-    bottom: 10px !important;
-  }
-  .ft-social li a {
-    height: 35px;
-    width: 35px;
-    margin-left: 10px;
-  }
-  .single-event-home {
-    margin-left: 0
-  }
-  .upgrade_msg p {
-    font-size: 14px;
-  }
-.couples-content{
-      max-width: 100%;
-  
+    .basic-row h4 {
+        font-size: 18px;
+    }
+    .chat_top_fix_cls a.btn.btn-secondary {
+        margin: 5px auto 0;
+        font-size: 10px;
+    }
+    .data_not_found img {
+        max-width: 240px;
+    }
+    .data_not_found p {
+        font-size: 13px;
+    }
+    .receiving-mesg {
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        margin-right: auto;
+    }
+    .receiving-sms {
+        margin: 0;
+    }
+    .current-chat-head .currently-active .current-active-info p {
+        font-size: 10px;
+    }
+    .send-field .encrypt-send.instant_message {
+        height: 38px;
+    }
+    .current-chat-footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        position: fixed;
+        width: calc(100% - 30px);
+        bottom: 0;
+        height: 55px;
+    }
+    .current-chat-footer button {
+        font-size: 12px;
+        width: unset;
+        padding: 6px 10px;
+        border-width: 2px !important;
+    }
+    .current-chat-footer button img {
+        max-width: 15px;
+    }
+    .receiving-mesg span,
+    .sender-sms span {
+        font-size: 9px;
+        margin-top: 5px !important;
+        display: block;
+    }
+    .msg_left_cls {
+        padding: 5px 10px;
+        margin: 5px 0;
+        margin-left: auto;
+    }
+    .receiving-mesg p,
+    .sender-sms p {
+        font-size: 17px;
+        margin-bottom: 0;
+    }
+    .sms-status {
+        bottom: 10px !important;
+    }
+    .ft-social li a {
+        height: 35px;
+        width: 35px;
+        margin-left: 10px;
+    }
+    .single-event-home {
+        margin-left: 0;
+    }
+    .upgrade_msg p {
+        font-size: 14px;
+    }
+    .couples-content {
+        max-width: 100%;
     }
     /* .weddingBg a {
       display: block;
@@ -6364,40 +6380,40 @@ p.MsoNormal {
       transition: 0.3s ease;
     } */
     .wedding_image1 {
-      height: 300px;
-      width:  50%;
+        height: 300px;
+        width: 50%;
     }
 }
 @media screen and (max-width: 420px) {
-	.btn_action a {
-	    padding: 10px 10px;
-	    margin-right: 10px;
-	}
-	.chat_top_right h4 {
-	    font-size: 15px;
-	}
-	.chat_top_right p {
-	    font-size: 11px;
-	}
-	.chat_top_fix_cls p {
-	    font-size: 12px;
-	}
-  .most_popular .btn_popular {
-    padding: 10px 5px;
-    font-size: 9px;
-  }
-  .most_popular {
-    left: calc(50% - 39px);
-  }
-  .single-plan {
-    flex: 0 0 100%;
-    max-width: 100%
-  }
+    .btn_action a {
+        padding: 10px 10px;
+        margin-right: 10px;
+    }
+    .chat_top_right h4 {
+        font-size: 15px;
+    }
+    .chat_top_right p {
+        font-size: 11px;
+    }
+    .chat_top_fix_cls p {
+        font-size: 12px;
+    }
+    .most_popular .btn_popular {
+        padding: 10px 5px;
+        font-size: 9px;
+    }
+    .most_popular {
+        left: calc(50% - 39px);
+    }
+    .single-plan {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
     .wedding_image1 {
-      height: 250px;
-      /*width: 55%;*/
-      width: 100%;
-      margin: 7px;
+        height: 250px;
+        /*width: 55%;*/
+        width: 100%;
+        margin: 7px;
     }
                          /* .dropdown-menu .logout-btn li {
                     display: inline-block;
