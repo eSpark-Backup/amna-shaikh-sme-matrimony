@@ -5218,7 +5218,12 @@ p.MsoNormal {
         right: -30px;
         opacity: 1;
     }
-}
+ .site-menu2 .logout-btn a {
+    
+ padding: 5px;
+
+} 
+
 
 @media screen and (max-width: 767px) {
     .alert_popup.chat_upgrade_popup .modal-content {
@@ -6394,6 +6399,12 @@ p.MsoNormal {
       width: 100%;
       margin: 7px;
     }
+                         /* .dropdown-menu .logout-btn li {
+                    display: inline-block;
+                } */
+        /* .logout-btn{
+            display: inline-flex;
+        } */
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .iti__flag {
