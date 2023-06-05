@@ -605,8 +605,10 @@ h2 {
     font-weight: 400;
     fill: #ffffff;
     color: #ffffff;
-    /* background: linear-gradient(#e20f43, #6c2f75) padding-box,
-        linear-gradient(to bottom, #6c2f75, #be0c53) border-box; */
+    /*
+     background: linear-gradient(#e20f43, #6c2f75) padding-box,
+        linear-gradient(to bottom, #6c2f75, #be0c53) border-box;
+         */
     /*border-style: solid;*/
     background-color: #ea147e;
     border-width: 1px 1px 1px 1px;
@@ -2816,7 +2818,8 @@ div#plan1 .close {
 
 .chat-sidebar {
     width: 450px;
-    background: rgba(197, 209, 211, 0.14);
+    /* background: rgba(197, 209, 211, 0.14); */
+background: linear-gradient(87.57deg, #FB406C 0%, rgba(234, 20, 126, 0.95) 0%, #1BAACC 99.61%);
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -4652,6 +4655,29 @@ p.MsoNormal {
 .alert_popup.chat_upgrade_popup .modal-content {
     padding: 25px 0;
 }
+.data_not_found {
+    opacity: 0.5;
+    padding: 60px;
+}
+
+.input-message input {
+    width: 80%;
+    padding: 10px;
+    box-shadow: 0px 3px 25px rgba(0, 0, 0, 0.1);
+    outline: none;
+
+}
+.input-message{
+         /* margin-bottom: 100px; */
+         margin-top: 30px;
+        /* margin-right: 40px; */ 
+        display: flex;
+        justify-content: center;
+}
+/* .input-message input:focus,
+select:focus {
+    outline: none;
+} */
 
 /************************
         Responsive
@@ -4908,7 +4934,9 @@ p.MsoNormal {
     .chat-main {
         width: calc(100% - 380px);
     }
-
+ .data_not_found {
+opacity: 0.5;
+}
     .current-chat-head {
         padding: 13px 20px;
     }
