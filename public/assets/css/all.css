@@ -308,9 +308,19 @@ a.u_cht.u_cht_active li {
     height: 250px;
     margin-left: 20px;
 }
+.img-icon {
+    width: 30px;
+    margin-inline-end: 60px;
+   
+}
 
 .wedding-top-row {
     /* align-items: flex-end; */
+}
+
+.member-heading-occupation span{
+    margin: 4px;
+    font-size: 14px;
 }
 
 .weddingBg a {
@@ -567,22 +577,26 @@ h2 {
     margin-bottom: 14px;
 }
 
-.member-infos span img {
+/* .member-infos span img {
     display: inline-block;
-    margin-right: 5px;
-}
+    margin-right: 3px;
+} */
 
 .member-infos span {
     color: rgba(61, 61, 61, 0.5);
-    font-size: 14px;
+    font-size: 12px;
+    /* margin: 10px; */
 }
 
 .member-infos {
-    margin: 20px 0 5px;
+    /* margin: 20px 0 5px; */
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .member-infos span:first-child {
-    margin-right: 30px;
+    /* margin-right: 30px; */
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -600,6 +614,7 @@ h2 {
     border-radius: 5px 5px 5px 5px;
     padding: 10px 25px 10px 25px;
     margin-top: 15px;
+    width: 100%;
     /*display: flex;*/
 }
 .btn-custom-primary:hover {

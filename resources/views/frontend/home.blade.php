@@ -111,11 +111,22 @@
                         <div class="member-image">
                             <img class="{{$M['picture_privacy'] == 'blur' ? 'blur_img' : ''}}" src="{{ $M['profile_image'] }}" alt="">
                         </div>
+
                         <div class="member-info">
-                            <h5>{{ $M['first_name'] }}</h5>
-                            <div class="member-infos">
-                                <span><img src="assets/images/avatar.svg" alt="icon">{{ $M['occupation_id'] }}</span>
-                                <span><img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
+                            <div class="member-heading-occupation d-flex">
+                                <h5>{{ $M['first_name'] }}</h5>
+                                <span>{{ $M['occupation_id'] }}</span>
+                            </div>
+                            <div class="member-infos d-flex">
+                                
+                                    <span>
+                                        <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
+                                
+                                <div class=" img-icon d-flex">
+                                    <img src="{{ asset('images/Heart.png')}}" alt="heart">
+                                    <img src="{{ asset('images/Close.png')}}" alt="close">
+                                    <img src="{{ asset('images/Mark.png')}}" alt=mark>
+                                </div>
                             </div>
 
                             @auth('user')
@@ -179,8 +190,8 @@
             </div>
         </div>
     </section> -->
-    <!-- Matrimonial Events -->
-    <section class="events-section">
+<!-- Matrimonial Events -->
+<section class="events-section">
     <div class="container">
         <div class="section-head">
             <h2>{{ settings()->events_title }}</h2>
@@ -211,72 +222,16 @@
             </div>
             @endif
         </div>
-            
 
-            @if(count($events))
-                <div class="events-link">
-                    <a href="{{ route('events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
-                </div>
-            @endif
-            <div class="section-head">
-                    <h2>Our Past Events</h2>
-                </div>
-            <!-- Past Events -->
-            <div class="owl-carousel events-section">
-                <!-- <div class="owl-carousel members-slider"> -->
-                    @foreach($past_events as $K => $V)
-                        <div class="single-event-home" >
-                            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
-                            <div class="event_details resize">
-                                <h4>{{ $V->title }}</h4>
-                                <p>{!! truncatedStr($V->short_description) !!} </p>
-                                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
-                                <div class="event_info">
-                                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
-                                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                <!-- </div> -->
-            </div>
-
-            @if(count($past_events))
-                <div class="events-link">
-                    <a href="{{ route('past-events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
-                </div>
-            @endif
-            <!-- End Past Events -->
-        </div>
-
-        <div class="owl-carousel events-section">
-            <!-- <div class="owl-carousel members-slider"> -->
-            @foreach($events as $K => $V)
-            <div class="single-event-home">
-                <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
-                <div class="event_details resize">
-                    <h4>{{ $V->title }}</h4>
-                    <p>{!! truncatedStr($V->short_description) !!} </p>
-                    <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
-                    <div class="event_info">
-                        <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
-                        <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
-                    </div>
-                </div>
-                @if($V->type == 1)
-                <span class="tag">Upcoming</span>
-                @endif
-            </div>
-            @endforeach
-            <!-- </div> -->
-        </div>
 
         @if(count($events))
         <div class="events-link">
             <a href="{{ route('events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
         </div>
         @endif
-
+        <div class="section-head">
+            <h2>Our Past Events</h2>
+        </div>
         <!-- Past Events -->
         <div class="owl-carousel events-section">
             <!-- <div class="owl-carousel members-slider"> -->
@@ -304,6 +259,62 @@
         @endif
         <!-- End Past Events -->
     </div>
+
+    <div class="owl-carousel events-section">
+        <!-- <div class="owl-carousel members-slider"> -->
+        @foreach($events as $K => $V)
+        <div class="single-event-home">
+            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
+            <div class="event_details resize">
+                <h4>{{ $V->title }}</h4>
+                <p>{!! truncatedStr($V->short_description) !!} </p>
+                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
+                <div class="event_info">
+                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
+                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+                </div>
+            </div>
+            @if($V->type == 1)
+            <span class="tag">Upcoming</span>
+            @endif
+        </div>
+        @endforeach
+        <!-- </div> -->
+    </div>
+
+    @if(count($events))
+    <div class="events-link">
+        <a href="{{ route('events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
+    </div>
+    @endif
+
+    <!-- Past Events -->
+    <div class="owl-carousel events-section">
+        <!-- <div class="owl-carousel members-slider"> -->
+        @foreach($past_events as $K => $V)
+        <div class="single-event-home">
+            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
+            <div class="event_details resize">
+                <h4>{{ $V->title }}</h4>
+                <p>{!! truncatedStr($V->short_description) !!} </p>
+                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
+                <div class="event_info">
+                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
+                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        <!-- </div> -->
+    </div>
+
+    @if(count($past_events))
+    <div class="events-link">
+        <a href="{{ route('past-events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
+    </div>
+    @endif
+    <!-- End Past Events -->
+    </div>
     <!-- modal -->
     <div class="alert_popup">
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -326,7 +337,7 @@
 
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -343,13 +354,13 @@
     $(document).ready(function() {
         $('body').on('click', '.custom_modal', function() {
             Swal.fire({
-              title: 'Please Login',
-              text: "Please login to view Full Profile Of This Member!",
-              icon: 'info',
-              showCancelButton: true,
-              confirmButtonColor: '#21c2d6',
-              cancelButtonColor: '#e7147b',
-              confirmButtonText: '<a href="/login">Login</div>'
+                title: 'Please Login',
+                text: "Please login to view Full Profile Of This Member!",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#21c2d6',
+                cancelButtonColor: '#e7147b',
+                confirmButtonText: '<a href="/login">Login</div>'
             });
         });
     });
