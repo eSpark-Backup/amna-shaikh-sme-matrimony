@@ -5,8 +5,15 @@ const fs = require('fs');
 const express = require('express');
 const port = 9000;
 const isProd = true;
-
-var io = require('socket.io')(http);
+const cors = require('cors');
+app.use(cors({
+    origin: '*'
+}));
+const options={
+    cors:true,
+    origins:['http://127.0.0.1:8000'],
+   }
+var io = require('socket.io')(http,options);
 //var db = require('./db');
 //var mydb = new db();
 
@@ -36,11 +43,15 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
 
 	console.log('a user connected');
-    
+
   socket.on('session_join_request_send', (data) => {
       console.log(data);
       io.emit('session_join_request_get', data);
   });
+//   socket.on('typing', (data) => {
+//     console.log("typing:",data);
+// });
+
 });
 
 http.listen(port, () => {

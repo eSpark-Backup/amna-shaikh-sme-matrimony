@@ -1099,7 +1099,8 @@ class UserController extends Controller
 
                 }
                $id = $member->id;
-               return  \Hashids::encode($id);
+//               return  \Hashids::encode($id);
+                return  $id;
             });
             $datatable = $datatable->editColumn('message', function($row) use ($active_plan)
             {
@@ -1169,7 +1170,8 @@ class UserController extends Controller
 
         if ( isset($input['id'] ) && !empty($input['id']) ) {
 
-            $rid = Hashids::decode($input['id'])[0];
+//            $rid = Hashids::decode($input['id'])[0];
+            $rid = $input['id'];
             $chat_user = Member::where('id',$rid)->first();
             $chat_user->age = \Carbon\Carbon::parse($chat_user->date_of_birth)->age;
             $data['chat_user'] = $chat_user;

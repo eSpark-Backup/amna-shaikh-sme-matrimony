@@ -4,9 +4,9 @@
     var fs = require( 'fs' );
     //var options = {};
     var options = {
-        key: fs.readFileSync('/etc/ssl/private/crzglobal_xyz.key'),
-        cert: fs.readFileSync('/etc/ssl/certs/crzglobal_xyz.crt'),
-        ca: fs.readFileSync('/etc/ssl/crzglobal_xyz.ca-bundle'),
+        key: fs.readFileSync('crzglobal_xyz.key'),
+        cert: fs.readFileSync('crzglobal_xyz.crt'),
+        ca: fs.readFileSync('crzglobal_xyz.ca-bundle'),
 
         requestCert: false,
         rejectUnauthorized: false
@@ -17,7 +17,7 @@
 
     const io = require('socket.io')(server,{ cors: { origin: '*' } });
     //4-08-22
-   
+
     let arr = [];
     let sessions = {};
     let communityChats = {};
@@ -45,6 +45,7 @@
     };
 
     server.listen(9000, () => {
+        // console.log(socket.id);
       console.log('listening on *:9000');
     });
     app.get("/", function(request, response){
@@ -53,12 +54,23 @@
         response.send('Socket Working Fine.');
     });
 
-   
-    
+
+
     io.on('connection', (socket) => {
         console.log(socket.id);
         console.log('a user connected');
-        
+        socket.emit("connected",{status: "connected", id: socket.id})
+
+        socket.on("typing", function(data){
+            console.log(data)
+            if(data.typing){
+                io.timeout(2000).emit("sender_typing", data)
+            }
+        })
+
+        socket.on("send_message", function(data){
+            console.log(data)
+        })
         socket.on('session_join_request_send', (data) => {
           console.log(data);
           io.emit('session_join_request_get', data);
@@ -79,5 +91,5 @@
         });
     });
 
-    
-    
+
+

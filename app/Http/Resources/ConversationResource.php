@@ -17,7 +17,8 @@ class ConversationResource extends JsonResource
         return  [
             "message_id" => $this->id,
             'sender_id' => $this->user_id,
-            'hash_id'       => \Hashids::encode($this->id),
+//            'hash_id'       => \Hashids::encode($this->id),
+            'hash_id'       => $this->id,
             'chat_id' => $this->chat_user_id,
             'message' => $this->message,
             'msg_file' => $this->msg_file,

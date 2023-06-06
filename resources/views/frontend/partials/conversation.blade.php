@@ -3,21 +3,20 @@
         <div class="chat-main">
             <div class="current-chat-head flex">
                 <div class="currently-active flex">
-                    <?php 
+                    <?php
                         $photo_url = '';
                         if (!empty($chat_user)) {
-                            $photo_url = ($chat_user->profile_image) ? asset('storage/members/profile-image/'.$chat_user->profile_image) : asset('images/placeholder.png'); 
-                            $sender_photo_url = (auth()->user()->profile_image) ? asset('storage/members/profile-image/'.auth()->user()->profile_image) : asset('images/placeholder.png'); 
+                            $photo_url = ($chat_user->profile_image) ? asset('storage/members/profile-image/'.$chat_user->profile_image) : asset('images/placeholder.png');
+                            $sender_photo_url = (auth()->user()->profile_image) ? asset('storage/members/profile-image/'.auth()->user()->profile_image) : asset('images/placeholder.png');
                         }
                     ?>
                     <div class="chat-image {{$chat_user->picture_privacy == 'blur' ? 'blur_img' : ''}}" style="background-image: url({{ $photo_url}});">
-                        
+
                     </div>
 
                     <div class="current-active-info">
                         @if (!empty($chat_user))
-                            <h5>{{ getUserName($chat_user->first_name.' '.$chat_user->last_name) }}</h5>
-
+                            <h5>{{ getUserName($chat_user->first_name.' '.$chat_user->last_name) }} <span id="is_typing"></span></h5>
                             <!--  <span>online</span> -->
                             <p>{{$chat_user->age}} Yrs, {{$chat_user->height}}, {{ isset($chat_user->state->name)? $chat_user->state->name:'---' }}, {{ isset($chat_user->country->name)?$chat_user->country->name:'---' }}</p>
                         @endif
@@ -53,7 +52,7 @@
                                 </div>
                             </div>
                         </a>
-                        
+
                     </div> -->
 
                 @else
@@ -69,7 +68,7 @@
                                 </div>
                             </div>
                         </a>
-                           
+
                     </div> -->
                 @endif
             @endif
@@ -83,10 +82,10 @@
 
                             @if( $K->sender_id == auth()->user()->id )
                                 @if(!empty($K->msg_file))
-                                    <?php 
+                                    <?php
                                         $img = '';
-                                        
-                                        $img = ($K->msg_file) ? asset('storage/members/chat/'.$K->msg_file) : asset('images/user-placeholder.jpg'); 
+
+                                        $img = ($K->msg_file) ? asset('storage/members/chat/'.$K->msg_file) : asset('images/user-placeholder.jpg');
                                     ?>
                                     <div class="sender-sms sender-sms-img generic-append d-flex justify-content-end p-0">
                                         <a href="{{ $img }}" data-fancybox="gallery">
@@ -128,15 +127,15 @@
                             @else
                                 @if(isset($oneHavePlan) && $oneHavePlan == 1)
                                     @if(!empty($K->msg_file))
-                                        <?php 
+                                        <?php
                                             $img = '';
-                                            
-                                            $img = ($K->msg_file) ? asset('storage/members/chat/'.$K->msg_file) : asset('images/user-placeholder.jpg'); 
+
+                                            $img = ($K->msg_file) ? asset('storage/members/chat/'.$K->msg_file) : asset('images/user-placeholder.jpg');
                                         ?>
                                             <div class="receiving-sms generic-append d-flex justify-content-start"><div class="receiving-mesg">
                                                 <a href="{{ $img }}" data-fancybox="gallery">
                                                 <img class="receiving-img" style="width: 14rem" src="{{ $img }}"><span></a>
-                                                
+
                                                 @if($K->instant_count == 1)
                                                     <img class="instant-msg instant-msg-left" src="{{asset('assets/images/instant-msg.svg') }}">
                                                 @endif
@@ -201,7 +200,7 @@
                         @endforeach
                     @else
                         <span class="generic-append"></span>
-                    @endif 
+                    @endif
                 </div>
             </div>
             <!-- if(isset($active_plan) && $active_plan == 1) -->
@@ -212,7 +211,7 @@
                             <!-- <button type="button" class="add_photo"> -->
                             <img src="{{asset('assets/images/media.svg') }}" alt="" class="add_photo">
                             <!-- </button> -->
-                            <input type="text" placeholder="type something..." id="message">
+                            <input type="text" placeholder="type something..." id="message" data-receiver="{{ $chat_user_id }}" class="message123">
                             <input type="hidden" name="user_id_receiver" id="user_id_receiver" value="{{ $chat_user_id }}">
                             <input type="file" id="file" name="file" style="display: none;">
                             <!-- <img class="encrypt-send instant_message" src="{{asset('assets/images/encrypt-msg.svg') }}" alt="Instant"> -->
@@ -225,7 +224,7 @@
                         </div>
                     </form>
                 </div>
-            
+
                 <!-- <div class="current-chat-footer">
                     <div class="typing"></div>
                     <div class="send-field"> -->
@@ -237,7 +236,7 @@
                         <button type="button" class="no_plan"> Send <img src="{{asset('assets/images/send.svg') }}" alt="icon" ></button>
                     </div>
                 </div> -->
-            
+
         </div>
     @else
         <div class="chat-main">

@@ -31,7 +31,7 @@
                                 <h4>Chats</h4>
                                 <!-- <span>6 active chats</span> -->
                             </div>
-                            
+
                             <div class="chat-boxes">
                             	<table id="members_table" class="w-100">
                                     <thead>
@@ -41,12 +41,12 @@
                                     </thead>
                                 </table>
                             </div>
-                            
+
                         </div>
 
                             <!-- Include file here -->
                             @include('/frontend.partials.conversation')
-                        
+
                     </div>
                 </section>
             </div>
@@ -114,15 +114,16 @@
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
-    
+
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://crzglobal.xyz:9000/socket.io/socket.io.js"></script>
+    <!-- <script src="https://crzglobal.xyz:9000/socket.io/socket.io.js"></script> -->
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
 
     <script type="text/javascript">
-       
-        const socket = io('https://crzglobal.xyz:9000',{secure: true});
+
+        const socket = io('https://localhost:9000',{secure: true});
         var auth_id = {{ auth()->user()->id }};
         var uploaded_image = '';
         var user_hash = {{ (isset($rid) && !empty($rid) ) ? $rid:0 }};
@@ -131,8 +132,26 @@
         var typing=false;
         var timeout=undefined;
         var cht_active = '';
+        console.log("sdfasd")
+
         $(document).ready(function() {
-            
+
+            // $(".message123").on('input', function(){
+            //     console.log("typing")
+            //     socket.emit('typing', {typing:"hello from php"})
+            // })
+
+            socket.on("connected", function(data){
+                console.log(data)
+                socket.on("sender_typing", function(data){
+                    if(data.receiver_id == auth_id){
+                        // console.log("typing...")
+                        $('#is_typing').text("typing...")
+                        setTimeout(() => $('#is_typing').text(""), 2000)
+                    }
+                  })
+            })
+
             //event for send message on enter button
                 /*$('#messagePPP').keypress(function(event){
 
@@ -147,18 +166,18 @@
                     }
                 });*/
             /*$('.no_plan').on('click' , function(){
-        
+
                 Swal.fire({
                           title: "It's time to upgrade",
                           icon: 'error',
                           html:
                             'To upgrade package please click on , ' +
-                            
+
                             '<div class="plan-footer">'+
                                 '<a href="/plans">Plans</a>'+
                             '</div>',
                           focusConfirm: true,
-                          
+
                         });
 
                 return false;
@@ -166,7 +185,7 @@
 
             $("#message-form").submit(function(e) {
                 // Stop the form submitting
-                e.preventDefault(); 
+                e.preventDefault();
                 var message = $('#message').val();
                 if(message != ''){
                     $('.sendMsgBtn').prop('disabled', true);
@@ -175,22 +194,25 @@
             });
             //show typing ..
             $('#message').keypress((e)=>{
+                var receiver_id=$('#user_id_receiver').val()
                 if(e.which!=13){
                   typing=true
-                  socket.emit('typing', {typing:true,user_id:auth_id})
+                  socket.emit('typing', {typing:true,user_id:auth_id, receiver_id: receiver_id})
+                //   console.log({user_id: auth_id, receiver_id : receiver_id})
                   clearTimeout(timeout)
                   timeout=setTimeout(typingTimeout, 3000)
                 }else{
                   clearTimeout(timeout);
-                  typingTimeout();
+                  typingTimeout(receiver_id);
                   //sendMessage() function will be called once the user hits enter
                   event.preventDefault();
                   $('#btn-send').trigger('click');
                 }
             });
             $('#message').focusout(function(){
+                var receiver_id=$('#user_id_receiver').val()
                 clearTimeout(timeout);
-                typingTimeout();
+                typingTimeout(receiver_id);
             });
             //code explained later
             socket.on('display', (data)=>{
@@ -203,32 +225,32 @@
                     }
                 }
             });
-            //END show typing .. 
+            //END show typing ..
             var oTable = $('#members_table').DataTable({
               "bLengthChange": false,
                 searching: false,
                 processing: true,
                 serverSide: true,
-                sorting: false, 
+                sorting: false,
                 ordering : false,
-                bPaginate: false, 
+                bPaginate: false,
                 ordering: false,
                 info: false,
-                'language':{ 
+                'language':{
                    "loadingRecords": "&nbsp;",
                    "processing": "Loading..."
-                },                       
+                },
                 "ajax": {
                     "url": "{!! url('user/chats') !!}",
-                    
+
                     'headers': {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },                   
+                    },
                 },
-                columns: [                              
-                    
+                columns: [
+
                     {
-                    
+
                     "render": function(data, type, row, meta) {
                         var _url = "{{ url('user/chats?id=') }}";
                         _url = _url+row.hash_id;
@@ -258,19 +280,19 @@
                         return '<ul>'+
                                 '<a href="'+_url+'" class="u_cht '+cht_active+'">'+
                                 '<li class="'+current_chat_active+'">'+
-                                    
+
                                         '<div class="single-chat flex">'+
                                             '<div class="chat-image '+ (row.picture_privacy == "blur" ? 'blur_img' : '') +'" style="background-image: url('+row.profile_image_path+');">'+
-                                                
+
                                             '</div>'+
                                             '<div class="chat-data">'+
                                                 '<h5>'+row.display_user_name+'</h5>'+
                                                 msg+
                                             '</div>'+tme+
-                                            
+
                                         '</div>'+
-                                    
-                                '</li>'+ '</a>'+ 
+
+                                '</li>'+ '</a>'+
                             '</ul>';
                     }
                   },
@@ -279,7 +301,7 @@
               $('html, body').animate({
                 scrollTop: $(".dataTables_wrapper").offset().top
               }, 'slow');
-              
+
             });
 
             $('#btn-send').on('click',function(event) {
@@ -289,7 +311,7 @@
                     $('.sendMsgBtn').prop('disabled', true);
                     upload(message,0,'');
                     oTable.draw();
-                    
+
                 }
             });
             $('.instant_message').on('click',function(event) {
@@ -303,8 +325,8 @@
             });
 
             socket.off('session_join_request_get').on('session_join_request_get', function(msg) {
-                
-               
+
+
                 if(msg.receiver.id == auth_id){
                     var message = '';
                     if(msg.file != null){
@@ -342,11 +364,11 @@
             $('.add_photo').on("click", function(e) {
                 e.preventDefault();
                 $('#file').focus().trigger("click");
-                
+
             });
             $image_crop = $('#image_demoP').croppie({
                 enableExif: true,
-            
+
                 viewport: {
                     width: 600,
                     height: 600,
@@ -362,18 +384,18 @@
             $('#file').on('change', function() {
                 var reader = new FileReader();
                 var file = this.files[0]; // Get your file here
-               
+
                 var fileExt = file.type.split('/')[1]; // Get the file extension
                 $('#ext').val(fileExt);
-               
-                if (fileTypes.indexOf(fileExt) !== -1) 
+
+                if (fileTypes.indexOf(fileExt) !== -1)
                 {
 
                     /*reader.onload = function(event) {
                       $image_crop.croppie('bind', {
                           url: event.target.result
                       }).then(function() {
-                          
+
                       });
                     }*/
                     reader.onload = function (e) {
@@ -384,9 +406,9 @@
 
                    // reader.readAsDataURL(this.files[0]);
                     $('#uploadimageModal').modal('show');
-                     
-                } 
-                else 
+
+                }
+                else
                 {
                   alert('File not supported');
                 }
@@ -398,7 +420,7 @@
                 response = response.replace("data:image/png;base64,", "");
                 var _inst = $(this).data('instantimage');
                 upload('',_inst,response);
-                    
+
                 oTable.draw();
                 scrollBottom();
 
@@ -408,9 +430,9 @@
                 }).then(function(response) {
 
                     response = response.replace("data:image/png;base64,", "");
-                    
+
                     upload('',_inst,response);
-                    
+
                     oTable.draw();
                     scrollBottom();
                 })*/
@@ -418,12 +440,12 @@
             });
             //var aDay = 2*60*60*1000;
             var aDay = 1660403391;
-           
+
             scrollBottom();
         });
-        function typingTimeout(){
+        function typingTimeout(receiver_id){
             typing=false;
-            socket.emit('typing', {typing:false,user_id:auth_id});
+            socket.emit('typing', {typing:false,user_id:auth_id, receiver_id: receiver_id});
         }
 
         function upload(msg='',instant=0, img='') {
@@ -438,36 +460,38 @@
                 'user_id_receiver' : user_id_receiver
             }
             $('.uploading_spinner').show();
-           
-
+            
+            
             // AJAX request
-
+            
             /*$.post('{{ route("user.users_add_photo") }}', data)
-                .done(function(response) {
-                    $('.crop_image').show();
-                    $('.uploading_spinner').hide();
-                    $('#uploadimageModal').modal('hide');
-                    _photo = 0;
-                     window.location.reload(true);            
-                })
-                .fail(function($xhr) {
-                    var response = $xhr.responseJSON;
-                    $('.uploading_spinner').hide();
-                    $('.crop_image').show();
+            .done(function(response) {
+                $('.crop_image').show();
+                $('.uploading_spinner').hide();
+                $('#uploadimageModal').modal('hide');
+                _photo = 0;
+                window.location.reload(true);
+            })
+            .fail(function($xhr) {
+                var response = $xhr.responseJSON;
+                $('.uploading_spinner').hide();
+                $('.crop_image').show();
                    // Swal.fire(response.msg);
                 });*/
                 // AJAX request
-
+                
                 $.post('{{ route("user.send-message") }}', data)
-                    .done(function(response) {
+                .done(function(response) {
+                    console.log("send message")
+                        socket.emit("send_message",{is_send: true, data: data})
                         $('.uploading_spinner').hide();
                         $('#uploadimageModal').modal('hide');
                         var res = JSON.parse(response);
-                        
+
                         $('.sendMsgBtn').prop('disabled', false);
-                                     
+
                         if(res.status == 1){
-                            
+
                             var im = "{{ asset('storage/members/chat/') }}";
                             var msges = '';
                             var image_url = '';
@@ -477,29 +501,29 @@
                                 msges = '<div class="sender-sms sender-sms-img generic-append d-flex justify-content-end p-0">'+
                                             '<a href="'+image_url+'" data-fancybox="gallery"><img class="sender-img" style="width: 14rem" src="'+image_url+'"><span>'+res.success_data.chat.d_time+'</span><div class="sms-status"><img src="{{asset('assets/images/s_tick.png')}}" alt="icon"></div></a>';
                                         if(instant == 1){
-                                          msges += '<img class="instant-msg instant-msg-right" src="{{asset('assets/images/instant-msg.svg') }}">'; 
+                                          msges += '<img class="instant-msg instant-msg-right" src="{{asset('assets/images/instant-msg.svg') }}">';
                                         }
-                                       
+
                                         '</div>';
                             }else{
                                 var ins_msg = '';
                                 if(instant == 1){
-                                   ins_msg = '<img class="instant-msg instant-msg-right" src="{{asset('assets/images/instant-msg.svg') }}">'; 
+                                   ins_msg = '<img class="instant-msg instant-msg-right" src="{{asset('assets/images/instant-msg.svg') }}">';
                                 }
                                 // msges =   '<div class="sender-sms generic-append"><div class="send_msg_cont"><div class="msg_left_cls">'+
                                 //     '<p>'+msg+'</p>'+
                                 //     '<span>'+res.success_data.chat.d_time+'</span><div class="sms-status"><img src="{{asset('assets/images/s_tick.png')}}" alt="icon"></div>'+ins_msg+
-                                    
+
                                 // '</div><div class="msg_right_cls"><img class="sender-img" src="'+image_url+'"></div></div></div>';
 
 
                                 msges =   '<div class="sender-sms generic-append"><div class="send_msg_cont"><div class="msg_left_cls">'+
                                     '<p>'+msg+'</p>'+
                                     ins_msg+
-                                    
+
                                 '</div></div></div>';
                             }
-                            
+
                             $('.generic-append:last').after(msges);
                             scrollBottom();
                             $('#message').val('');
@@ -520,7 +544,7 @@
                                 Swal.fire({
                                   icon: 'warning',
                                   title: "Upgrade to send message",
-                                  
+
                                   text:   "To continue sending messages please upgrade.",
                                   showClass: {
                                     popup: 'animate__animated animate__fadeInDown'
@@ -528,26 +552,26 @@
                                     hideClass: {
                                         popup: 'animate__animated animate__fadeOutUp'
                                     },
-                                    
+
                                     showCancelButton: true,
                                     focusConfirm: false,
                                     reverseButtons: true,
                                     confirmButtonText:
                                     '<a href="/plans" target="_blank"> View Plans </a>',
-                                  
+
                                     cancelButtonText:'Cancel',
                                     cancelButtonColor: '#e7147b',
                                     confirmButtonColor: '#21c2d6',
                                 });
                                 return false;
-                            } 
+                            }
                         }else if(res.status == 0){
                             /*$('#user_message_popup').text(res.message);
                             $('#no_plan').modal('show');*/
                             Swal.fire({
                               icon: 'warning',
                               title: res.title,
-                              
+
                               text:   res.message,
                               showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
@@ -555,13 +579,13 @@
                                 hideClass: {
                                     popup: 'animate__animated animate__fadeOutUp'
                                 },
-                                
+
                                 showCancelButton: true,
                                 focusConfirm: false,
                                 reverseButtons: true,
                                 confirmButtonText:
                                 '<a href="/plans" target="_blank"> View Plans </a>',
-                              
+
                                 cancelButtonText:'Cancel',
                                 cancelButtonColor: '#e7147b',
                                 confirmButtonColor: '#21c2d6',
@@ -578,7 +602,7 @@
                     });
         }
         function timeSince(date) {
-           
+
           var seconds = Math.floor((new Date() - date) / 1000);
 
           var interval = seconds / 31536000;
@@ -610,5 +634,5 @@
             }, 1000);
         }
     </script>
-    
+
 @endsection
