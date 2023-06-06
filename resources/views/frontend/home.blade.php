@@ -118,10 +118,10 @@
                                 <span>{{ $M['occupation_id'] }}</span>
                             </div>
                             <div class="member-infos d-flex">
-                                
-                                    <span>
-                                        <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
-                                
+
+                                <span>
+                                    <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
+
                                 <div class=" img-icon d-flex">
                                     <img src="{{ asset('images/Heart.png')}}" alt="heart">
                                     <img src="{{ asset('images/Close.png')}}" alt="close">
@@ -290,30 +290,30 @@
 
     <!-- Past Events -->
     <div class="owl-carousel events-section">
-        <!-- <div class="owl-carousel members-slider"> -->
-        @foreach($past_events as $K => $V)
-        <div class="single-event-home">
-            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
-            <div class="event_details resize">
-                <h4>{{ $V->title }}</h4>
-                <p>{!! truncatedStr($V->short_description) !!} </p>
-                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
-                <div class="event_info">
-                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
-                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+        <div class="owl-carousel members-slider">
+            @foreach($past_events as $K => $V)
+            <div class="single-event-home">
+                <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
+                <div class="event_details resize">
+                    <h4>{{ $V->title }}</h4>
+                    <p>{!! truncatedStr($V->short_description) !!} </p>
+                    <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
+                    <div class="event_info">
+                        <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
+                        <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+                    </div>
                 </div>
             </div>
+            @endforeach
+            <!-- </div> -->
         </div>
-        @endforeach
-        <!-- </div> -->
-    </div>
 
-    @if(count($past_events))
-    <div class="events-link">
-        <a href="{{ route('past-events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
-    </div>
-    @endif
-    <!-- End Past Events -->
+        @if(count($past_events))
+        <div class="events-link">
+            <a href="{{ route('past-events') }}"><img src="assets/images/link_icon.svg" alt="icon">View All Events</a>
+        </div>
+        @endif
+        <!-- End Past Events -->
     </div>
     <!-- modal -->
     <div class="alert_popup">
