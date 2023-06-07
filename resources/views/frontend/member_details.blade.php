@@ -27,268 +27,268 @@
                         <div class="d-flex">
                             <span><img src="{{ asset('assets/images/location_white.png') }}" alt="">{{ isset($member->city->name)?$member->city->name:'---' }}, {{ isset($member->country->name)?$member->country->name:'---' }}</span>
                         </div>
-                            <!-- <span><img src="{{asset('assets/images/map.svg') }}" alt="icon">{{ $member['country_id'] }}</span> -->
-                            <div class=" img-icon d-flex">
-                                <img src="{{ asset('images/Heart.png')}}" alt="heart">
-                                <img src="{{ asset('images/Close.png')}}" alt="close">
-                                <img src="{{ asset('images/Mark.png')}}" alt=mark>
-                            </div>
+                        <!-- <span><img src="{{asset('assets/images/map.svg') }}" alt="icon">{{ $member['country_id'] }}</span> -->
+                        <div class=" img-icon d-flex">
+                            <img src="{{ asset('images/Heart.png')}}" alt="heart">
+                            <img src="{{ asset('images/Close.png')}}" alt="close">
+                            <img src="{{ asset('images/Mark.png')}}" alt=mark>
                         </div>
-
-                        @auth('user')
-                        <a href="" class="btn-custom-primary">Send Message</a>
-
-                        @else
-                        <!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" onclick="openLoginModel()">View Full Profile</a> -->
-                        <a href="javascript:void(0);" class="custom_modal btn-custom-primary">View Full Profile</a>
-                        @endauth
                     </div>
 
-                    <!-- <a href="{{ url('user/chats?id='.$has_id ) }}" class="mesg-btn"> <img src="{{ asset('assets/images/sms.png') }}" alt="icon"> Send Message</a> -->
-                    <!-- <div class="prof-actions-details">
+                    @auth('user')
+                    <a href="" class="btn-custom-primary btn-member-msg w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
+
+                    @else
+                    <!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" onclick="openLoginModel()">View Full Profile</a> -->
+                    <a href="javascript:void(0);" class="custom_modal btn-custom-primary">View Full Profile</a>
+                    @endauth
+                </div>
+
+                <!-- <a href="{{ url('user/chats?id='.$has_id ) }}" class="mesg-btn"> <img src="{{ asset('assets/images/sms.png') }}" alt="icon"> Send Message</a> -->
+                <!-- <div class="prof-actions-details">
                         <a href='#' class="interest-request likeMe btn-custom-secondary" data-memberid="{{ $member->id }}" data-status="1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</a>
                         <a href="#" class="btn-member-msg  btn-custom-primary" data-memberidhash="{{ \Hashids::encode($member->id) }}"><i class="fa fa-commenting-o" aria-hidden="true"></i> Message</a>                    
                         <a href="#" class="interest-request btn-custom-secondary" data-memberid="{{$member->id}}" data-status="3"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Ignore</a>
                         <a href="javascript:void(0);" class="report-request btn-custom-primary" data-memberid="{{ $member->id }}"><i class="fa fa-flag-o" aria-hidden="true"></i> Report</a>
                     </div> -->
 
-                    @if ($member->gallery_image == 'all_member')
-                    <div class="profile-photos">
-                        <h4>Photos:</h4>
-                        <ul id="lightgallery">
-                            @foreach($user_images as $K => $V)
+                @if ($member->gallery_image == 'all_member')
+                <div class="profile-photos">
+                    <h4>Photos:</h4>
+                    <ul id="lightgallery">
+                        @foreach($user_images as $K => $V)
 
-                            <?php
-                            $photo_url = ($V->user_image) ? asset('storage/members/profile-image/' . $V->user_image) : asset('images/user-placeholder.jpg');
-                            ?>
-                            <a href="{{$photo_url}}">
-                                <img src="{{$photo_url}}" class="profile-gal {{$member->picture_privacy == 'blur' ? 'blur_img' : ''}}" />
-                                <!--  <div class="profile-gal" style="background-image: url({{$photo_url}});"></div> -->
-                            </a>
+                        <?php
+                        $photo_url = ($V->user_image) ? asset('storage/members/profile-image/' . $V->user_image) : asset('images/user-placeholder.jpg');
+                        ?>
+                        <a href="{{$photo_url}}">
+                            <img src="{{$photo_url}}" class="profile-gal {{$member->picture_privacy == 'blur' ? 'blur_img' : ''}}" />
+                            <!--  <div class="profile-gal" style="background-image: url({{$photo_url}});"></div> -->
+                        </a>
 
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
+                        @endforeach
+                    </ul>
                 </div>
-                <div class="user-profile-center">
-                    <div class="profile-main-body">
-                        <div class="profile-inner-body">
-                            <h4>Profile Information:</h4>
-                            <span>Member#: ID{{ $member->id }}</span>
-                        </div>
-                        <div class="inner_information">
-                            <div class="profile_desc">
-                                <h4>Introduction</h4>
-                                <p>{{ $member['about'] }}</p>
-                            </div>
-                            <div class="basic-info with_line">
-                                <div class="basic-row flex">
-                                    <h4>Personal Information:</h4>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Full Name</span>
-                                    <h6>{{ getUserName($member->first_name.' '.$member['last_name']) }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Gender</span>
-                                    <h6>
-                                        <?php
-                                        if ($member['gender'] == 1) {
-                                            echo 'Female';
-                                        } elseif ($member['gender'] == 0) {
-                                            echo 'Male';
-                                        } else {
-                                            echo 'Others';
-                                        }
-                                        ?>
-                                    </h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Marital Status</span>
-                                    <h6>
-                                        {{ isset($member->marital_status->name)? $member->marital_status->name:'---' }}
-                                    </h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Height</span>
-                                    <h6>{{ (isset($member['height']) && !empty($member['height']) )?$member['height']:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Date of Birth</span>
-                                    <h6>{{ $member['date_of_birth']}}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>On Behalf</span>
-                                    <h6>{{ isset($member->on_behalf->name)?$member->on_behalf->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Religion</span>
-                                    <h6>{{ isset($member->religion->name)? $member->religion->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Caste</span>
-                                    <h6>{{ isset($member->caste->name)? $member->caste->name:'---' }}</h6>
-                                </div>
-                            </div>
-                            <div class="basic-info with_line">
-                                <div class="basic-row flex">
-                                    <h4>Present Address Information:</h4>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Country</span>
-                                    <h6>{{ isset($member->country->name)?$member->country->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>State</span>
-                                    <h6>
-                                        {{ isset($member->state->name)? $member->state->name:'---' }}
-                                    </h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>City</span>
-                                    <h6>{{ isset($member->city->name)? $member->city->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Nationality</span>
-                                    <h6>{{ isset($member->nationality->name)? $member->nationality->name:'---' }}</h6>
-                                </div>
-                            </div>
-                            <div class="basic-info">
-                                <div class="basic-row flex">
-                                    <h4>Education & Career:</h4>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Education</span>
-                                    <h6>{{ isset($member->education->name)? $member->education->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Specialization</span>
-                                    <h6>{{ isset($member->specialisation->name)? $member->specialisation->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Occupation</span>
-                                    <h6>{{ isset($member->occupation->name)? $member->occupation->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Working With</span>
-                                    <h6>{{ isset($member->working->name)? $member->working->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Annual Income</span>
-                                    <h6>{{ isset($member->annual_income)? $member->annual_income:'---' }}</h6>
-                                </div>
-                            </div>
-                            <div class="basic-info with_line">
-                                <div class="basic-row flex">
-                                    <h4>Partner Expectation:</h4>
-                                </div>
+                @endif
 
-                                <div class="basic-info-row">
-                                    <span>General Requirement</span>
-                                    <h6>
-                                        {{ isset($member->partner_general_requirement)? $member->partner_general_requirement:'---' }}
-                                    </h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Age</span>
-                                    <h6>{{ isset($member->partner_age)? $member->partner_age:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Height</span>
-                                    <h6>{{ isset($member->partner_height)? $member->partner_height:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Weight</span>
-                                    <h6>{{ isset($member->partner_weight)? $member->partner_weight:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Marital Status</span>
-                                    <h6>{{ isset($member->partner_marital_status)?$member->partner_marital_status->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Children Acceptables</span>
-                                    <h6>{{ ($member->partner_with_children_acceptable == 2)?'No':'Yes' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Caste</span>
-                                    <h6>{{ ($member->partner_caste) ? $member->partner_caste->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Religion</span>
-                                    <h6>{{ ($member->partner_religion) ? $member->partner_religion->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Country of Residence</span>
-                                    <h6>{{ ($member->partner_residence_country) ? $member->partner_residence_country->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Education</span>
-                                    <h6>{{ ($member->partner_education) ? $member->partner_education->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Profession</span>
-                                    <h6>{{ ($member->partner_profession) ? $member->partner_profession:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Complexion</span>
-                                    <h6>{{ ($member->partner_complexion) ? $member->partner_complexion:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Drinking Habits</span>
-                                    <h6>{{ ($member->partner_drinking_habits == 0) ? 'No':'Yes' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Smoking Habits</span>
-                                    <h6>{{ ($member->partner_smoking_habits == 0) ? 'No':'Yes' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Diet</span>
-                                    <h6>{{ ($member->partner_diet) ? $member->partner_diet:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Body Type</span>
-                                    <h6>{{ ($member->partner_body_type) ? $member->partner_body_type:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Personal Value</span>
-                                    <h6>{{ ($member->partner_personal_value) ? $member->partner_personal_value:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Manglik</span>
-                                    <h6>{{ ($member->partner_manglik == 1) ? 'Yes':'No' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Any Desablity</span>
-                                    <h6>{{ ($member->partner_desablity) ? $member->partner_desablity:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Mother Tongue</span>
-                                    <h6>{{ ($member->partner_mother_language) ? $member->partner_mother_language->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Prefered Status</span>
-                                    <h6>{{ ($member->partner_prefered_status) ? $member->partner_prefered_status:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Family Value</span>
-                                    <h6>{{ ($member->partner_family_value) ? $member->partner_family_value->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Prefered Country</span>
-                                    <h6>{{ ($member->partner_prefered_country) ? $member->partner_prefered_country->name:'---' }}</h6>
-                                </div>
-                                <div class="basic-info-row">
-                                    <span>Prefered State</span>
-                                    <h6>{{ ($member->partner_prefered_state) ? $member->partner_prefered_state->name:'---' }}</h6>
-                                </div>
+            </div>
+            <div class="user-profile-center">
+                <div class="profile-main-body">
+                    <div class="profile-inner-body">
+                        <h4>Profile Information:</h4>
+                        <span>Member#: ID{{ $member->id }}</span>
+                    </div>
+                    <div class="inner_information">
+                        <div class="profile_desc">
+                            <h4>Introduction</h4>
+                            <p>{{ $member['about'] }}</p>
+                        </div>
+                        <div class="basic-info with_line">
+                            <div class="basic-row flex">
+                                <h4>Personal Information:</h4>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Full Name</span>
+                                <h6>{{ getUserName($member->first_name.' '.$member['last_name']) }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Gender</span>
+                                <h6>
+                                    <?php
+                                    if ($member['gender'] == 1) {
+                                        echo 'Female';
+                                    } elseif ($member['gender'] == 0) {
+                                        echo 'Male';
+                                    } else {
+                                        echo 'Others';
+                                    }
+                                    ?>
+                                </h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Marital Status</span>
+                                <h6>
+                                    {{ isset($member->marital_status->name)? $member->marital_status->name:'---' }}
+                                </h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Height</span>
+                                <h6>{{ (isset($member['height']) && !empty($member['height']) )?$member['height']:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Date of Birth</span>
+                                <h6>{{ $member['date_of_birth']}}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>On Behalf</span>
+                                <h6>{{ isset($member->on_behalf->name)?$member->on_behalf->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Religion</span>
+                                <h6>{{ isset($member->religion->name)? $member->religion->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Caste</span>
+                                <h6>{{ isset($member->caste->name)? $member->caste->name:'---' }}</h6>
+                            </div>
+                        </div>
+                        <div class="basic-info with_line">
+                            <div class="basic-row flex">
+                                <h4>Present Address Information:</h4>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Country</span>
+                                <h6>{{ isset($member->country->name)?$member->country->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>State</span>
+                                <h6>
+                                    {{ isset($member->state->name)? $member->state->name:'---' }}
+                                </h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>City</span>
+                                <h6>{{ isset($member->city->name)? $member->city->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Nationality</span>
+                                <h6>{{ isset($member->nationality->name)? $member->nationality->name:'---' }}</h6>
+                            </div>
+                        </div>
+                        <div class="basic-info">
+                            <div class="basic-row flex">
+                                <h4>Education & Career:</h4>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Education</span>
+                                <h6>{{ isset($member->education->name)? $member->education->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Specialization</span>
+                                <h6>{{ isset($member->specialisation->name)? $member->specialisation->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Occupation</span>
+                                <h6>{{ isset($member->occupation->name)? $member->occupation->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Working With</span>
+                                <h6>{{ isset($member->working->name)? $member->working->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Annual Income</span>
+                                <h6>{{ isset($member->annual_income)? $member->annual_income:'---' }}</h6>
+                            </div>
+                        </div>
+                        <div class="basic-info with_line">
+                            <div class="basic-row flex">
+                                <h4>Partner Expectation:</h4>
+                            </div>
+
+                            <div class="basic-info-row">
+                                <span>General Requirement</span>
+                                <h6>
+                                    {{ isset($member->partner_general_requirement)? $member->partner_general_requirement:'---' }}
+                                </h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Age</span>
+                                <h6>{{ isset($member->partner_age)? $member->partner_age:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Height</span>
+                                <h6>{{ isset($member->partner_height)? $member->partner_height:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Weight</span>
+                                <h6>{{ isset($member->partner_weight)? $member->partner_weight:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Marital Status</span>
+                                <h6>{{ isset($member->partner_marital_status)?$member->partner_marital_status->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Children Acceptables</span>
+                                <h6>{{ ($member->partner_with_children_acceptable == 2)?'No':'Yes' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Caste</span>
+                                <h6>{{ ($member->partner_caste) ? $member->partner_caste->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Religion</span>
+                                <h6>{{ ($member->partner_religion) ? $member->partner_religion->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Country of Residence</span>
+                                <h6>{{ ($member->partner_residence_country) ? $member->partner_residence_country->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Education</span>
+                                <h6>{{ ($member->partner_education) ? $member->partner_education->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Profession</span>
+                                <h6>{{ ($member->partner_profession) ? $member->partner_profession:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Complexion</span>
+                                <h6>{{ ($member->partner_complexion) ? $member->partner_complexion:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Drinking Habits</span>
+                                <h6>{{ ($member->partner_drinking_habits == 0) ? 'No':'Yes' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Smoking Habits</span>
+                                <h6>{{ ($member->partner_smoking_habits == 0) ? 'No':'Yes' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Diet</span>
+                                <h6>{{ ($member->partner_diet) ? $member->partner_diet:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Body Type</span>
+                                <h6>{{ ($member->partner_body_type) ? $member->partner_body_type:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Personal Value</span>
+                                <h6>{{ ($member->partner_personal_value) ? $member->partner_personal_value:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Manglik</span>
+                                <h6>{{ ($member->partner_manglik == 1) ? 'Yes':'No' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Any Desablity</span>
+                                <h6>{{ ($member->partner_desablity) ? $member->partner_desablity:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Mother Tongue</span>
+                                <h6>{{ ($member->partner_mother_language) ? $member->partner_mother_language->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Prefered Status</span>
+                                <h6>{{ ($member->partner_prefered_status) ? $member->partner_prefered_status:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Family Value</span>
+                                <h6>{{ ($member->partner_family_value) ? $member->partner_family_value->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Prefered Country</span>
+                                <h6>{{ ($member->partner_prefered_country) ? $member->partner_prefered_country->name:'---' }}</h6>
+                            </div>
+                            <div class="basic-info-row">
+                                <span>Prefered State</span>
+                                <h6>{{ ($member->partner_prefered_state) ? $member->partner_prefered_state->name:'---' }}</h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <div class="alert_popup">
     <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

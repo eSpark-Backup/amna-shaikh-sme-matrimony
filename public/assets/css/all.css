@@ -44,9 +44,9 @@ img {
     display: block;
 }
 
-.coming_soon img{
-    width:50%;
-    display:block;
+.coming_soon img {
+    width: 50%;
+    display: block;
 }
 
 a {
@@ -316,14 +316,13 @@ a.u_cht.u_cht_active li {
 .img-icon {
     width: 30px;
     margin-inline-end: 60px;
-   
 }
 
 .wedding-top-row {
     /* align-items: flex-end; */
 }
 
-.member-heading-occupation span{
+.member-heading-occupation span {
     margin: 4px;
     font-size: 14px;
 }
@@ -597,7 +596,6 @@ h2 {
     /* margin: 20px 0 5px; */
     justify-content: space-between;
     align-items: center;
-
 }
 
 .member-infos span:first-child {
@@ -609,7 +607,7 @@ h2 {
     font-size: 15px;
     font-weight: 400;
     fill: #ffffff;
-    color: #ffffff;
+    color: #ffffff !important;
     /*
      background: linear-gradient(#e20f43, #6c2f75) padding-box,
         linear-gradient(to bottom, #6c2f75, #be0c53) border-box;
@@ -625,7 +623,7 @@ h2 {
     /*display: flex;*/
 }
 .btn-custom-primary:hover {
-    color: #ea147e;
+    color: #ea147e !important;
     background: #df175600;
     border-style: solid;
 }
@@ -1048,7 +1046,6 @@ h2 {
 }
 
 @media (min-width: 992px) {
-      
     /* .site-menu .log a {
         font-size: 15px;
         display:flex;
@@ -1313,11 +1310,16 @@ label.error {
 }
 
 .filters-section {
-  padding: 60px 0;
-  opacity: 0.95;
-  background: linear-gradient(90.48deg, #e11d1e -73.27%, #ea147e -11.03%, #573675 99.61%);
-  z-index: 111111111;
-  position: relative;
+    padding: 60px 0;
+    opacity: 0.95;
+    background: linear-gradient(
+        90.48deg,
+        #e11d1e -73.27%,
+        #ea147e -11.03%,
+        #573675 99.61%
+    );
+    z-index: 111111111;
+    position: relative;
 }
 .filters-content form {
     display: flex;
@@ -2830,7 +2832,12 @@ div#plan1 .close {
 .chat-sidebar {
     width: 450px;
     /* background: rgba(197, 209, 211, 0.14); */
-background: linear-gradient(87.57deg, #FB406C 0%, rgba(234, 20, 126, 0.95) 0%, #1BAACC 99.61%);
+    background: linear-gradient(
+        87.57deg,
+        #fb406c 0%,
+        rgba(234, 20, 126, 0.95) 0%,
+        #1baacc 99.61%
+    );
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -4677,14 +4684,13 @@ p.MsoNormal {
     padding: 10px;
     box-shadow: 0px 3px 25px rgba(0, 0, 0, 0.1);
     outline: none;
-
 }
-.input-message{
-         /* margin-bottom: 100px; */
-         margin-top: 30px;
-        /* margin-right: 40px; */ 
-        display: flex;
-        justify-content: center;
+.input-message {
+    /* margin-bottom: 100px; */
+    margin-top: 30px;
+    /* margin-right: 40px; */
+    display: flex;
+    justify-content: center;
 }
 /* .input-message input:focus,
 select:focus {
@@ -4697,7 +4703,7 @@ select:focus {
 @media screen and (min-width: 1700px) {
     .site-menu .log a {
         font-size: 15px;
-        display:none;
+        display: none;
     }
     .container,
     .banner_specs {
@@ -4707,7 +4713,7 @@ select:focus {
 @media screen and (min-width: 1360px) and (max-width: 1699px) {
     .site-menu .log a {
         font-size: 15px;
-        display:none;
+        display: none;
     }
     .container {
         max-width: 1270px;
@@ -4720,7 +4726,7 @@ select:focus {
 @media screen and (max-width: 1460px) {
     .site-menu .log a {
         font-size: 15px;
-        display:none;
+        display: none;
     }
     .hero-content {
         max-width: 600px;
@@ -4737,7 +4743,7 @@ select:focus {
 
     .site-menu .log a {
         font-size: 15px;
-        display:none;
+        display: none;
     }
 
     .section-head h2 {
@@ -4801,7 +4807,7 @@ select:focus {
 @media screen and (max-width: 1360px) {
     .site-menu .log a {
         font-size: 15px;
-        display:none;
+        display: none;
     }
     .chat_top_fix_cls + .current-chat-body {
         height: calc(100% - 270px);
@@ -4811,10 +4817,9 @@ select:focus {
     }
 }
 @media screen and (max-width: 1199px) {
-
     .site-menu .log a {
         font-size: 15px;
-        display:none;
+        display: none;
     }
 
     .site-menu li {
@@ -4973,9 +4978,9 @@ select:focus {
     .chat-main {
         width: calc(100% - 380px);
     }
- .data_not_found {
-opacity: 0.5;
-}
+    .data_not_found {
+        opacity: 0.5;
+    }
     .current-chat-head {
         padding: 13px 20px;
     }
@@ -5009,11 +5014,10 @@ opacity: 0.5;
 }
 
 @media screen and (max-width: 991px) {
-      
     .site-menu .log a {
         font-size: 15px;
-        display:flex;
-        padding-left:10px;
+        display: flex;
+        padding-left: 10px;
     }
 
     .site-logo {
@@ -5324,1227 +5328,1209 @@ opacity: 0.5;
         right: -30px;
         opacity: 1;
     }
- .site-menu2 .logout-btn a {  
- padding: 5px;
-} 
-   .wedding-top-row {
-       display: flex;
-       justify-content: center;
-   }
-          .wedding_image1 {
-              /* height: 300px; */
-              /* width: 100%; */
-          }
+    .site-menu2 .logout-btn a {
+        padding: 5px;
+    }
 
-@media screen and (max-width: 767px) {
-
-    .wedding_image1 {
-            /* height: 300px; */
-            width: 120%;
+    @media screen and (max-width: 767px) {
+        .site-menu .log a {
+            font-size: 15px;
+            display: flex;
+            padding-left: 10px;
         }
-    .site-menu .log a {
-        font-size: 15px;
-        display:flex;
-        padding-left:10px;
-    }
-
- 
-    .alert_popup.chat_upgrade_popup .modal-content {
-        padding: 35px 0 20px;
-    }
-    .alert_popup.chat_upgrade_popup h2 {
-        max-width: 100%;
-        font-size: 20px;
-    }
-    .alert_popup.chat_upgrade_popup p {
-        font-size: 13px;
-    }
-    .profile-main-body {
-        margin-top: 20px;
-    }
-    .card-body.p-3.pt-0.text-center.padding_cls {
-        padding: 20px 0 0 !important;
-    }
-    .mobile_none {
-        display: none;
-    }
-    .desktop_none {
-        display: flex;
-        margin: 20px 0;
-    }
-    .profile_info_cls {
-        flex-direction: column;
-    }
-    .profile_info_cls .btn-primary {
-        margin-left: 0;
-        margin-top: 10px;
-        width: auto;
-        margin-bottom: 10px;
-    }
-    .section-head {
-        padding: 20px 0;
-    }
-    .events_center p {
-        margin-bottom: 10px;
-    }
-    main.event_detail .video-section .events_links a {
-        min-width: unset !important;
-    }
-    .stories-gallery p {
-        font-size: 16px;
-    }
-    .single-event-home {
-        margin-bottom: 0;
-    }
-    .members-list .single-member {
-        width: 100%;
-    }
-   
-    .stories-gallery {
-        padding-top: 35px !important;
-    }
-    .user-profile-section h5 {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-    .user-profile-section .row.form-group {
-        margin-bottom: 0;
-    }
-    .profile-main-body [class*="col-"] {
-        margin-bottom: 20px;
-    }
-    .profile-main-body [class*="col-"] label.form-label,
-    .profile-main-body [class*="col-"] label {
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-    .btn,
-    .mesg-btn,
-    .upload_photo span,
-    .field-btn button {
-        font-size: 14px !important;
-    }
-    p.MsoNormal {
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-    .alert_popup .modal-body h2 {
-        font-size: 16px;
-        max-width: 80%;
-        margin: 10px auto;
-    }
-    form#report-form label.form-label {
-        display: block;
-        margin-bottom: 5px;
-        font-size: 14px;
-    }
-    form#report-form .form-control {
-        font-size: 14px;
-    }
-    .alert_popup .modal-footer .btn {
-        font-size: 14px;
-        padding: 5px 15px;
-    }
-
-    .alert_popup .icon-show {
-        height: 35px;
-        width: 35px;
-        font-size: 20px;
-    }
-
-    .alert_popup .modal-body {
-        padding: 0 15px;
-    }
-    .members-section .members-content {
-        padding-bottom: 0 !important;
-    }
-    .most_popular .btn_popular {
-        padding: 10px 5px;
-        font-size: 10px;
-    }
-
-    .most_popular {
-        left: calc(50% - 42px);
-    }
-
-    .plan_inner_cont h2 {
-        font-size: 20px;
-    }
-
-    .plan_inner_cont h5 {
-        font-size: 14px;
-    }
-
-    .like_popup p {
-        font-size: 10px;
-    }
-
-    .plan_col {
-        padding: 20px 5px 15px;
-    }
-
-    .plan_inner_cont {
-        min-height: 50px;
-        margin-bottom: 5px;
-    }
-
-    .like_popup h2 {
-        font-size: 24px;
-    }
-
-    .like_popup h3 {
-        font-size: 18px;
-    }
-
-    .continue-action a {
-        font-size: 15px;
-        padding: 10px 25px;
-    }
-    .alert_popup .modal-body p {
-        font-size: 12px;
-        padding: 0 10px;
-    }
-    .profile-photos li {
-        width: 50%;
-    }
-    .croppie-container .cr-boundary {
-        height: 240px !important;
-    }
-    .mt-88 {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .user-profile-image {
-        margin-bottom: 20px;
-    }
-    .receiving-sms {
-        max-width: 100%;
-    }
-    .receiving-mesg {
-        max-width: 100%;
-    }
-    .field-btn button {
-        padding: 10px 30px;
-    }
-    table#transactions_table {
-        display: block;
-        width: 100%;
-        white-space: nowrap;
-        overflow-x: auto;
-    }
-    .profile-inner-body span {
-        padding: 10px 0px 10px;
-    }
-    .basic-info.with_line {
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-    }
-    .profile-main-page .user-profile-left {
-        padding: 15px;
-    }
-    .profiles-content ul {
-        margin-top: 10px !important;
-    }
-    .single-profile {
-        margin-bottom: 20px;
-    }
-    #user_section .row {
-        flex-direction: unset !important;
-    }
-    .current-chat-head .currently-active {
-        flex: 0 0 calc(100% - 30px);
-    }
-
-    .chat-options {
-        display: flex;
-        justify-content: end;
-        flex: 0 0 30px;
-    }
-
-    .chat-options .chat-dots {
-        margin-left: auto;
-    }
-    .profiles-section {
-        margin: 30px 0;
-    }
-    .basic-info.with_line.members-basic-info
-        .basic-row
-        + table.table.table-bordered
-        td {
-        font-size: 12px;
-        padding: 5px 5px;
-        width: auto !important;
-        min-width: unset;
-        white-space: unset;
-        word-break: break-word;
-    }
-    .basic-info.with_line.members-basic-info
-        .basic-row
-        + table.table.table-bordered
-        td
-        h6 {
-        font-size: 12px;
-    }
-
-    .prof-actions {
-        flex-wrap: wrap;
-    }
-
-    div#members_table_wrapper {
-        max-width: 100%;
-    }
-
-    .prof-actions a img {
-        max-width: 20px;
-    }
-
-    .prof-actions a {
-        font-size: 10px;
-        min-width: 60px;
-        margin: 2px;
-        padding: 10px 16px 10px 16px !important;
-    }
-
-    .current-chat-head {
-        padding: 5px 20px;
-    }
-    section.chat-section {
-        margin: 0 !important;
-    }
-    .send-field .encrypt-send.instant_message {
-        height: 41px;
-    }
-    .current-chat-head .currently-active {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-    }
-    .current-chat-head .currently-active .current-active-info {
-        margin-left: 0;
-    }
-
-    .current-chat-head .currently-active .current-active-info h5 {
-        margin: 0;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    .current-chat-head .currently-active .current-active-info p {
-        font-size: 12px;
-    }
-    .chat_top_fix_cls {
-        padding: 10px 10px 5px;
-    }
-
-    .chat_top_fix_cls p {
-        font-size: 14px;
-    }
-    .chat_top_right h4 {
-        font-size: 20px;
-    }
-    .chat_top_cls {
-        justify-content: center;
-    }
-
-    .chat_top_fix_cls a.btn.btn-secondary {
-        display: block;
-        width: auto;
-        max-width: 130px;
-        margin: 10px auto 0;
-        font-size: 12px;
-    }
-    .coming_soon img {
-        max-width: 200px;
-    }
-    .profile-main-body ul li.nav-item a {
-        font-size: 14px;
-        padding: 10px 10px;
-    }
-
-    li.list-group-item {
-        font-size: 14px;
-        padding: 10px 10px;
-    }
-    .user-profile-payment .row {
-        flex-direction: column-reverse;
-    }
-    div#user_section .form-group [class*="col-"] {
-        margin-bottom: 15px;
-    }
-    div#reserve_family_members > .py-5 {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
-    }
-
-    .user-profile-info.pt-5 {
-        padding-top: 0px !important;
-    }
-
-    .profile-main-body .field-btn {
-        margin-top: 0px;
-    }
-    .single-plan {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    .single-hero {
-        align-items: flex-end;
-        padding-bottom: 30px !important;
-    }
-    .parallax-section-lg {
-        padding: 30px 0 !important;
-    }
-    .couples-section {
-        padding: 30px 0 !important;
-    }
-    .members-content {
-        padding-bottom: 30px !important;
-    }
-    .event_details h4 {
-        font-size: 20px;
-    }
-    .filters-section {
-        padding: 30px 0;
-    }
-    .event-filter-search {
-        width: 100%;
-    }
-    .ft-menu li a {
-        font-size: 13px;
-    }
-    .fluid-paragraph {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    #parallax_txt {
-        font-size: 16px;
-    }
-    .wedding_image1 {
-        height: 260px;
-        margin: 2;
-    }
-    .couples-content {
-        margin-top: 0px;
-    }
-    .ft-menu li {
-        margin-left: 10px;
-    }
-    .event_info span {
-        margin-left: 0;
-        display: flex;
-        width: 100%;
-        margin-bottom: 5px;
-    }
-    h2 {
-        font-size: 22px;
-    }
-
-    .couples-content {
-        max-width: 100%;
-    }
-    .section-head h2::after {
-        right: 0;
-        width: 100px;
-    }
-
-    .section-head h2 {
-        font-size: 26px;
-    }
-
-    .event_image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .event_details {
-        width: 100%;
-        padding-left: 0;
-        padding-top: 20px;
-    }
-    .events-link {
-        margin-top: 0;
-    }
-
-    .event_info {
-        margin-top: 10px;
-        justify-content: left;
-        flex-wrap: wrap;
-    }
-
-    .bracelet_image {
-        left: 0;
-        right: 0;
-        margin: auto;
-        display: flex;
-        justify-content: center;
-    }
-
-    .wedding_image2 {
-        width: 37%;
-        margin-left: 10px;
-        height: 120px;
-    }
-
-    .wedding_image3 {
-        height: 80px;
-        width: 25%;
-    }
-
-    .wedding_image4 {
-        margin: 0 10px;
-        width: 35%;
-        height: 190px;
-    }
-
-    .wedding_image5 {
-        width: 33%;
-        height: 120px;
-    }
-
-    .wedOverlay span {
-        font-size: 12px;
-    }
-
-    .wedOverlay span img {
-        max-width: 70px;
-    }
-
-    .members-text {
-        width: 100%;
-        padding: 60px 20px;
-    }
-
-    .members-list {
-        margin-top: -160px;
-    }
-
-    .members-list .single-member {
-        /* width: 100%; */
-        margin-bottom: 15px;
-    }
-
-    .members-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .about_image1 {
-        height: 140px;
-    }
-
-    .about_image2 {
-        height: 250px;
-    }
-
-    .about-text {
-        padding-left: 0;
-    }
-
-    .section-head h2::before {
-        left: -20px;
-    }
-
-    .about-bottom-image {
-        margin-top: 20px;
-    }
-
-    .about_image3 {
-        height: 220px;
-    }
-
-    .about-section {
-        margin-bottom: 30px;
-    }
-
-    .contact-overlay {
-        padding: 40px 0 10px;
-    }
-
-    .contact-col h4 {
-        font-size: 16px;
-    }
-
-    .contact-col span {
-        font-size: 16px;
-    }
-
-    .member-info h5 {
-        font-size: 22px;
-    }
-
-    .section-head p {
-        font-size: 16px;
-        text-align: center;
-    }
-
-    .single-hero {
-        min-height: 450px;
-        padding: 10px;
-    }
-
-    .hero-content h1 {
-        font-size: 20px;
-        margin: 6px 0 14px;
-    }
-
-    .hero-content {
-        padding: 25px 10px 30px;
-        max-width: 260px;
-    }
-
-    .hero-content a {
-        font-size: 16px;
-        padding: 14px;
-    }
-
-    .hero-content span {
-        font-size: 17px;
-    }
-
-    .heartic {
-        margin-bottom: 0px;
-    }
-
-    .site-logo img {
-        max-width: 230px;
-    }
-
-    .site-logo {
-        padding: 12px 0;
-    }
-
-    .single-event {
-        padding: 8px;
-        margin-bottom: 15px;
-    }
-    .events-section {
-        padding: 30px 0;
-    }
-
-    .accounts-image {
-        height: 300px;
-    }
-
-    .login-links a {
-        width: 100%;
-        height: 50px;
-        margin: 6px 0;
-    }
-
-    .accounts-form > p {
-        font-size: 16px;
-    }
-
-    .fields-row .field {
-        width: 100%;
-    }
-
-    .field.gender {
-        max-width: 100%;
-    }
-
-    .birth-details select {
-        width: 100%;
-        margin-bottom: 7px;
-    }
-
-    .country .field:first-child {
-        width: 100%;
-    }
-
-    .account-section {
-        margin-bottom: 0;
-    }
-    .profiles-content li {
-        width: auto;
-    }
-    .filter-search {
-        width: 100%;
-    }
-
-    .filter-btn {
-        width: 100%;
-        flex-wrap: wrap;
-    }
-
-    .filter-btn button {
-        width: 100%;
-    }
-
-    .filter-btn button:last-child {
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    .filter-btn button:first-child {
-        margin: 10px 0 5px;
-    }
-
-    .filters-wrap {
-        padding: 10px;
-        top: 130px;
-    }
-
-    .filters-row {
-        margin-top: 15px;
-        padding: 0;
-    }
-
-    .single-filterr {
-        width: 48%;
-    }
-
-    .filter-search label {
-        margin-bottom: 3px;
-    }
-
-    .filters-row-bottom {
-        margin-top: 15px;
-    }
-
-    .filters-actions.flex {
-        justify-content: center;
-        padding-right: 0;
-        margin-top: 20px;
-    }
-
-    .filters-actions a {
-        margin: 0;
-        width: 100%;
-    }
-
-    .filters-actions button {
-        margin: 10px 0;
-        width: 100%;
-    }
-
-    .user-profile-left {
-        width: 100%;
-    }
-    .user-profile-left + .user-profile-left {
-        margin-top: 0;
-    }
-    .prersonal-prof .profile-top-head.flex {
-        margin-top: 30px;
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-
-    .user-profile-image img {
-        height: 280px;
-        object-fit: cover;
-    }
-
-    .empty-banner {
-        height: 190px;
-    }
-
-    .profile-photos {
-        margin-top: 20px;
-    }
-
-    .profile-gal {
-        height: 140px;
-    }
-
-    .profile-main-page .profile-main-body {
-        width: 100%;
-        padding: 15px 10px;
-    }
-    .profile-main-body {
-        width: 100%;
-        padding: 15px 10px;
-    }
-
-    .user-profile-center {
-        width: 100%;
-        padding: 0;
-    }
-
-    .profile-top-head.flex {
-        margin: 0;
-        background: linear-gradient(
-            90.48deg,
-            #e11d1e -73.27%,
-            #ea147e -11.03%,
-            #573675 99.61%
-        );
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 4px;
-    }
-    .profile-main-page .profile-top-head.flex {
-        margin: 0;
-        background: transparent;
-        padding: 0;
-        margin-top: 20px;
-        border-radius: 0;
-    }
-
-    .profile-left-titles {
-        width: 100%;
-    }
-
-    .profile-actionss.flex {
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    .profile-left-titles h2 {
-        font-size: 24px;
-    }
-    .profile-main-body h4 {
-        font-size: 18px;
-        margin-bottom: 0;
-        padding: 0px 0px 10px;
-    }
-    .user-profile-right {
-        padding-top: 30px;
-    }
-
-    .user-profile-section {
-        margin-bottom: 20px;
-    }
-
-    .basic-row h4 {
-        font-size: 24px;
-    }
-
-    .events_content h2 {
-        font-size: 32px;
-    }
-    .events_content p {
-        font-size: 16px;
-    }
-
-    .events_links a:first-child {
-        margin: 10px 0;
-        font-size: 16px;
-    }
-
-    .events_overlay {
-        padding: 70px 0;
-    }
-
-    .events_detailing_overlay {
-        padding: 60px 0 150px;
-    }
-
-    .event_lists_row ol {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .single_event_option {
-        margin-bottom: 40px;
-    }
-
-    .events_right {
-        width: 48%;
-    }
-
-    .events_left {
-        width: 48%;
-    }
-
-    .eventsss_content {
-        justify-content: space-between;
-    }
-
-    /*.video {
-    margin-top: -130px;
-  }*/
-
-    .video-overlay {
-        height: 300px;
-    }
-
-    .video-overlay a img {
-        max-width: 110px !important;
-    }
-
-    .video-content p {
-        max-width: 100%;
-    }
-
-    .couples-section.success_stories {
-        padding-bottom: 120px;
-    }
-
-    .upcoming-content h2 {
-        font-size: 26px;
-    }
-
-    .upcoming-content {
-        padding: 20px;
-    }
-
-    .upcoming-content p {
-        max-width: 100%;
-    }
-
-    .event-contacts.flex {
-        max-width: 100%;
-        margin-top: 30px;
-    }
-
-    .single-event-contact {
-        width: 100%;
-        margin: 20px 0;
-    }
-
-    .single-event-contact span {
-        font-size: 15px;
-    }
-
-    .faq-heading h2 {
-        font-size: 26px;
-    }
-
-    .faq-section {
-        margin: 40px 0;
-    }
-
-    .faq-heading p {
-        font-size: 16px;
-    }
-
-    .accordion_head p {
-        font-size: 16px;
-    }
-
-    .accordion_head {
-        padding: 15px;
-        background-position: center right 5px;
-    }
-
-    .events-content li {
-        width: 100%;
-    }
-
-    .event_detail .events_overlay {
-        padding: 100px 0;
-    }
-
-    .event_detail .aboutEvent-section {
-        padding-bottom: 30px;
-    }
-
-    .plans-section {
-        margin: 40px 0 20px;
-    }
-
-    .single-plan {
-        margin-bottom: 20px;
-    }
-
-    .single-packagee {
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    #plan1 .modal-dialog {
-        max-width: 100%;
-    }
-
-    div#plan1 .close {
-        top: 5px;
-        right: 7px;
-    }
-
-    .intrest-header .nav-tabs {
-        flex-wrap: nowrap;
-        overflow: auto;
-    }
-
-    .intrest-header .nav-link {
-        min-width: 170px;
-    }
-
-    .interest-wrapping {
-        margin-top: 30px;
-    }
-
-    .interest-tabs-section {
-        margin: 40px 0 20px;
-    }
-
-    .eventss-content h2,
-    .eventss-content h2 {
-        font-size: 26px;
-    }
-
-    .eventss-content p {
-        font-size: 16px;
-    }
-
-    .chat-mobile span {
-        font-size: 20px;
-    }
-
-    .chat-mobile {
-        padding: 10px 20px;
-    }
-
-    .chat_top_fix_cls + .current-chat-body {
-        padding: 5px 15px;
-        height: calc(100% - 170px);
-    }
-    .current-chat-body {
-        padding: 5px 15px;
-        height: calc(100% - 115px);
-    }
-    .chat-content {
-        height: calc(100vh - 130px) !important;
-    }
-
-    .current-chat-footer {
-        padding: 10px 10px;
-    }
-
-    .current-chat-footer button {
-        font-size: 14px;
-        width: unset;
-    }
-    .send-field input {
-        width: calc(100% - 55px);
-        font-size: 14px;
-        margin: 0 10px;
-    }
-    .siteModal .close {
-        top: -30px;
-        right: 0;
-        opacity: 1;
-    }
-
-    .account-form h3 {
-        font-size: 26px;
-        margin-bottom: 15px;
-    }
-
-    .account-form {
-        padding: 25px 10px;
-    }
-
-    .currently-active.flex {
-        flex-wrap: unset !important;
-        flex-direction: unset;
-        justify-content: left;
-    }
-    .chat-image,
-    .receieve_img {
-        height: 30px;
-        width: 30px;
-        flex: 0 0 30px;
-    }
-    .current-chat-head {
-        padding: 5px 10px !important;
-        justify-content: start;
-        align-content: start;
-    }
-    .current-chat-head .currently-active .current-active-info {
-        text-align: left;
-        margin-left: 5px;
-    }
-    div.dataTables_wrapper div.dataTables_paginate ul.pagination li {
-        width: auto !important;
-    }
-}
-
-/* end new about us section*/
-@media screen and (max-width: 575.98px) {
-    .site-menu .log a {
-        font-size: 15px;
-        display:flex;
-        padding-left:10px;
-    }
-
-    .btn_action {
-        padding: 0;
-    }
-    .inner_information {
-        padding: 0;
-    }
-    .inner_information > div {
-        padding: 10px;
-    }
-    .basic-info-row h6 {
-        font-size: 12px;
-    }
-
-    .basic-info-row span {
-        font-size: 12px;
-    }
-
-    .inner_information .basic-info-row {
-        padding: 5px 10px;
-    }
-
-    .inner_information > div h4 {
-        margin-top: 0;
-        font-size: 15px;
-    }
-    .prof-tags span {
-        font-size: 11px;
-        padding: 5px 5px;
-    }
-
-    .prof-tags span img {
-        margin-right: 5px;
-    }
-
-    .single-profile h5 {
-        font-size: 14px;
-    }
-
-    .profile-info-wrap {
-        margin-top: 15px;
-    }
-
-    .single-profile h5 span {
-        font-size: 11px;
-    }
-
-    .basic-row h4 {
-        font-size: 18px;
-    }
-    .chat_top_fix_cls a.btn.btn-secondary {
-        margin: 5px auto 0;
-        font-size: 10px;
-    }
-    .data_not_found img {
-        max-width: 240px;
-    }
-    .data_not_found p {
-        font-size: 13px;
-    }
-    .receiving-mesg {
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin: 5px 0;
-        margin-right: auto;
-    }
-    .receiving-sms {
-        margin: 0;
-    }
-    .current-chat-head .currently-active .current-active-info p {
-        font-size: 10px;
-    }
-    .send-field .encrypt-send.instant_message {
-        height: 38px;
-    }
-    .current-chat-footer {
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
-        position: fixed;
-        width: calc(100% - 30px);
-        bottom: 0;
-        height: 55px;
-    }
-    .current-chat-footer button {
-        font-size: 12px;
-        width: unset;
-        padding: 6px 10px;
-        border-width: 2px !important;
-    }
-    .current-chat-footer button img {
-        max-width: 15px;
-    }
-    .receiving-mesg span,
-    .sender-sms span {
-        font-size: 9px;
-        margin-top: 5px !important;
-        display: block;
-    }
-    .msg_left_cls {
-        padding: 5px 10px;
-        margin: 5px 0;
-        margin-left: auto;
-    }
-    .receiving-mesg p,
-    .sender-sms p {
-        font-size: 17px;
-        margin-bottom: 0;
-    }
-    .sms-status {
-        bottom: 10px !important;
-    }
-    .ft-social li a {
-        height: 35px;
-        width: 35px;
-        margin-left: 10px;
-    }
-    .single-event-home {
-        margin-left: 0;
-    }
-    .upgrade_msg p {
-        font-size: 14px;
-    }
-    .couples-content {
-        max-width: 100%;
-        /* display: flex; */
-        /* justify-content: center; */
-        /* align-items: center; */
-    }
-        .wedding-top-row{
+
+        .alert_popup.chat_upgrade_popup .modal-content {
+            padding: 35px 0 20px;
+        }
+        .alert_popup.chat_upgrade_popup h2 {
+            max-width: 100%;
+            font-size: 20px;
+        }
+        .alert_popup.chat_upgrade_popup p {
+            font-size: 13px;
+        }
+        .profile-main-body {
+            margin-top: 20px;
+        }
+        .card-body.p-3.pt-0.text-center.padding_cls {
+            padding: 20px 0 0 !important;
+        }
+        .mobile_none {
+            display: none;
+        }
+        .desktop_none {
+            display: flex;
+            margin: 20px 0;
+        }
+        .profile_info_cls {
+            flex-direction: column;
+        }
+        .profile_info_cls .btn-primary {
+            margin-left: 0;
+            margin-top: 10px;
+            width: auto;
+            margin-bottom: 10px;
+        }
+        .section-head {
+            padding: 20px 0;
+        }
+        .events_center p {
+            margin-bottom: 10px;
+        }
+        main.event_detail .video-section .events_links a {
+            min-width: unset !important;
+        }
+        .stories-gallery p {
+            font-size: 16px;
+        }
+        .single-event-home {
+            margin-bottom: 0;
+        }
+        .members-list .single-member {
+            width: 100%;
+        }
+        .video-content {
+            /*margin-top: 0;*/
+        }
+        .stories-gallery {
+            padding-top: 35px !important;
+        }
+        .user-profile-section h5 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .user-profile-section .row.form-group {
+            margin-bottom: 0;
+        }
+        .profile-main-body [class*="col-"] {
+            margin-bottom: 20px;
+        }
+        .profile-main-body [class*="col-"] label.form-label,
+        .profile-main-body [class*="col-"] label {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .btn,
+        .mesg-btn,
+        .upload_photo span,
+        .field-btn button {
+            font-size: 14px !important;
+        }
+        p.MsoNormal {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .alert_popup .modal-body h2 {
+            font-size: 16px;
+            max-width: 80%;
+            margin: 10px auto;
+        }
+        form#report-form label.form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        form#report-form .form-control {
+            font-size: 14px;
+        }
+        .alert_popup .modal-footer .btn {
+            font-size: 14px;
+            padding: 5px 15px;
+        }
+
+        .alert_popup .icon-show {
+            height: 35px;
+            width: 35px;
+            font-size: 20px;
+        }
+
+        .alert_popup .modal-body {
+            padding: 0 15px;
+        }
+        .members-section .members-content {
+            padding-bottom: 0 !important;
+        }
+        .most_popular .btn_popular {
+            padding: 10px 5px;
+            font-size: 10px;
+        }
+
+        .most_popular {
+            left: calc(50% - 42px);
+        }
+
+        .plan_inner_cont h2 {
+            font-size: 20px;
+        }
+
+        .plan_inner_cont h5 {
+            font-size: 14px;
+        }
+
+        .like_popup p {
+            font-size: 10px;
+        }
+
+        .plan_col {
+            padding: 20px 5px 15px;
+        }
+
+        .plan_inner_cont {
+            min-height: 50px;
+            margin-bottom: 5px;
+        }
+
+        .like_popup h2 {
+            font-size: 24px;
+        }
+
+        .like_popup h3 {
+            font-size: 18px;
+        }
+
+        .continue-action a {
+            font-size: 15px;
+            padding: 10px 25px;
+        }
+        .alert_popup .modal-body p {
+            font-size: 12px;
+            padding: 0 10px;
+        }
+        .profile-photos li {
+            width: 50%;
+        }
+        .croppie-container .cr-boundary {
+            height: 240px !important;
+        }
+        .mt-88 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .user-profile-image {
+            margin-bottom: 20px;
+        }
+        .receiving-sms {
+            max-width: 100%;
+        }
+        .receiving-mesg {
+            max-width: 100%;
+        }
+        .field-btn button {
+            padding: 10px 30px;
+        }
+        table#transactions_table {
+            display: block;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        .profile-inner-body span {
+            padding: 10px 0px 10px;
+        }
+        .basic-info.with_line {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+        .profile-main-page .user-profile-left {
+            padding: 15px;
+        }
+        .profiles-content ul {
+            margin-top: 10px !important;
+        }
+        .single-profile {
+            margin-bottom: 20px;
+        }
+        #user_section .row {
+            flex-direction: unset !important;
+        }
+        .current-chat-head .currently-active {
+            flex: 0 0 calc(100% - 30px);
+        }
+
+        .chat-options {
+            display: flex;
+            justify-content: end;
+            flex: 0 0 30px;
+        }
+
+        .chat-options .chat-dots {
+            margin-left: auto;
+        }
+        .profiles-section {
+            margin: 30px 0;
+        }
+        .basic-info.with_line.members-basic-info
+            .basic-row
+            + table.table.table-bordered
+            td {
+            font-size: 12px;
+            padding: 5px 5px;
+            width: auto !important;
+            min-width: unset;
+            white-space: unset;
+            word-break: break-word;
+        }
+        .basic-info.with_line.members-basic-info
+            .basic-row
+            + table.table.table-bordered
+            td
+            h6 {
+            font-size: 12px;
+        }
+
+        .prof-actions {
+            flex-wrap: wrap;
+        }
+
+        div#members_table_wrapper {
+            max-width: 100%;
+        }
+
+        .prof-actions a img {
+            max-width: 20px;
+        }
+
+        .prof-actions a {
+            font-size: 10px;
+            min-width: 60px;
+            margin: 2px;
+            padding: 10px 16px 10px 16px !important;
+        }
+
+        .current-chat-head {
+            padding: 5px 20px;
+        }
+        section.chat-section {
+            margin: 0 !important;
+        }
+        .send-field .encrypt-send.instant_message {
+            height: 41px;
+        }
+        .current-chat-head .currently-active {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .current-chat-head .currently-active .current-active-info {
+            margin-left: 0;
+        }
+
+        .current-chat-head .currently-active .current-active-info h5 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .current-chat-head .currently-active .current-active-info p {
+            font-size: 12px;
+        }
+        .chat_top_fix_cls {
+            padding: 10px 10px 5px;
+        }
+
+        .chat_top_fix_cls p {
+            font-size: 14px;
+        }
+        .chat_top_right h4 {
+            font-size: 20px;
+        }
+        .chat_top_cls {
+            justify-content: center;
+        }
+
+        .chat_top_fix_cls a.btn.btn-secondary {
+            display: block;
+            width: auto;
+            max-width: 130px;
+            margin: 10px auto 0;
+            font-size: 12px;
+        }
+        .coming_soon img {
+            max-width: 200px;
+        }
+        .profile-main-body ul li.nav-item a {
+            font-size: 14px;
+            padding: 10px 10px;
+        }
+
+        li.list-group-item {
+            font-size: 14px;
+            padding: 10px 10px;
+        }
+        .user-profile-payment .row {
+            flex-direction: column-reverse;
+        }
+        div#user_section .form-group [class*="col-"] {
+            margin-bottom: 15px;
+        }
+        div#reserve_family_members > .py-5 {
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+        }
+
+        .user-profile-info.pt-5 {
+            padding-top: 0px !important;
+        }
+
+        .profile-main-body .field-btn {
+            margin-top: 0px;
+        }
+        .single-plan {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        .single-hero {
+            align-items: flex-end;
+            padding-bottom: 30px !important;
+        }
+        .parallax-section-lg {
+            padding: 30px 0 !important;
+        }
+        .couples-section {
+            padding: 30px 0 !important;
+        }
+        .members-content {
+            padding-bottom: 30px !important;
+        }
+        .event_details h4 {
+            font-size: 20px;
+        }
+        .filters-section {
+            padding: 30px 0;
+        }
+        .event-filter-search {
+            width: 100%;
+        }
+        .ft-menu li a {
+            font-size: 13px;
+        }
+        .fluid-paragraph {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        #parallax_txt {
+            font-size: 16px;
+        }
+        .wedding_image1 {
+            height: 260px;
+            margin: 2;
+        }
+        .couples-content {
+            margin-top: 0px;
+        }
+        .ft-menu li {
+            margin-left: 10px;
+        }
+        .event_info span {
+            margin-left: 0;
+            display: flex;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 22px;
+        }
+
+        .couples-content {
+            max-width: 100%;
+        }
+        .section-head h2::after {
+            right: 0;
+            width: 100px;
+        }
+
+        .section-head h2 {
+            font-size: 26px;
+        }
+
+        .event_image {
+            width: 100%;
+            height: 200px;
+        }
+
+        .event_details {
+            width: 100%;
+            padding-left: 0;
+            padding-top: 20px;
+        }
+        .events-link {
+            margin-top: 0;
+        }
+
+        .event_info {
+            margin-top: 10px;
+            justify-content: left;
+            flex-wrap: wrap;
+        }
+
+        .bracelet_image {
+            left: 0;
+            right: 0;
+            margin: auto;
             display: flex;
             justify-content: center;
         }
-    /* .weddingBg a {
+
+        .wedding_image2 {
+            width: 37%;
+            margin-left: 10px;
+            height: 120px;
+        }
+
+        .wedding_image3 {
+            height: 80px;
+            width: 25%;
+        }
+
+        .wedding_image4 {
+            margin: 0 10px;
+            width: 35%;
+            height: 190px;
+        }
+
+        .wedding_image5 {
+            width: 33%;
+            height: 120px;
+        }
+
+        .wedOverlay span {
+            font-size: 12px;
+        }
+
+        .wedOverlay span img {
+            max-width: 70px;
+        }
+
+        .members-text {
+            width: 100%;
+            padding: 60px 20px;
+        }
+
+        .members-list {
+            margin-top: -160px;
+        }
+
+        .members-list .single-member {
+            /* width: 100%; */
+            margin-bottom: 15px;
+        }
+
+        .members-image {
+            width: 100%;
+            height: 200px;
+        }
+
+        .about_image1 {
+            height: 140px;
+        }
+
+        .about_image2 {
+            height: 250px;
+        }
+
+        .about-text {
+            padding-left: 0;
+        }
+
+        .section-head h2::before {
+            left: -20px;
+        }
+
+        .about-bottom-image {
+            margin-top: 20px;
+        }
+
+        .about_image3 {
+            height: 220px;
+        }
+
+        .about-section {
+            margin-bottom: 30px;
+        }
+
+        .contact-overlay {
+            padding: 40px 0 10px;
+        }
+
+        .contact-col h4 {
+            font-size: 16px;
+        }
+
+        .contact-col span {
+            font-size: 16px;
+        }
+
+        .member-info h5 {
+            font-size: 22px;
+        }
+
+        .section-head p {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .single-hero {
+            min-height: 450px;
+            padding: 10px;
+        }
+
+        .hero-content h1 {
+            font-size: 20px;
+            margin: 6px 0 14px;
+        }
+
+        .hero-content {
+            padding: 25px 10px 30px;
+            max-width: 260px;
+        }
+
+        .hero-content a {
+            font-size: 16px;
+            padding: 14px;
+        }
+
+        .hero-content span {
+            font-size: 17px;
+        }
+
+        .heartic {
+            margin-bottom: 0px;
+        }
+
+        .site-logo img {
+            max-width: 230px;
+        }
+
+        .site-logo {
+            padding: 12px 0;
+        }
+
+        .single-event {
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+        .events-section {
+            padding: 30px 0;
+        }
+
+        .accounts-image {
+            height: 300px;
+        }
+
+        .login-links a {
+            width: 100%;
+            height: 50px;
+            margin: 6px 0;
+        }
+
+        .accounts-form > p {
+            font-size: 16px;
+        }
+
+        .fields-row .field {
+            width: 100%;
+        }
+
+        .field.gender {
+            max-width: 100%;
+        }
+
+        .birth-details select {
+            width: 100%;
+            margin-bottom: 7px;
+        }
+
+        .country .field:first-child {
+            width: 100%;
+        }
+
+        .account-section {
+            margin-bottom: 0;
+        }
+        .profiles-content li {
+            width: auto;
+        }
+        .filter-search {
+            width: 100%;
+        }
+
+        .filter-btn {
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn button {
+            width: 100%;
+        }
+
+        .filter-btn button:last-child {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        .filter-btn button:first-child {
+            margin: 10px 0 5px;
+        }
+
+        .filters-wrap {
+            padding: 10px;
+            top: 130px;
+        }
+
+        .filters-row {
+            margin-top: 15px;
+            padding: 0;
+        }
+
+        .single-filterr {
+            width: 48%;
+        }
+
+        .filter-search label {
+            margin-bottom: 3px;
+        }
+
+        .filters-row-bottom {
+            margin-top: 15px;
+        }
+
+        .filters-actions.flex {
+            justify-content: center;
+            padding-right: 0;
+            margin-top: 20px;
+        }
+
+        .filters-actions a {
+            margin: 0;
+            width: 100%;
+        }
+
+        .filters-actions button {
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .user-profile-left {
+            width: 100%;
+        }
+        .user-profile-left + .user-profile-left {
+            margin-top: 0;
+        }
+        .prersonal-prof .profile-top-head.flex {
+            margin-top: 30px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .user-profile-image img {
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .empty-banner {
+            height: 190px;
+        }
+
+        .profile-photos {
+            margin-top: 20px;
+        }
+
+        .profile-gal {
+            height: 140px;
+        }
+
+        .profile-main-page .profile-main-body {
+            width: 100%;
+            padding: 15px 10px;
+        }
+        .profile-main-body {
+            width: 100%;
+            padding: 15px 10px;
+        }
+
+        .user-profile-center {
+            width: 100%;
+            padding: 0;
+        }
+
+        .profile-top-head.flex {
+            margin: 0;
+            background: linear-gradient(
+                90.48deg,
+                #e11d1e -73.27%,
+                #ea147e -11.03%,
+                #573675 99.61%
+            );
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .profile-main-page .profile-top-head.flex {
+            margin: 0;
+            background: transparent;
+            padding: 0;
+            margin-top: 20px;
+            border-radius: 0;
+        }
+
+        .profile-left-titles {
+            width: 100%;
+        }
+
+        .profile-actionss.flex {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .profile-left-titles h2 {
+            font-size: 24px;
+        }
+        .profile-main-body h4 {
+            font-size: 18px;
+            margin-bottom: 0;
+            padding: 0px 0px 10px;
+        }
+        .user-profile-right {
+            padding-top: 30px;
+        }
+
+        .user-profile-section {
+            margin-bottom: 20px;
+        }
+
+        .basic-row h4 {
+            font-size: 24px;
+        }
+
+        .events_content h2 {
+            font-size: 32px;
+        }
+        .events_content p {
+            font-size: 16px;
+        }
+
+        .events_links a:first-child {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .events_overlay {
+            padding: 70px 0;
+        }
+
+        .events_detailing_overlay {
+            padding: 60px 0 150px;
+        }
+
+        .event_lists_row ol {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .single_event_option {
+            margin-bottom: 40px;
+        }
+
+        .events_right {
+            width: 48%;
+        }
+
+        .events_left {
+            width: 48%;
+        }
+
+        .eventsss_content {
+            justify-content: space-between;
+        }
+
+        /*.video {
+    margin-top: -130px;
+  }*/
+
+        .video-overlay {
+            height: 300px;
+        }
+
+        .video-overlay a img {
+            max-width: 110px !important;
+        }
+
+        .video-content p {
+            max-width: 100%;
+        }
+
+        .couples-section.success_stories {
+            padding-bottom: 120px;
+        }
+
+        .upcoming-content h2 {
+            font-size: 26px;
+        }
+
+        .upcoming-content {
+            padding: 20px;
+        }
+
+        .upcoming-content p {
+            max-width: 100%;
+        }
+
+        .event-contacts.flex {
+            max-width: 100%;
+            margin-top: 30px;
+        }
+
+        .single-event-contact {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .single-event-contact span {
+            font-size: 15px;
+        }
+
+        .faq-heading h2 {
+            font-size: 26px;
+        }
+
+        .faq-section {
+            margin: 40px 0;
+        }
+
+        .faq-heading p {
+            font-size: 16px;
+        }
+
+        .accordion_head p {
+            font-size: 16px;
+        }
+
+        .accordion_head {
+            padding: 15px;
+            background-position: center right 5px;
+        }
+
+        .events-content li {
+            width: 100%;
+        }
+
+        .event_detail .events_overlay {
+            padding: 100px 0;
+        }
+
+        .event_detail .aboutEvent-section {
+            padding-bottom: 30px;
+        }
+
+        .plans-section {
+            margin: 40px 0 20px;
+        }
+
+        .single-plan {
+            margin-bottom: 20px;
+        }
+
+        .single-packagee {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        #plan1 .modal-dialog {
+            max-width: 100%;
+        }
+
+        div#plan1 .close {
+            top: 5px;
+            right: 7px;
+        }
+
+        .intrest-header .nav-tabs {
+            flex-wrap: nowrap;
+            overflow: auto;
+        }
+
+        .intrest-header .nav-link {
+            min-width: 170px;
+        }
+
+        .interest-wrapping {
+            margin-top: 30px;
+        }
+
+        .interest-tabs-section {
+            margin: 40px 0 20px;
+        }
+
+        .eventss-content h2,
+        .eventss-content h2 {
+            font-size: 26px;
+        }
+
+        .eventss-content p {
+            font-size: 16px;
+        }
+
+        .chat-mobile span {
+            font-size: 20px;
+        }
+
+        .chat-mobile {
+            padding: 10px 20px;
+        }
+
+        .chat_top_fix_cls + .current-chat-body {
+            padding: 5px 15px;
+            height: calc(100% - 170px);
+        }
+        .current-chat-body {
+            padding: 5px 15px;
+            height: calc(100% - 115px);
+        }
+        .chat-content {
+            height: calc(100vh - 130px) !important;
+        }
+
+        .current-chat-footer {
+            padding: 10px 10px;
+        }
+
+        .current-chat-footer button {
+            font-size: 14px;
+            width: unset;
+        }
+        .send-field input {
+            width: calc(100% - 55px);
+            font-size: 14px;
+            margin: 0 10px;
+        }
+        .siteModal .close {
+            top: -30px;
+            right: 0;
+            opacity: 1;
+        }
+
+        .account-form h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .account-form {
+            padding: 25px 10px;
+        }
+
+        .currently-active.flex {
+            flex-wrap: unset !important;
+            flex-direction: unset;
+            justify-content: left;
+        }
+        .chat-image,
+        .receieve_img {
+            height: 30px;
+            width: 30px;
+            flex: 0 0 30px;
+        }
+        .current-chat-head {
+            padding: 5px 10px !important;
+            justify-content: start;
+            align-content: start;
+        }
+        .current-chat-head .currently-active .current-active-info {
+            text-align: left;
+            margin-left: 5px;
+        }
+        div.dataTables_wrapper div.dataTables_paginate ul.pagination li {
+            width: auto !important;
+        }
+    }
+
+    /* end new about us section*/
+    @media screen and (max-width: 575.98px) {
+        .site-menu .log a {
+            font-size: 15px;
+            display: flex;
+            padding-left: 10px;
+        }
+
+        .btn_action {
+            padding: 0;
+        }
+        .inner_information {
+            padding: 0;
+        }
+        .inner_information > div {
+            padding: 10px;
+        }
+        .basic-info-row h6 {
+            font-size: 12px;
+        }
+
+        .basic-info-row span {
+            font-size: 12px;
+        }
+
+        .inner_information .basic-info-row {
+            padding: 5px 10px;
+        }
+
+        .inner_information > div h4 {
+            margin-top: 0;
+            font-size: 15px;
+        }
+        .prof-tags span {
+            font-size: 11px;
+            padding: 5px 5px;
+        }
+
+        .prof-tags span img {
+            margin-right: 5px;
+        }
+
+        .single-profile h5 {
+            font-size: 14px;
+        }
+
+        .profile-info-wrap {
+            margin-top: 15px;
+        }
+
+        .single-profile h5 span {
+            font-size: 11px;
+        }
+
+        .basic-row h4 {
+            font-size: 18px;
+        }
+        .chat_top_fix_cls a.btn.btn-secondary {
+            margin: 5px auto 0;
+            font-size: 10px;
+        }
+        .data_not_found img {
+            max-width: 240px;
+        }
+        .data_not_found p {
+            font-size: 13px;
+        }
+        .receiving-mesg {
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 5px 0;
+            margin-right: auto;
+        }
+        .receiving-sms {
+            margin: 0;
+        }
+        .current-chat-head .currently-active .current-active-info p {
+            font-size: 10px;
+        }
+        .send-field .encrypt-send.instant_message {
+            height: 38px;
+        }
+        .current-chat-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: calc(100% - 30px);
+            bottom: 0;
+            height: 55px;
+        }
+        .current-chat-footer button {
+            font-size: 12px;
+            width: unset;
+            padding: 6px 10px;
+            border-width: 2px !important;
+        }
+        .current-chat-footer button img {
+            max-width: 15px;
+        }
+        .receiving-mesg span,
+        .sender-sms span {
+            font-size: 9px;
+            margin-top: 5px !important;
+            display: block;
+        }
+        .msg_left_cls {
+            padding: 5px 10px;
+            margin: 5px 0;
+            margin-left: auto;
+        }
+        .receiving-mesg p,
+        .sender-sms p {
+            font-size: 17px;
+            margin-bottom: 0;
+        }
+        .sms-status {
+            bottom: 10px !important;
+        }
+        .ft-social li a {
+            height: 35px;
+            width: 35px;
+            margin-left: 10px;
+        }
+        .single-event-home {
+            margin-left: 0;
+        }
+        .upgrade_msg p {
+            font-size: 14px;
+        }
+        .couples-content {
+            max-width: 100%;
+        }
+        /* .weddingBg a {
       display: block;
       width: 100%;
       height: 100%;
       transition: 0.3s ease;
     } */
-    .wedding_image1 {
-        height: 300px;
-        width: 60%;
+        .wedding_image1 {
+            height: 300px;
+            width: 50%;
+        }
     }
-}
-@media screen and (max-width: 420px) {
-    .site-menu .log a {
-        font-size: 15px;
-        display:flex;
-        padding-left:10px;
-    }
+    @media screen and (max-width: 420px) {
+        .site-menu .log a {
+            font-size: 15px;
+            display: flex;
+            padding-left: 10px;
+        }
 
-    .btn_action a {
-        padding: 10px 10px;
-        margin-right: 10px;
-    }
-    .chat_top_right h4 {
-        font-size: 15px;
-    }
-    .chat_top_right p {
-        font-size: 11px;
-    }
-    .chat_top_fix_cls p {
-        font-size: 12px;
-    }
-    .most_popular .btn_popular {
-        padding: 10px 5px;
-        font-size: 9px;
-    }
-    .most_popular {
-        left: calc(50% - 39px);
-    }
-    .single-plan {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    .wedding_image1 {
-        height: 250px;
-        /*width: 55%;*/
-        width: 100%;
-        margin: 7px;
-    }
-                         /* .dropdown-menu .logout-btn li {
+        .btn_action a {
+            padding: 10px 10px;
+            margin-right: 10px;
+        }
+        .chat_top_right h4 {
+            font-size: 15px;
+        }
+        .chat_top_right p {
+            font-size: 11px;
+        }
+        .chat_top_fix_cls p {
+            font-size: 12px;
+        }
+        .most_popular .btn_popular {
+            padding: 10px 5px;
+            font-size: 9px;
+        }
+        .most_popular {
+            left: calc(50% - 39px);
+        }
+        .single-plan {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        .wedding_image1 {
+            height: 250px;
+            /*width: 55%;*/
+            width: 100%;
+            margin: 7px;
+        }
+        /* .dropdown-menu .logout-btn li {
                     display: inline-block;
                 } */
         /* .logout-btn{
             display: inline-flex;
         } */
-}}
+    }
+}
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .iti__flag {
         background-image: url("../images/flags@2x.png");
