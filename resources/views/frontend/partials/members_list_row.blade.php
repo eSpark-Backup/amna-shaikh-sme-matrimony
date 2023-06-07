@@ -145,14 +145,14 @@
         <!-- <a href="javascript:void(0);" class="report-request btn-custom-primary" data-memberid="{{ $member->id }}"><i class="fa fa-flag-o" aria-hidden="true"></i> Report</a> -->
         <!-- <div class="d-flex flex-row"> -->
 
-        <div class="d-flex col-12 col-md-2 col-lg-3 col-6 order-sm-1 order-2">
+        <div class="d-flex col-12 col-md-4 col-lg-3 col-6 order-sm-1 order-2">
             <!-- <button class="warning sendMe">Send Message</button> -->
-            <a href="#" class="btn-custom-primary w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
+            <a href="#" class="btn-custom-primary btn-member-msg w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
         </div>
-        <div class="d-flex col-12 col-md-10 col-lg-9 justify-content-end  col-6 order-sm-2 order-1">
+        <div class="d-flex col-12 col-md-8 col-lg-9 justify-content-end  col-6 order-sm-2 order-1">
             <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="../../../../public/images/Heart.png" alt=""></button>
-            <button class="btn-member-msg mx-1" data-memberidhash="{{ $member->hash_id}}"><img src="../../../../public/images/Close.png" alt=""></button>
-            <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="../../../../public/images/Mark.png" alt=""></button>
+            <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="../../../../public/images/Close.png" alt=""></button>
+            <button class="report-request mx-1" data-memberid="{{ $member->id }}"><img src="../../../../public/images/Mark.png" alt=""></button>
         </div>
 
         <!-- </div> -->
