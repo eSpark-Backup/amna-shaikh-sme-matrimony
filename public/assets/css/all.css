@@ -5327,10 +5327,21 @@ opacity: 0.5;
  .site-menu2 .logout-btn a {  
  padding: 5px;
 } 
-
+   .wedding-top-row {
+       display: flex;
+       justify-content: center;
+   }
+          .wedding_image1 {
+              /* height: 300px; */
+              /* width: 100%; */
+          }
 
 @media screen and (max-width: 767px) {
 
+    .wedding_image1 {
+            /* height: 300px; */
+            width: 120%;
+        }
     .site-menu .log a {
         font-size: 15px;
         display:flex;
@@ -5388,9 +5399,7 @@ opacity: 0.5;
     .members-list .single-member {
         width: 100%;
     }
-    .video-content {
-        /*margin-top: 0;*/
-    }
+   
     .stories-gallery {
         padding-top: 35px !important;
     }
@@ -6473,7 +6482,14 @@ opacity: 0.5;
     }
     .couples-content {
         max-width: 100%;
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
     }
+        .wedding-top-row{
+            display: flex;
+            justify-content: center;
+        }
     /* .weddingBg a {
       display: block;
       width: 100%;
@@ -6482,7 +6498,7 @@ opacity: 0.5;
     } */
     .wedding_image1 {
         height: 300px;
-        width: 50%;
+        width: 60%;
     }
 }
 @media screen and (max-width: 420px) {
