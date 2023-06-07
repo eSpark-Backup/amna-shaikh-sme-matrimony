@@ -5009,7 +5009,21 @@ opacity: 0.5;
 }
 
 @media screen and (max-width: 991px) {
-      
+
+    .dropdown-item-text {
+        display: block;
+        padding: 8px 50px;
+        text-align: center;
+    }
+    
+    .site-menu .dropdown-menu {
+        right: -400%;
+        top: 0;
+        text-align: center;
+    }
+    .site-menu .dropdown-menu .mobile{
+        display:none;
+    }
     .site-menu .log a {
         font-size: 15px;
         display:flex;
