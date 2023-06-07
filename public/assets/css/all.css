@@ -44,6 +44,11 @@ img {
     display: block;
 }
 
+.coming_soon img{
+    width:50%;
+    display:block;
+}
+
 a {
     color: inherit;
 }
@@ -1043,6 +1048,12 @@ h2 {
 }
 
 @media (min-width: 992px) {
+      
+    /* .site-menu .log a {
+        font-size: 15px;
+        display:flex;
+    } */
+
     .navbar-expand-lg .dropdown-menu {
         margin-top: 0.75rem;
     }
@@ -3473,8 +3484,9 @@ h3.requested {
     justify-content: center;
     align-items: center;
     padding: 40px 0;
-    height: 100%;
+    height: 50%;
 }
+
 .coming_soon p {
     margin-top: 20px;
     font-size: 16px;
@@ -4683,12 +4695,20 @@ select:focus {
         Responsive
 *************************/
 @media screen and (min-width: 1700px) {
+    .site-menu .log a {
+        font-size: 15px;
+        display:none;
+    }
     .container,
     .banner_specs {
         max-width: 1500px;
     }
 }
 @media screen and (min-width: 1360px) and (max-width: 1699px) {
+    .site-menu .log a {
+        font-size: 15px;
+        display:none;
+    }
     .container {
         max-width: 1270px;
     }
@@ -4698,6 +4718,10 @@ select:focus {
 }
 
 @media screen and (max-width: 1460px) {
+    .site-menu .log a {
+        font-size: 15px;
+        display:none;
+    }
     .hero-content {
         max-width: 600px;
         padding: 30px 50px 45px;
@@ -4709,6 +4733,11 @@ select:focus {
 
     .site-menu li a {
         font-size: 15px;
+    }
+
+    .site-menu .log a {
+        font-size: 15px;
+        display:none;
     }
 
     .section-head h2 {
@@ -4770,6 +4799,10 @@ select:focus {
 }
 
 @media screen and (max-width: 1360px) {
+    .site-menu .log a {
+        font-size: 15px;
+        display:none;
+    }
     .chat_top_fix_cls + .current-chat-body {
         height: calc(100% - 270px);
     }
@@ -4778,6 +4811,12 @@ select:focus {
     }
 }
 @media screen and (max-width: 1199px) {
+
+    .site-menu .log a {
+        font-size: 15px;
+        display:none;
+    }
+
     .site-menu li {
         margin-right: 45px;
     }
@@ -4970,6 +5009,13 @@ opacity: 0.5;
 }
 
 @media screen and (max-width: 991px) {
+      
+    .site-menu .log a {
+        font-size: 15px;
+        display:flex;
+        padding-left:10px;
+    }
+
     .site-logo {
         padding: 10px 0;
     }
@@ -5278,14 +5324,20 @@ opacity: 0.5;
         right: -30px;
         opacity: 1;
     }
- .site-menu2 .logout-btn a {
-    
+ .site-menu2 .logout-btn a {  
  padding: 5px;
-
 } 
 
 
 @media screen and (max-width: 767px) {
+
+    .site-menu .log a {
+        font-size: 15px;
+        display:flex;
+        padding-left:10px;
+    }
+
+ 
     .alert_popup.chat_upgrade_popup .modal-content {
         padding: 35px 0 20px;
     }
@@ -5594,7 +5646,7 @@ opacity: 0.5;
         font-size: 12px;
     }
     .coming_soon img {
-        max-width: 300px;
+        max-width: 200px;
     }
     .profile-main-body ul li.nav-item a {
         font-size: 14px;
@@ -6293,6 +6345,12 @@ opacity: 0.5;
 
 /* end new about us section*/
 @media screen and (max-width: 575.98px) {
+    .site-menu .log a {
+        font-size: 15px;
+        display:flex;
+        padding-left:10px;
+    }
+
     .btn_action {
         padding: 0;
     }
@@ -6428,6 +6486,12 @@ opacity: 0.5;
     }
 }
 @media screen and (max-width: 420px) {
+    .site-menu .log a {
+        font-size: 15px;
+        display:flex;
+        padding-left:10px;
+    }
+
     .btn_action a {
         padding: 10px 10px;
         margin-right: 10px;
@@ -6464,7 +6528,7 @@ opacity: 0.5;
         /* .logout-btn{
             display: inline-flex;
         } */
-}
+}}
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .iti__flag {
         background-image: url("../images/flags@2x.png");

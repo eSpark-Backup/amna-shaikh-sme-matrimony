@@ -65,7 +65,7 @@
 
                                     <!-- <a class="dropdown-item" href="{{ route('user.auth.logout') }}">Logout</a> -->
                                 </div>
-                        <li class="logout-btn"><a href="{{ route('user.auth.logout') }}">Logout</a></li>
+                        <li class="log"><a href="{{ route('user.auth.logout') }}">Logout</a></li>
                         </li>
                     </div>
         </div>
