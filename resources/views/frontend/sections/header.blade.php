@@ -59,14 +59,15 @@
                                     <a class="dropdown-item" href="{{ route('user.settings') }}">Settings</a>
                                     <a class="dropdown-item" href="{{ route('user.my_notifications') }}">Notifications</a>
                                     <a class="dropdown-item" href="{{ route('user.transactions') }}">Payment History</a>
+                                    <div class="dropdown-divider"></div>
+
                                     <div class="mobile"><a class="dropdown-item" href="{{ route('user.auth.logout') }}">Logout</a></div>
 
 
-                                    <div class="dropdown-divider"></div>
 
                                     <!-- <a class="dropdown-item" href="{{ route('user.auth.logout') }}">Logout</a> -->
                                 </div>
-                        <li class="log"><a href="{{ route('user.auth.logout') }}">Logout</a></li>
+                        <!-- <li class="log"><a href="{{ route('user.auth.logout') }}">Logout</a></li> -->
                         </li>
                     </div>
         </div>
