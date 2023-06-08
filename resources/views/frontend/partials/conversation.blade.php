@@ -242,18 +242,21 @@
 </div>
 @else
 <div class="chat-main">
-    <div class="data_not_found">
-        <center><img width="500px" src="{{ URL::asset('images/Object.png')}}" alt=""></center>
-        <!-- <p><span>You don't have any active chat here yet</span></p> -->
+    <div class="chat-head2">
     </div>
-    <div class="input-message">
-        <!-- <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.26367 3.15137L2.26367 16.8311L17.4633 9.99122L2.26367 3.15137ZM3.78364 5.50257L13.7599 9.99122L3.78364 14.4799L3.78364 10.9234L10.6235 9.99122L3.78364 9.05905V5.50257Z" fill="green" />
-        </svg> -->
-        <input type="text" id="fname" name="fname" placeholder="Type a Message" />
-        <img src="{{ asset('assets/images/Object.png')}}" alt="heart">
+    <!-- <div class="data_not_found">
+        <center><img width="400px" src="{{ URL::asset('images/Object.png')}}" alt=""></center> 
+    </div> -->
 
+    <div class="input-group mb-3">
+        <span class="input-group-text"> <img src="{{ URL::asset('images/Vector.png')}}" style="width: 17px; height:15px" alt="">
+        </span>
+        <input type="text" class="form-control border-0" aria-label="Amount (to the nearest dollar)"  placeholder="Type a message" />
+        <span class="input-group-text"><svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.26367 3.15137L2.26367 16.8311L17.4633 9.99122L2.26367 3.15137ZM3.78364 5.50257L13.7599 9.99122L3.78364 14.4799L3.78364 10.9234L10.6235 9.99122L3.78364 9.05905V5.50257Z" fill="#D42F8C" />
+            </svg></span>
     </div>
+
 </div>
 @endif
 

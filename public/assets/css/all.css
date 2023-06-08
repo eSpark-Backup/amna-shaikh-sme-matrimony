@@ -859,6 +859,11 @@ h2 {
 .mobile-menu {
     display: none;
 }
+.chat-head2{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+   padding:  40px;
+
+}
 
 .mobile-menu span {
     height: 2px;
@@ -1975,9 +1980,9 @@ div#members_table_wrapper {
     background-color: white;
 }
 
-#family_members_table .table thead th {
-    /* text-align: center; */
-}
+/* #family_members_table .table thead th {
+    text-align: center;
+} */
 
 .user-profile-section h4 {
     color: #6e3076;
@@ -2791,9 +2796,9 @@ div#plan1 .close {
     border-bottom: 2.5px solid #ea147e;
 }
 
-.interest-wrapping .members-list {
-    /* margin-top: 0;*/
-}
+/* .interest-wrapping .members-list {
+    margin-top: 0;
+} */
 
 .interest-wrapping {
     margin-top: 60px;
@@ -2943,6 +2948,7 @@ div#plan1 .close {
 
 .chat-main {
     width: calc(100% - 450px);
+  
 }
 
 .current-chat-head {
@@ -4119,7 +4125,7 @@ div#swal2-html-container {
 .tab-content > .active .profiles-section {
     margin: 35px 0;
 }
-.user-profile-left .profile-main-body ul. li {
+.user-profile-left .profile-main-body ul li {
     padding: 0;
     margin: 0;
 }
@@ -4676,22 +4682,22 @@ p.MsoNormal {
 }
 .data_not_found {
     opacity: 0.5;
-    padding: 60px;
+    padding: 95px;
+}
+.input-group{
+    width: 95%;
+    box-shadow: 0px 3px 25px rgba(0, 0, 0, 0.1);
+    border: none;
+  margin-left: 25px;  
+  /* margin-bottom: 50px; */
+  margin-top: 530px;
+}
+.input-group-text{
+    border: none;
+    background-color: #fff;
 }
 
-.input-message input {
-    width: 80%;
-    padding: 10px;
-    box-shadow: 0px 3px 25px rgba(0, 0, 0, 0.1);
-    outline: none;
-}
-.input-message {
-    /* margin-bottom: 100px; */
-    margin-top: 30px;
-    /* margin-right: 40px; */
-    display: flex;
-    justify-content: center;
-}
+
 /* .input-message input:focus,
 select:focus {
     outline: none;
@@ -4700,6 +4706,20 @@ select:focus {
 /************************
         Responsive
 *************************/
+@media screen and (min-width: 1920px) {
+    /* .data_not_found img{
+        width: 500px;
+    }
+    }
+        .data_not_found {
+        padding: 200px;
+        }
+
+    .input-group{
+        margin-bottom: 30px;
+    } */
+    
+
 @media screen and (min-width: 1700px) {
     .site-menu .log a {
         font-size: 15px;
@@ -4963,10 +4983,9 @@ select:focus {
         font-size: 34px;
     }
 
-    .chat-sidebar {
-        width: 380px;
-    }
-
+     .chat-sidebar {
+            width: 200px;
+        }
     .caht-head {
         padding: 20px;
     }
@@ -4978,9 +4997,14 @@ select:focus {
     .chat-main {
         width: calc(100% - 380px);
     }
-    .data_not_found {
-        opacity: 0.5;
-    }
+ .data_not_found img{
+    padding: 10px;
+opacity: 0.8;
+
+}
+.input-group{
+    margin-top: 20px;
+}
     .current-chat-head {
         padding: 13px 20px;
     }
