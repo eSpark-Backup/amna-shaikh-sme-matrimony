@@ -55,8 +55,9 @@
                             <a href="{{ url('auth/google') }}"><img src="assets/images/gmail_icon.svg" alt="icon">Login with Google</a>
                         </div>
                         <div class="newUser">
-                            <span>New Member?</span>
-                            <a href="{{ route('register') }}" class="registerNewUser btn-custom-secondary">Register Now</a>
+                            <span>New Member?
+                            <a href="{{ route('register') }}" class="registerNewUser">Register Now</a>
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -133,8 +133,8 @@
                             <a href="{{ url('user/members/'.$M['id']) }}" class="btn-custom-primary w-100">View Full Profile</a>
 
                             @else
-                            <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" onclick="openLoginModel()">View Full Profile</a>
-                            <a href="javascript:void(0);" class="custom_modal btn-custom-primary">View Full Profile</a>
+                            <!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" onclick="openLoginModel()">View Full Profile</a> -->
+                            <a href="javascript:void(0);" class="btn-custom-primary custom_modal">View Full Profile</a>
                             @endauth
                         </div>
                     </div>
@@ -316,7 +316,7 @@
         <!-- End Past Events -->
     </div>
     <!-- modal -->
-    <div class="alert_popup">
+    <!-- <div class="alert_popup">
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -341,7 +341,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </section>
 
