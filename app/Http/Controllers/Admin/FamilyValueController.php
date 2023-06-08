@@ -43,8 +43,10 @@ class FamilyValueController extends Controller
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/family-values/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
-                $actions .= '&nbsp;<form method="POST" action="'.url("admin/family-values/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/family-values/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+//                $actions .= '&nbsp;<form method="POST" action="'.url("admin/family-values/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/family-values/" . $row->id.'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+                $actions .= '&nbsp;<form method="POST" action="'.url("admin/family-values/" . $row->id).'" accept-charset="UTF-8" style="display:inline">';
                 $actions .= '<input type="hidden" name="_method" value="DELETE">';
                 $actions .= '<input name="_token" type="hidden" value="'.csrf_token().'">';
                $actions .= '<button class=" btn-danger del_btn" onclick="return confirm(\'Are you sure you want to delete this record?\');" title="Delete">';

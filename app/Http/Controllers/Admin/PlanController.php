@@ -62,11 +62,13 @@ class PlanController extends Controller
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/plans/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
-                $actions .= '&nbsp;<form method="POST" action="'.url("admin/plans/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/plans/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+//                $actions .= '&nbsp;<form method="POST" action="'.url("admin/plans/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/plans/" . $row->id.'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+                $actions .= '&nbsp;<form method="POST" action="'.url("admin/plans/" . $row->id).'" accept-charset="UTF-8" style="display:inline">';
                 $actions .= '<input type="hidden" name="_method" value="DELETE">';
                 $actions .= '<input name="_token" type="hidden" value="'.csrf_token().'">';
-                
+
 
                  $actions .= '<button class="btn-danger del_btn" onclick="return confirm(\'Are you sure you want to delete this record?\');" title="Delete">';
 
@@ -104,7 +106,7 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-       
+
         if($input['action'] == 'Add')
         {
             $validator = Validator::make($request->all(), [

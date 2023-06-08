@@ -37,7 +37,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
         $data = [];
         if($request->ajax())
         {
@@ -65,9 +65,12 @@ class EventController extends Controller
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/events-audience/" . Hashids::encode($row->id).'/get-audiences').'" title="View" _target="blank"><img class="width-25" src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/events/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
-                $actions .= '&nbsp;<form method="POST" action="'.url("admin/events/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/events-audience/" . Hashids::encode($row->id).'/get-audiences').'" title="View" _target="blank"><img class="width-25" src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/events/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+//                $actions .= '&nbsp;<form method="POST" action="'.url("admin/events/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/events-audience/" . $row->id.'/get-audiences').'" title="View" _target="blank"><img class="width-25" src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/events/" . $row->id.'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+                $actions .= '&nbsp;<form method="POST" action="'.url("admin/events/" . $row->id).'" accept-charset="UTF-8" style="display:inline">';
                 $actions .= '<input type="hidden" name="_method" value="DELETE">';
                 $actions .= '<input name="_token" type="hidden" value="'.csrf_token().'">';
                 $actions .= '<button class="btn-danger del_btn" onclick="return confirm(\'Are you sure you want to delete this record?\');" title="Delete">';
@@ -126,7 +129,7 @@ class EventController extends Controller
                 'long_description' => ['required'],
                 'siblings' => ['required'],
                 'allow_siblings' => ['required']
-                
+
             ]);
             if ($validator->fails())
             {
@@ -138,13 +141,13 @@ class EventController extends Controller
                     'message' => $validator->messages(),
                 ],200, ['Content-Type' => 'application/json']);
             }
-           
+
             $model = new Event();
             $flash_message = 'Event has been created successfully.';
         }
         else
         {
-           
+
             $validator = Validator::make($request->all(), [
                 'title' => ['required','max:255','string'],
                 'location' => ['required','max:255','string'],
@@ -154,15 +157,15 @@ class EventController extends Controller
                 'joined_male' => ['required','integer'],
                 'total_seats' => ['required','integer'],
                 'adults_charges' => ['required'],
-                
+
                 'event_charges' => ['required'],
                 'short_description' => ['required'],
                 'long_description' => ['required'],
                 'siblings' => ['required'],
                 'allow_siblings' => ['required']
-                
+
             ]);
-            
+
             if ($validator->fails())
             {
                 /*Session::flash('flash_danger', $validator->messages());
@@ -172,7 +175,7 @@ class EventController extends Controller
                     'message' => $validator->messages(),
                 ],200, ['Content-Type' => 'application/json']);
             }
-            
+
             $model = Event::findOrFail($input['id']);
             $flash_message = 'Event has been updated successfully.';
         }
@@ -194,7 +197,7 @@ class EventController extends Controller
         }*/
         $ArGal = array();
         //$target_path = 'public/events/';
-       
+
         $target_path = storage_path('app/public').'/events';
         if (!empty($request->files) && $request->hasFile('gallary'))
         {
@@ -204,7 +207,7 @@ class EventController extends Controller
             // Upload File //
             // *********** //
             $ArGal = array();
-           
+
             if (!empty($files)) {
                 //$filename = 'member-'.$file->getClientOriginalName();
                 foreach ($files as $K => $file) {
@@ -212,8 +215,8 @@ class EventController extends Controller
                     $path = $file->storeAs('events', $filename);
                     $ArGal[] = $filename;
                 }
-                
-                $Rs3 =  $model; //Event::where(['id' => $input['id'] ])->first();    
+
+                $Rs3 =  $model; //Event::where(['id' => $input['id'] ])->first();
 
                 if(!empty($Rs3->gallary)){
                     $X = explode(',', $Rs3->gallary );
@@ -224,13 +227,13 @@ class EventController extends Controller
         // Gallaryp
         if( !empty($input['chk_del']) ){
 
-            $Rs3 =  Event::where(['id' => $input['id'] ])->first();    
+            $Rs3 =  Event::where(['id' => $input['id'] ])->first();
 
             if(!empty($Rs3->gallary)){
                 $X = explode(',', $Rs3->gallary );
                 $ArGal = array_values(array_merge( $ArGal, $X ));
             }
-            
+
             if(!empty($input['chk_del'])){
                 foreach( $input['chk_del'] as $k => $v ){
 
@@ -238,7 +241,7 @@ class EventController extends Controller
                         unset( $ArGal[$key] );
                     }
                     /*$old_file = public_path() . '/storage/events/'.$v;*/
-                   
+
                     $old_file = public_path('storage') .'/events/'.$v;
                     if (file_exists($old_file) )
                     {
@@ -252,19 +255,19 @@ class EventController extends Controller
         //Video
         if( !empty($input['chk_del_video']) ){
 
-            $Rs3 =  Event::where(['id' => $input['id'] ])->first(); 
+            $Rs3 =  Event::where(['id' => $input['id'] ])->first();
 
             if(!empty($Rs3->event_video)){
                 $old_filev = public_path('storage') .'/events/'.$Rs3->event_video;
 
                 if (file_exists($old_filev) )
                 {
-                    
+
                     unlink($old_filev);
                     $input['event_video'] = '';
 
-                } 
-            }  
+                }
+            }
 
         }
         if (!empty($request->files) && $request->hasFile('event_video'))
@@ -277,7 +280,7 @@ class EventController extends Controller
             // *********** //
             //$filename = 'member-'.$file->getClientOriginalName();
             $v_filename = 'event_video-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            
+
             // **************** //
             // Delete Old File
             // **************** //
@@ -307,7 +310,7 @@ class EventController extends Controller
             $ArGal = array_values($ArGal);
             $input['gallary'] = implode(',', $ArGal);
         }
-        
+
         $input['siblings'] = implode(',', $input['siblings']);
         $model->fill($input);
         $model->save();
@@ -342,7 +345,7 @@ class EventController extends Controller
         return view('admin.events.form')->with($data);
     }
 
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -362,7 +365,7 @@ class EventController extends Controller
         $id = Hashids::decode($id)[0];
         $data['id'] = $id;
         return view('admin.events.audience',$data);
-        
+
     }
     public function audiences_ajax(Request $request)
     {
@@ -372,7 +375,7 @@ class EventController extends Controller
             //echo $id = $request->id; die();
             //$db_record = EventAudience::where('event_id', $id);
             $db_record = EventAudience::orderBy('created_at','DESC');
-           
+
             $datatable = Datatables::of($db_record);
             $datatable = $datatable->addIndexColumn();
             $datatable = $datatable->editColumn('status', function($row)
@@ -400,7 +403,7 @@ class EventController extends Controller
                 }else{
                     return '---';
                 }
-                
+
             });
 
             $datatable = $datatable->addColumn('action', function($row)

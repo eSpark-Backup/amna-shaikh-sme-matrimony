@@ -29,7 +29,7 @@ use Stripe;
 
 class AppController extends Controller
 {
-   
+
     public function index(Request $request){
 
     	$data = array();
@@ -50,7 +50,7 @@ class AppController extends Controller
         $memb = $members->toArray();
 
         foreach ($members as $K => $V) {
-          
+
             $memb[$K]['first_name'] =  Str::title($V->first_name.' '.substr($V->last_name, 0, 1) );
             // $memb[$K]['first_name'] =  Str::title($V->first_name.' '.$V->last_name);
             $memb[$K]['profile_image'] = checkImage(asset('storage/members/profile-image/' . $V->profile_image),'image-svgrepo-com.png',$V->profile_image,1);
@@ -109,14 +109,14 @@ class AppController extends Controller
         $data['stories'] = Story::where('status',1)->orderBy('id', 'desc')->take(5)->get()->toArray();
         return view('frontend.event-details')->with($data);
     }
-    
+
 
     public function emailVerification($id)
     {
         $data['message'] = '';
     	$input['email_verified_at'] = now();
     	$input['status'] = 3;
-    	$id = Hashids::decode($id)[0];
+//    	$id = Hashids::decode($id)[0];
     	$model = Member::findOrFail($id);
         if ($model->status != 3) {
             $model->fill($input);
@@ -125,14 +125,14 @@ class AppController extends Controller
                     <p>Your account has been activated and you can now login to your SME account.</p>';
             // ************************* //
             // Send mail to user
-            // ************************* // 
+            // ************************* //
 
             $name = $model->first_name.' '.$model->last_name;
 
             $email = $model->email;
-            
+
             $email_template = EmailTemplate::where('type','now_verified')->first();
-            
+
             $subject = $email_template['subject'];
             $content = $email_template['content'];
             $search = array("{{name}}","{{app_name}}","{{link}}");
@@ -171,7 +171,7 @@ class AppController extends Controller
                         $name = $user->first_name.' '.$user->last_name;
 
                         $email = $user->email;
-                        
+
                         $email_template = EmailTemplate::where('type','user_welcome')->first();
                         $subject = $email_template['subject'];
                         $content = $email_template['content'];
@@ -179,9 +179,9 @@ class AppController extends Controller
                         $replace = array(ucwords($name),env('APP_NAME'));
                         $content  = str_replace($search,$replace,$content);
                         $social_links = GeneralSetting::find(1);
-                        
+
                         sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
-                        
+
                         break;
                 }
                 if($is_user_active == false)
@@ -197,7 +197,7 @@ class AppController extends Controller
             $data['message'] = '<h2>Account is already active.</h2><p>Your account has been already activated and you can now login to your SME account.</p>';
             return view('frontend.email_verified')->with($data);
         }
-    	
+
     }
 
     public function unsubscribe_payment($email)
@@ -205,7 +205,7 @@ class AppController extends Controller
         $data['message'] = '';
         $input['auto_recurring'] = 0;
         $model = Member::where('email', $email)->first();
-        
+
         if ($model) {
             $model->fill($input);
             $model->save();
@@ -215,14 +215,14 @@ class AppController extends Controller
             return view('frontend.email_verified')->with($data);
             // ************************* //
             // Send mail to user
-            // ************************* // 
+            // ************************* //
 
             $name = $model->first_name.' '.$model->last_name;
 
             $email = $model->email;
-            
+
             // $email_template = EmailTemplate::where('type','now_verified')->first();
-            
+
             // $subject = $email_template['subject'];
             // $content = $email_template['content'];
             // $search = array("{{name}}","{{app_name}}","{{link}}");
@@ -261,7 +261,7 @@ class AppController extends Controller
                         $name = $user->first_name.' '.$user->last_name;
 
                         $email = $user->email;
-                        
+
                         $email_template = EmailTemplate::where('type','user_welcome')->first();
                         $subject = $email_template['subject'];
                         $content = $email_template['content'];
@@ -269,9 +269,9 @@ class AppController extends Controller
                         $replace = array(ucwords($name),env('APP_NAME'));
                         $content  = str_replace($search,$replace,$content);
                         $social_links = GeneralSetting::find(1);
-                        
+
                         sendEmail($email, $subject, $content, '', '', 'en','',$social_links);
-                        
+
                         break;
                 }
                 if($is_user_active == false)
@@ -287,7 +287,7 @@ class AppController extends Controller
             $data['message'] = '<h2>Invalid Link!!!</h2><p>This link is not valid please check again.</p>';
             return view('frontend.email_verified')->with($data);
         }
-        
+
     }
     //plans list
     public function plans(Request $request){
@@ -310,19 +310,19 @@ class AppController extends Controller
         return view('frontend.story_details')->with($data);
     }
     public function privacyPolicy(Request $request){
-        
+
         return view('frontend.privacy_policy');
     }
     public function termsCondition(Request $request){
-        
+
         return view('frontend.terms_condition');
     }
     public function notApprovedUser(Request $request){
-        
+
         return view('frontend.not_approved');
     }
     public function contactUs(){
-        
+
         return view('frontend.contact_us');
     }
 
@@ -349,7 +349,7 @@ class AppController extends Controller
                             $currentDateTime = \Carbon\Carbon::now();
                             $newDateTime = \Carbon\Carbon::now()->addDays($plan->period);
                             $end_plan_date = \Carbon\Carbon::createFromTimeStamp(strtotime($newDateTime), "UTC")->format('Y-m-d');
-                            
+
                             try {
                               Stripe\Stripe::setApiKey( env('STRIPE_SECRET') );
                               $charge = Stripe\PaymentIntent::create([
@@ -360,24 +360,24 @@ class AppController extends Controller
                                 'off_session' => true,
                                 'confirm' => true,
                               ]);
-                             
+
                             } catch (\Stripe\Exception\CardException $e) {
                               // Error code will be authentication_required if authentication is needed
                               echo 'Error code is:' . $e->getError()->code;
                               $payment_intent_id = $e->getError()->payment_intent->id;
                               $payment_intent = \Stripe\PaymentIntent::retrieve($payment_intent_id);
                             }
-                          
+
                             /*if (empty($charge->id)) {
                                 return die(json_encode([
                                     'status' => 0,
                                     'message' => 'Payment does not charged'
                                 ]));
                             }*/
-                            
+
                             $total_cost = $plan->price;
                             if ( empty($mplan)  ) {
-                                
+
                                 $apply = MemberPlan::create([
                                     'member_id' => auth()->user()->id,
                                     'plan_id' => $mplan->plan_id,
@@ -388,16 +388,16 @@ class AppController extends Controller
                                     'status' => 1
                                 ]);
                                 $payments = Payments::create([
-                                    
+
                                     'members_plan_id' => $apply->id,
-                                    
+
                                     'plan_id' => $mplan->plan_id,
                                     'amoun_paid' => $total_cost,
                                     'payment_id' => $charge->id,
                                     'plan_end_date' => $end_plan_date,
                                     'stripe_status' => 'Payment complete',
                                     'status' => 1
-                                ]); 
+                                ]);
                                 $member->update([
                                    'plan_id' => $mplan->plan_id
                                 ]);
@@ -406,7 +406,7 @@ class AppController extends Controller
                             }else{
                                 //update
                                 $mplan->update([
-                                   
+
                                     'plan_id' => $mplan->plan_id,
                                     'total_price' => $total_cost,
                                     'payment_id' => $charge->id,
@@ -415,7 +415,7 @@ class AppController extends Controller
                                     'status' => 1
                                 ]);
                                 $payments = Payments::create([
-                                    
+
                                     'members_plan_id' => $mplan->id,
                                     'plan_id' => $mplan->plan_id,
                                     'amoun_paid' => $total_cost,
@@ -425,21 +425,21 @@ class AppController extends Controller
                                     'status' => 1
                                 ]);
                                 $member->update([
-                                   'plan_id' => $mplan->plan_id 
+                                   'plan_id' => $mplan->plan_id
                                 ]);
                             }
 
-                            
-                            
+
+
                             // ************************* //
                             // Send mail to user
                             // ************************* //
                             $model = $member;
                             $name = $model->first_name.' '.$model->last_name;
                             $email = $model->email;
-                            
+
                             $email_template = EmailTemplate::where('type','plan_auto_renewal')->first();
-                            
+
                             $subject = $email_template['subject'];
                             $content = $email_template['content'];
                             $unsubcribe_url = url('/user/unsubscribe-payment/'.$member->email);
@@ -464,7 +464,7 @@ class AppController extends Controller
                             $firebaseToken['to'] = $model->firebase_token;
                             firebasePushNotification($firebaseToken,$notificationAr);
                             $notificationAr['image'] =  $model->profile_image;
-                            
+
                             $notification = Notification::create($notificationAr);
 
                             // ************************* //
@@ -478,32 +478,32 @@ class AppController extends Controller
                             $search = array("{{name}}","{{app_name}}");
                             $replace = array(ucwords($name),env('APP_NAME'));
                             $content  = str_replace($search,$replace,$content);
-                            
+
                             sendEmail($admin_email, $subject, $content, '', '', 'en','',$social_links);
                         }
 
 
                         /*} catch (\Exception $e) {
-                           
+
                             return $e->getMessage();
                         }*/
                     }
-                
+
                 }
             }
         }
-        die('Success');        
-        
+        die('Success');
+
     }
     public function contactUsSend(Request $request){
-        
+
         // ************************* //
         // Send mail to admin
-        // ************************* // 
+        // ************************* //
 
         $input = $request->all();
         $email_template = EmailTemplate::where('type','contact_us')->first();
-        
+
         $subject = $email_template['subject'];
         $content = $email_template['content'];
         $search = array("{{first_name}}","{{last_name}}","{{email}}","{{mobile}}","{{message}}");

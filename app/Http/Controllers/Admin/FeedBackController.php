@@ -37,7 +37,7 @@ class FeedBackController extends Controller
             $datatable = $datatable->addIndexColumn();
             $datatable = $datatable->addColumn('name', function($row)
             {
-                if (isset($row->member_id)) { 
+                if (isset($row->member_id)) {
                     //dd($row->member);
                     if (isset($row->member)) {
                         return $row->member->first_name.' '.$row->member->last_name;
@@ -59,7 +59,8 @@ class FeedBackController extends Controller
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/feedback/" . Hashids::encode($row->id).'/view').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'" style="width:25px"></a>';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/feedback/" . Hashids::encode($row->id).'/view').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'" style="width:25px"></a>';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/feedback/" . $row->id.'/view').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'" style="width:25px"></a>';
                 $actions .= '</div>';
                 return $actions;
             });

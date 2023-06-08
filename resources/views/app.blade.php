@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/loader.css') }}">
-    
+
     @yield('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/all.css') }}">
 </head>
@@ -24,26 +24,28 @@
         <span>Loading...</span>
       </div>
     </div>
-    
-      
-    
+
+
+
   <!--////////////////// /.PreLoader END//////////////////////-->
     @include('frontend.sections.header')
 
     @yield('content')
-    
+
     @include('frontend.sections.footer')
     <!-- Scripts -->
-    <script src="{{ asset('assets/js/jquery-3.1.1.js')}}"></script> 
+    <script src="{{ asset('assets/js/jquery-3.1.1.js')}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>   
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js')}}"></script>
-    
+
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    
+
+    <script src="{{ asset('assets/js/socket.io.js')}}"></script>
+
     @yield('js')
     <script src="{{ asset('assets/js/custom.js')}}"></script>
-    
+
     <script>
       function showOverlayLoader()
       {

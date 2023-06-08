@@ -41,7 +41,7 @@ class StoryController extends Controller
                 }else{
                     return '---';
                 }
-                
+
             });
             $datatable = $datatable->editColumn('status', function($row)
             {
@@ -65,9 +65,12 @@ class StoryController extends Controller
             $datatable = $datatable->addColumn('action', function($row)
             {
                 $actions = '<div class="actions table-operate flex">';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/stories/" . Hashids::encode($row->id).'/view-story').'" title="View"><img class="width-25" src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
-                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/stories/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
-                $actions .= '&nbsp;<form method="POST" action="'.url("admin/stories/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/stories/" . Hashids::encode($row->id).'/view-story').'" title="View"><img class="width-25" src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
+//                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/stories/" . Hashids::encode($row->id).'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+//                $actions .= '&nbsp;<form method="POST" action="'.url("admin/stories/" . Hashids::encode($row->id)).'" accept-charset="UTF-8" style="display:inline">';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/stories/" . $row->id.'/view-story').'" title="View"><img class="width-25" src="'. asset('admin-assets/assets/media/icons/files/16.svg') .'"></a>';
+                $actions .= '&nbsp;<a class="edit_btn" href="'.url("admin/stories/" . $row->id.'/edit').'" title="Edit"><img src="'. asset('admin-assets/assets/media/icons/files/edit_pencil.svg') .'"></a>';
+                $actions .= '&nbsp;<form method="POST" action="'.url("admin/stories/" . $row->id).'" accept-charset="UTF-8" style="display:inline">';
                 $actions .= '<input type="hidden" name="_method" value="DELETE">';
                 $actions .= '<input name="_token" type="hidden" value="'.csrf_token().'">';
                $actions .= '<button class="btn-danger del_btn" onclick="return confirm(\'Are you sure you want to delete this record?\');" title="Delete">';
@@ -106,13 +109,13 @@ class StoryController extends Controller
         $data['story'] = $story = Story::findOrFail($id);
         $member = Story::findOrFail($id)->get_member;
         if (isset($member) && !empty($member)) {
-        
+
            $data['member'] = $membr;
 
             $created = Carbon::createFromTimeStamp(strtotime($member->created_at), "UTC")->tz(session('timezone'))->format('d M, Y');
             $image = checkImage(asset('storage/stories/' . $story->image),'avatar.png',$story->image);
         }
-        
+
         $data['created_at'] = $created;
         $data['image'] = $image;
 
@@ -122,10 +125,10 @@ class StoryController extends Controller
     /*public function store(Request $request)
     {
         $input = $request->all();
-        
+
         $model = Story::findOrFail($input['id']);
         $flash_message = 'State has been updated successfully.';
-        
+
         $model->fill($input);
         $model->save();
         $request->session()->flash('flash_success', $flash_message);
@@ -142,7 +145,7 @@ class StoryController extends Controller
                 'partner_name'      => 'required|string|max:100',
                 'member_id'      => 'required|integer',
                 'description'      => 'required|string',
-                
+
             ]);
             if ($validator->fails())
             {
@@ -160,7 +163,7 @@ class StoryController extends Controller
                 'partner_name'      => 'required|string|max:100',
                /* 'member_id'      => 'required|integer',*/
                 'description'      => 'required|string',
-                
+
             ]);
             if ($validator->fails())
             {
@@ -180,7 +183,7 @@ class StoryController extends Controller
             // *********** //
             // Upload File //
             // *********** //
-           
+
             if (!empty($file)) {
                 //$filename = 'member-'.$file->getClientOriginalName();
                 $filename = 'story-image-' . uniqid() . '.' . $file->getClientOriginalExtension();
@@ -189,7 +192,7 @@ class StoryController extends Controller
             }
         }
         $ArGal = array();
-       
+
         $target_path = storage_path('app/public').'/stories';
         if (!empty($request->files) && $request->hasFile('gallery'))
         {
@@ -199,7 +202,7 @@ class StoryController extends Controller
             // Upload File //
             // *********** //
             $ArGal = array();
-           
+
             if (!empty($files)) {
                 //$filename = 'member-'.$file->getClientOriginalName();
                 foreach ($files as $K => $file) {
@@ -212,13 +215,13 @@ class StoryController extends Controller
         // Gallaryp
         if( !empty($input['chk_del']) ){
 
-            $Rs3 =  Story::where(['id' => $input['id'] ])->first();    
+            $Rs3 =  Story::where(['id' => $input['id'] ])->first();
 
             if(!empty($Rs3->gallery)){
                 $X = explode(',', $Rs3->gallery );
                 $ArGal = array_values(array_merge( $ArGal, $X ));
             }
-            
+
             if(!empty($input['chk_del'])){
                 foreach( $input['chk_del'] as $k => $v ){
 

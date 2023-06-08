@@ -56,16 +56,8 @@
                                             <td>{{$email_template->subject}}</td>
                                             <td>
                                                 <div class="actions table-operate flex">
-                                                    <a class="edit_btn" href="{{url('admin/email-templates/' . Hashids::encode($email_template->id) . '/edit')}}" title="Edit"><img src="{{asset('admin-assets/assets/media/icons/files/edit_pencil.svg')}}"></a>
-
-                                                    <!-- <form method="POST" action="{{url('admin/email-templates/'.Hashids::encode($email_template->id)) }}" accept-charset="UTF-8" style="display:inline">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input name="_token" type="hidden" value="{{csrf_token()}}">
-                                                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">
-                                                                <i class="fa fa-trash"></i>
-                                                            </button>
-                                                        </form> -->
-
+{{--                                                    <a class="edit_btn" href="{{url('admin/email-templates/' . Hashids::encode($email_template->id) . '/edit')}}" title="Edit"><img src="{{asset('admin-assets/assets/media/icons/files/edit_pencil.svg')}}"></a>--}}
+                                                    <a class="edit_btn" href="{{url('admin/email-templates/' . $email_template->id . '/edit')}}" title="Edit"><img src="{{asset('admin-assets/assets/media/icons/files/edit_pencil.svg')}}"></a>
                                                 </div>
                                             </td>
                                         </tr>

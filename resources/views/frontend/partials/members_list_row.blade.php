@@ -5,7 +5,7 @@
                 <div class="profile_user_img">
                     <?php $photo_url = checkImage( asset('storage/members/profile-image/' . $member->profile_image),'',$member->profile_image,1);
                     ?>
-                    
+
                     <a href="{{ url('user/members/'.$member->id) }}">
                     <img class="profile_image {{$member->picture_privacy == 'blur' ? 'blur_img' : ''}}" src="{{ $photo_url }}" alt="Profile Image"></a>
                     <!-- <div class="profile_image" style="background-image: url('{{ $photo_url }}');"></div> -->
@@ -96,7 +96,7 @@
                                     <td><span>On Behalf</span></td>
                                     <td><h6>{{ $member->on_behalf->name }}</h6></td>
                                 @endif -->
-                                
+
                             </tr>
                         </table>
                         <!-- <div class="basic-info-row">
@@ -135,14 +135,17 @@
             <img src="{{asset('assets/images/like.svg') }}" alt="icon">Like
         </a>
         <a href="#" class="btn-member-msg" data-memberidhash="{{ $member->hash_id}}"><img src="{{asset('assets/images/msg.svg') }}" alt="icon">Message</a>
-        
+
         <a href="#" class="interest-request" data-memberid="{{ $member->id }}" data-status="3"><img src="{{asset('assets/images/cross-ic.svg') }}" alt="icon">Ignore</a>
         <a href="#" class="favorite-btn" data-memberid="{{ $member->id }}" data-status="3"><img src="{{asset('assets/images/fav.svg') }}" alt="icon">Favourite</a>
         <a href="#" class="interest-request" data-memberid="{{ $member->id }}" data-status="3"><img src="{{asset('assets/images/report.svg') }}" alt="icon">Report</a> -->
 
-        <a href='#' class="interest-request likeMe btn-custom-secondary" data-memberid="{{ $member->id }}" data-status="1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</a>
-        <a href="#" class="btn-member-msg  btn-custom-primary" data-memberidhash="{{ $member->hash_id}}"><i class="fa fa-commenting-o" aria-hidden="true"></i> Message</a>                    
+        <a href='#' class="interest-request likeMe btn-custom-secondary" data-memberid="{{ $member->id }}" data-status="1" data-checklikelimitcondition="1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</a>
+        <a href="#" class="btn-member-msg  btn-custom-primary" data-memberidhash="{{ $member->hash_id}}"><i class="fa fa-commenting-o" aria-hidden="true"></i> Message</a>
         <a href="#" class="interest-request btn-custom-secondary" data-memberid="{{ $member->id }}" data-status="3"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Ignore</a>
         <a href="javascript:void(0);" class="report-request btn-custom-primary" data-memberid="{{ $member->id }}"><i class="fa fa-flag-o" aria-hidden="true"></i> Report</a>
+
     </div>
 </div>
+
+

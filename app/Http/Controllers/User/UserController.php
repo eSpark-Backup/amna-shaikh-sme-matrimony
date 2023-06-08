@@ -233,7 +233,7 @@ class UserController extends Controller
             ],200, ['Content-Type' => 'application/json']);
         }
 
-        $interestMember = MemberInterest::where(['member_id' => auth()->user()->id , 'member_interested_id' => $request->input('member_interested_id') ] )->first();
+        $interestMember = MemberInterest::where(['member_id' => auth()->user()->id , 'member_interested_id' => $request->input('member_interested_id')])->first();
 
         if ($interestMember) {
             if($request->input('status') == 3){
@@ -250,7 +250,20 @@ class UserController extends Controller
                 ]));
             }
 
+        }
 
+        if($request->checkLikeLimitCondition == 1)
+        {
+            $interestMemberCount = MemberInterest::where('member_id',auth()->user()->id)->count();
+
+            if($interestMemberCount>2)
+            {
+                return die(json_encode([
+                    'status' => 5,
+                    'message' => 'You can send message',
+                    'title' => 'Already ignored!',
+                ]));
+            }
         }
 
         //Check Plan and Show Plan Popup
@@ -396,6 +409,8 @@ class UserController extends Controller
             if ($likes_count == 15) {
                 $req_message = "Here you can send the message directly. Click here";
             }
+
+            $req_message = 'User has been liked';
 
             return die(json_encode([
                 'status' => 1,
@@ -1941,6 +1956,7 @@ class UserController extends Controller
     // send message..
     public function sendMessage(Request $request){
 
+
         $input = $request->all();
         $id = auth()->user()->id;
         $rid = $input['user_id_receiver'];
@@ -1959,9 +1975,11 @@ class UserController extends Controller
         $current_date = date('Y-m-d');
         $active_plan =MemberPlan::where('member_id',$id)->first();
 
+
         /*One have Plan*/
         $otherUserId = $rid;
         $oneHavePlan = 0;
+
 
         if (isset($active_plan) && !empty($active_plan) && $active_plan->end_date >= $current_date) {
             $oneHavePlan = 1;
@@ -2117,7 +2135,8 @@ class UserController extends Controller
             $name = $member->first_name.' '.$member->last_name;
             $user = getUserName(Auth()->user()->first_name.' '.Auth()->user()->last_name);
             //$profile_link = url('user/members/'.Auth()->user()->id);
-            $has_id = Hashids::encode(Auth()->user()->id);
+//            $has_id = Hashids::encode(Auth()->user()->id);
+            $has_id = Auth()->user()->id;
 
             $profile_link = url('user/chats?id='.$has_id );
 

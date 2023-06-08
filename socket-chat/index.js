@@ -15,7 +15,8 @@
     const server = https.createServer(options, app);
     //const server = http.createServer(app);
 
-    const io = require('socket.io')(server,{ cors: { origin: '*' } });
+
+    const io = require('socket.io')(server,{ cors: true,  originxdsf: '*'  });
     //4-08-22
 
     let arr = [];

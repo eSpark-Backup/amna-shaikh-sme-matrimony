@@ -119,7 +119,7 @@
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="https://crzglobal.xyz:9000/socket.io/socket.io.js"></script> -->
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
+{{--    <script src="/socket.io/socket.io.js"></script>--}}
 
     <script type="text/javascript">
 
@@ -450,7 +450,7 @@
 
         function upload(msg='',instant=0, img='') {
             $('.sendMsgBtn').prop('disabled', true);
-            
+
             var user_id_receiver = $('#user_id_receiver').val();
             var data = {
                 '_token': "{{ csrf_token() }}",
@@ -460,10 +460,10 @@
                 'user_id_receiver' : user_id_receiver
             }
             $('.uploading_spinner').show();
-            
-            
+
+
             // AJAX request
-            
+
             /*$.post('{{ route("user.users_add_photo") }}', data)
             .done(function(response) {
                 $('.crop_image').show();
@@ -479,7 +479,7 @@
                    // Swal.fire(response.msg);
                 });*/
                 // AJAX request
-                
+
                 $.post('{{ route("user.send-message") }}', data)
                 .done(function(response) {
                     console.log("send message")

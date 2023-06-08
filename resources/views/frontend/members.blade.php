@@ -227,7 +227,7 @@
                     </div>
                     <input type="hidden" name="memberId" value="" id="reportMemberId">
                     <div class="alert-action">
-                        
+
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -289,11 +289,39 @@
                         <a href="{{url('/plans')}}">Continue</a>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
+        <!-- Modal -->
+
+    </div>
+<!-- The Modal -->
+<div class="modal fade" id="liked">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                {{--                <h4 class="modal-title">Modal Heading</h4>--}}
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>You can send message</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn interest-request" id="send-like" data-dismiss="modal" data-status="1" data-checklikelimitcondition="0">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="chatLink">Send Message</button>
+            </div>
+
         </div>
+    </div>
+</div>
+
 @endsection
 
 @section('js')
@@ -332,7 +360,7 @@
                 }
             },
             "footerCallback": function ( row, data, start, end, display ) {
-                
+
                 if (display.length == 0) {
                     // $('.filters-content').hide();
                     $('.filters-wrap').slideUp();
@@ -343,7 +371,7 @@
                     $('.results').hide();
                     $('.profiles-content').show();
                 }
-                  
+
             },
             columns: [{
                 data: 'customer_html',
@@ -355,7 +383,7 @@
             }, 'slow');
 
         });
-        
+
         $('#search-form').on('submit', function (e) {
             oTable.draw();
             e.preventDefault();
@@ -406,7 +434,7 @@
                             Swal.fire({
                               icon: 'warning',
                               title: 'Reported User',
-                              
+
                               text:  data.req_message ,
                               showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
@@ -426,7 +454,7 @@
                         Swal.fire({
                           icon: 'warning',
                           title: data.title,
-                          
+
                           text:   data.message,
                           showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -448,9 +476,24 @@
         });
 
         $('body').on('click', '.interest-request', function (e) {
+
+
             e.preventDefault();
             var id = $(this).data('memberid');
             var status = $(this).data('status');
+            var checkLikeLimitCondition = $(this).data('checklikelimitcondition');
+
+            if(checkLikeLimitCondition == 1)
+            {
+                $('#send-like').attr("data-memberid",id);
+                var chatUrl = "{{ url('user/chats') }}";
+                chatUrl = chatUrl+"?id="+id;
+                var a = "window.location.href = '"+chatUrl+"'"
+                $('#chatLink').attr('onclick',a);
+
+                    // onclick="window.location.href = 'https://ide.geeksforgeeks.org';"
+            }
+
             showOverlayLoader();
             $.ajax({
                 url: "{{ url('/user/send-interest-request') }}",
@@ -460,13 +503,14 @@
                 type: "post",
                 data: {
                     'member_interested_id': id,
-                    'status': status
+                    'status': status,
+                    'checkLikeLimitCondition':checkLikeLimitCondition
                 },
                 cache: false,
-                
+
                 success: function (data) {
                     hideOverlayLoader();
-                    
+
                     var data = JSON.parse(data);
 
                     if (data.status == 1) {
@@ -474,8 +518,8 @@
                         if(data.req_message != ''){
                             Swal.fire({
                               icon: 'info',
-                              title: 'Why wait?',
-                              
+                              // title: 'Why wait?',
+
                               text:  data.req_message ,
                               showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
@@ -491,7 +535,7 @@
                             });
                         }
                     } else if(data.status == 0) {
-                        
+
                         Swal.fire({
                           icon: 'warning',
                           title: data.title,
@@ -502,7 +546,7 @@
                             hideClass: {
                                 popup: 'animate__animated animate__fadeOutUp'
                             },
-                            
+
                             showCancelButton: false,
                             focusConfirm: false,
                             confirmButtonText:'OK',
@@ -512,6 +556,9 @@
                     } else if(data.status == 3) {
                         // alert('Update Plan')
                         $('#like_for_approval').modal('show');
+                    }
+                    else if(data.status == 5) {
+                        $('#liked').modal('show');
                     }
                 }
             });
@@ -524,7 +571,7 @@
                 Swal.fire({
                     icon: 'warning',
                     title: "Account is under admin approval",
-                  
+
                     text:   "Your account is under admin approval. You'll not be able to perform any actions until your profile is approved. Thanks for your patience.",
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
@@ -532,13 +579,13 @@
                     hideClass: {
                         popup: 'animate__animated animate__fadeOutUp'
                     },
-                    
+
                     showCancelButton: true,
                     focusConfirm: false,
                     reverseButtons: true,
                     confirmButtonText:
                     '<a href="/user/edit-profile" target="_blank"> GoTo Profile </a>',
-                  
+
                     cancelButtonText:'Cancel',
                     cancelButtonColor: '#e7147b',
                     confirmButtonColor: '#21c2d6',
@@ -547,7 +594,7 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'Verification Required',
-                  
+
                     text:   'Your account verification is required. Please complete your profile and submit it for admin approval. After your profile is approved you ll receive a verified user badge to continue your search.',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
@@ -555,12 +602,12 @@
                     hideClass: {
                         popup: 'animate__animated animate__fadeOutUp'
                     },
-                  
+
                     showCancelButton: true,
                     focusConfirm: false,
                     reverseButtons: true,
                     confirmButtonText: '<a href="/user/edit-profile" target="_blank"> GoTo Profile </a>',
-                  
+
                     cancelButtonText: 'Okay',
                     cancelButtonText:'Cancel',
                     cancelButtonColor: '#e7147b',

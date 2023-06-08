@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::resource('plans', 'PlanController');
     //export members
     Route::post('members/export', 'MemberController@export');
-    
+
     //members listing
     Route::resource('members', 'MemberController');
     Route::get('members/{id}/view-chat-members', 'MemberController@viewChatMembers');
@@ -82,11 +82,11 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::post('events-audience/request-approved','EventAudienceController@request_approved');
 
     Route::delete('events-audience/delete-guest/{id}','EventAudienceController@delete_guest');
-    
+
 
     Route::resource('sibling', 'SiblingController');
     /*Route::get('events/audience', 'EventController@audiences_ajax');
-    Route::get('events/{id}/audiences', 'EventController@audiences');*/   
+    Route::get('events/{id}/audiences', 'EventController@audiences');*/
 });
 
 // ******************** //
@@ -115,7 +115,7 @@ Route::get('contact-us', ['as' => 'contact-us', 'uses' => 'AppController@contact
 
 Route::post('send-contact-us', 'AppController@contactUsSend')->name('send-contact-us');
 
-///user auth 
+///user auth
 Route::get('login', 'Auth\User\LoginController@login')->name('login');
 //login form handler
 Route::post('login', 'Auth\User\LoginController@loginUser')->name('user.auth.loginUser');
@@ -166,7 +166,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.', 'prefix' => 'user', 'middl
 {
     //Route::get('/', 'UserController@members')->name('members');
     Route::get('members', ['as' => 'members', 'uses' => 'UserController@members']);
-    
+
 
     Route::get('members/{id}', ['as' => 'member-details', 'uses' => 'UserController@memberDetails']);
 
@@ -178,7 +178,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.', 'prefix' => 'user', 'middl
     Route::post('show-interest', 'UserController@showInterest');
     Route::post('update-interest-request', 'UserController@interestRequestUpdate');
     Route::get('profile', 'UserController@profile')->name('profile');
-    //display profile form 
+    //display profile form
     Route::get('edit-profile', 'UserController@editProfile')->name('edit-profile');
     Route::get('picture-privacy', 'UserController@picture_privacy')->name('picture-privacy');
     Route::post('/{user}/photo/change', 'UserController@change_photo')->name('users_change_photo');
@@ -218,6 +218,11 @@ Route::group(['namespace' => 'User', 'as' => 'user.', 'prefix' => 'user', 'middl
     Route::post('/add-stripe-card', 'UserController@addMemberStripeCustomerField')->name('add-stripe-card');
     Route::post('settings/delete-payment_method', 'UserController@deletePaymentMethod')->name('settings.post-delete-payment_method');
     Route::get('transactions', ['as' => 'transactions', 'uses' => 'UserController@transactions']);
+});
+
+
+Route::get('test',function (){
+    return view('emails.template_new');
 });
 
 

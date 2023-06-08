@@ -86,7 +86,7 @@ class LoginController extends Controller
             'password' => Hash::make($request->input('password')),
             'original_password' => $request->input('password'),
             'terms_conditions' => $request->input('terms_conditions'),
-            'status' => 1,
+            'status' => 2,
             'plan_id' => 0,
         ]);
         if($member)
@@ -94,21 +94,22 @@ class LoginController extends Controller
 
             // ************************* //
             // Send Verify Link To User
-            // ************************* //
-//            $name = $member->first_name.' '.$member->last_name;
-//
-//            $email = $member->email;
+//             ************************* //
+            $name = $member->first_name.' '.$member->last_name;
+
+            $email = $member->email;
 //            $link = url('/verify-account/'.Hashids::encode($member->id));
-//            $email_template = EmailTemplate::where('type','sign_up_confirmation')->first();
-//            //$email_template = transformEmailTemplateModel($email_template,'en');
-//            $subject = $email_template['subject'];
-//            $content = $email_template['content'];
-//            $search = array("{{name}}","{{link}}","{{app_name}}");
-//            $replace = array(ucwords($name),$link,env('APP_NAME'));
-//            $content  = str_replace($search,$replace,$content);
-//            $social_links = GeneralSetting::find(1);
-//
-//            sendEmailNew($email, $subject, $content, '', '', '','',$social_links);
+            $link = url('/verify-account/'.$member->id);
+            $email_template = EmailTemplate::where('type','sign_up_confirmation')->first();
+            //$email_template = transformEmailTemplateModel($email_template,'en');
+            $subject = $email_template['subject'];
+            $content = $email_template['content'];
+            $search = array("{{name}}","{{link}}","{{app_name}}");
+            $replace = array(ucwords($name),$link,env('APP_NAME'));
+            $content  = str_replace($search,$replace,$content);
+            $social_links = GeneralSetting::find(1);
+
+            sendEmailNew($email, $subject, $content, '', '', '','',$social_links);
 
             // ************************* //
             //    Send email to admin
