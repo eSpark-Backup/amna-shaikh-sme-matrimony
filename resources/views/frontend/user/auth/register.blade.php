@@ -22,11 +22,6 @@
                 <div class="account-form">
                     <div class="account-form-inner">
                         <h3>Register Now</h3>
-                        <div class="login-links">
-                            <a href="#"><img src="assets/images/facebook_icon.svg" alt="icon">Register with Facebook</a>
-                            <a href="#"><img src="assets/images/gmail_icon.svg" alt="icon">Register with Google</a>
-                        </div>
-                        <div class="orline"><span>OR</span></div>
                         <form action="{{ route('user.auth.registerUser') }}" method="POST" id="register-form">
                             {{ csrf_field() }}
                             @include('../../../admin.message')
@@ -73,6 +68,12 @@
                                 <button type="submit" class="btn-custom-primary">Register Now</button>
                             </div>
                         </form>
+                        <div class="orline"><span>OR</span></div>
+                        <div class="login-links">
+                            <a href="#"><img src="assets/images/facebook_icon.svg" alt="icon">Register with Facebook</a>
+                            <a href="#"><img src="assets/images/gmail_icon.svg" alt="icon">Register with Google</a>
+                        </div>
+                      
                         <div class="newUser">
                             <span>Already Member?</span>
                             <a href="{{ route('login') }}" class="btn-custom-secondary">Login here</a>

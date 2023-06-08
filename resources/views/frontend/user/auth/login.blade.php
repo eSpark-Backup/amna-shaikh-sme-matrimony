@@ -22,11 +22,6 @@
                 <div class="account-form">
                     <div class="account-form-inner">
                         <h3>Login</h3>
-                        <div class="login-links">
-                            <a href="{{ url('auth/facebook') }}"><img src="assets/images/facebook_icon.svg" alt="icon">Login with Facebook</a>
-                            <a href="{{ url('auth/google') }}"><img src="assets/images/gmail_icon.svg" alt="icon">Login with Google</a>
-                        </div>
-                        <div class="orline"><span>OR</span></div>
                         <form action="{{ route('user.auth.loginUser') }}" method="POST" id="login-form">
                             {{ csrf_field() }}
                             
@@ -54,9 +49,15 @@
                                 <button type="submit" class="btn-custom-primary">Login</button>
                             </div>
                         </form>
+                        <div class="orline"><span>OR</span></div>
+                        <div class="login-links">
+                            <a href="{{ url('auth/facebook') }}"><img src="assets/images/facebook_icon.svg" alt="icon">Login with Facebook</a>
+                            <a href="{{ url('auth/google') }}"><img src="assets/images/gmail_icon.svg" alt="icon">Login with Google</a>
+                        </div>
                         <div class="newUser">
-                            <span>New Member?</span>
-                            <a href="{{ route('register') }}" class="registerNewUser btn-custom-secondary">Register Now</a>
+                            <span>New Member?
+                            <a href="{{ route('register') }}" class="registerNewUser">Register Now</a>
+                            </span>
                         </div>
                     </div>
                 </div>
