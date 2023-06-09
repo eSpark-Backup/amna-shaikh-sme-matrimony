@@ -1,1 +1,0 @@
-email.blade.php

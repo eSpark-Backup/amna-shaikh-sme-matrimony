@@ -1,9 +1,0 @@
-<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M250 50H50C36.25 50 25.125 61.25 25.125 75L25 225C25 238.75 36.25 250 50 250H250C263.75 250 275 238.75 275 225V75C275 61.25 263.75 50 250 50ZM250 100L150 162.5L50 100V75L150 137.5L250 75V100Z" fill="url(#paint0_linear_10_98)"/>
-<defs>
-<linearGradient id="paint0_linear_10_98" x1="150" y1="50" x2="150" y2="250" gradientUnits="userSpaceOnUse">
-<stop stop-color="#A2B5FC"/>
-<stop offset="0.947917" stop-color="#757DBA"/>
-</linearGradient>
-</defs>
-</svg>
