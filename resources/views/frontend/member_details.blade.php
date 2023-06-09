@@ -11,8 +11,10 @@
             <div class="user-profile-left">
                 <?php $photo_url = checkImage(asset('storage/members/profile-image/' . $member->profile_image), '', $member->profile_image, 1);  ?>
                 <div class="user-profile-image"><img src="{{$photo_url }}" class="{{$member->picture_privacy == 'blur' ? 'blur_img' : ''}}" alt="image"></div>
-                <?php $has_id = \Hashids::encode($member->id); ?>
-                <div class="profile-top-head flex">
+                <?php //$has_id = \Hashids::encode($member->id); ?>
+                    <?php $has_id = $member->id; ?>
+
+                    <div class="profile-top-head flex">
                     <div class="profile-left-titles">
                         <h2>{{ getUserName($member->first_name.' '.$member['last_name']) }}. <span>({{(isset( $member->occupation->name))?  $member->occupation->name:'---' }})</span></h2>
 
@@ -47,7 +49,6 @@
                 <!-- <a href="{{ url('user/chats?id='.$has_id ) }}" class="mesg-btn"> <img src="{{ asset('assets/images/sms.png') }}" alt="icon"> Send Message</a> -->
                 <!-- <div class="prof-actions-details">
                         <a href='#' class="interest-request likeMe btn-custom-secondary" data-memberid="{{ $member->id }}" data-status="1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</a>
-                        <a href="#" class="btn-member-msg  btn-custom-primary" data-memberidhash="{{ \Hashids::encode($member->id) }}"><i class="fa fa-commenting-o" aria-hidden="true"></i> Message</a>                    
                         <a href="#" class="interest-request btn-custom-secondary" data-memberid="{{$member->id}}" data-status="3"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Ignore</a>
                         <a href="javascript:void(0);" class="report-request btn-custom-primary" data-memberid="{{ $member->id }}"><i class="fa fa-flag-o" aria-hidden="true"></i> Report</a>
                     </div> -->
