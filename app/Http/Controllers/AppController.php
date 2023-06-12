@@ -63,6 +63,7 @@ class AppController extends Controller
             }
         }
         $data['members'] = $memb;
+        $data['plans'] = Plan::where(['status' => 1])->orderBy('id', 'desc')->get();
         return view('frontend.home')->with($data);
     }
     public function events(Request $request){

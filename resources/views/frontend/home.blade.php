@@ -123,8 +123,8 @@
                                     <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
 
                                 <div class=" img-icon d-flex">
-                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}"  data-status="1" alt="heart">
-                                    &nbsp; <img class="interest-request" src="{{ asset('images/Close.png')}}"  data-memberid="{{ $M['id'] }}"  data-status="3" alt="close">
+                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}"  data-status="1" data-checklikelimitcondition="1" alt="heart">
+                                    &nbsp; <img class="interest-request" src="{{ asset('images/Close.png')}}"  data-memberid="{{ $M['id'] }}"  data-status="3" data-checklikelimitcondition="0" alt="close">
                                     &nbsp; <img class="report-request" src="{{ asset('images/Mark.png')}}"  data-memberid="{{ $M['id'] }}" alt=mark>
 {{--                                    <button class="interest-request likeMe mx-1" data-memberid="{{ $M['id'] }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>--}}
 {{--                                    <button class="interest-request mx-1" data-memberid="{{ $M['id'] }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>--}}
@@ -393,7 +393,88 @@
     </div>
 </div>
 
+<div class="modal fade" id="liked">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
+            <!-- Modal Header -->
+            <div class="modal-header">
+                {{--                <h4 class="modal-title">Modal Heading</h4>--}}
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>You can send message</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn interest-request" id="send-like" data-dismiss="modal" data-status="1" data-checklikelimitcondition="0">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="chatLink">Send Message</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="like_popup">
+    <div class="modal fade" id="like_for_approval" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Upgrade Now</h2>
+                    <span class="msg_ic_cls">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="118.983" height="124.121" viewBox="0 0 118.983 124.121">
+                          <g id="Layer_x0020_1" transform="translate(-1044.458 -308.009)">
+                            <path id="Path_21360" data-name="Path 21360" d="M52.194,105.489v24.794a3.08,3.08,0,0,0,5.3,2.129l29.224-26.924h24.64a13.986,13.986,0,0,0,13.954-13.954V37.829a13.986,13.986,0,0,0-13.954-13.953H41.334A13.985,13.985,0,0,0,27.38,37.829V91.535a13.986,13.986,0,0,0,13.954,13.954h10.86Zm49.812-48.117a5.268,5.268,0,1,0,5.268,5.268,5.268,5.268,0,0,0-5.268-5.268Zm-51.325,0A5.268,5.268,0,1,0,55.95,62.64a5.268,5.268,0,0,0-5.268-5.268Zm17.108,0a5.268,5.268,0,1,0,5.268,5.268,5.268,5.268,0,0,0-5.268-5.268Zm17.108,0a5.268,5.268,0,1,0,5.268,5.268A5.268,5.268,0,0,0,84.9,57.372Zm46.511,28.366c-4.046,0-4.046,6.155,0,6.155a13.986,13.986,0,0,0,13.954-13.954V24.233A13.986,13.986,0,0,0,131.409,10.28H61.388c-4.046,0-4.046,6.153,0,6.153h70.021a7.831,7.831,0,0,1,7.8,7.8V77.938a7.831,7.831,0,0,1-7.8,7.8ZM58.347,123.274V102.411a3.077,3.077,0,0,0-3.077-3.077H41.334a7.832,7.832,0,0,1-7.8-7.8V37.829a7.832,7.832,0,0,1,7.8-7.8h70.02a7.831,7.831,0,0,1,7.8,7.8V91.535a7.831,7.831,0,0,1-7.8,7.8l-25.831.007a3.058,3.058,0,0,0-2.08.81Z" transform="translate(1017.579 298.23)" fill="#d92483" stroke="#d92483" stroke-width="1"/>
+                          </g>
+                        </svg>
+                    </span>
+                    <h3>Choose your Package</h3>
+                    <p>Unlock Messages and chat with anyone you like!</p>
+                    <div class="plan_main_sec">
+                        <div class="plan_inner">
+
+                            @foreach($plans as $K => $V)
+                                <div class="plan_col {{ $K == 1 ? 'most_popular_main' : '' }}">
+
+                                    @if ($K == 1)
+                                        <div class="most_popular">
+                                            <span class="btn_popular">Most Popular</span>
+                                        </div>
+                                    @endif
+                                    <div class="plan_cont">
+                                        <div class="plan_inner_cont">
+                                            <h2>{{ $V->period }}</h2>
+                                            <h5>Days</h5>
+
+                                            @if($K == 1)
+                                                <p>Best Seller</p>
+                                            @endif
+                                        </div>
+                                        <h3>${{ $V->price }}</h3>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="continue-action">
+                        <a href="{{url('/plans')}}">Continue</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+</div>
 @endsection
 @section('js')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
