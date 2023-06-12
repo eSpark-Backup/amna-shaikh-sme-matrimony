@@ -3583,7 +3583,7 @@ section.chat-section {
 .swal2-actions button.swal2-styled {
     margin: 0;
     border-radius: 10px;
-    background: linear-gradient(98.41deg, #4fa6c9 -22.46%, #6c41b6 82.65%) !important; 
+    background: linear-gradient(98.41deg, #4fa6c9 -22.46%, #6c41b6 82.65%) !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100%;
@@ -6491,7 +6491,6 @@ select:focus {
     } */
         .wedding_image1 {
             height: 300px;
-            width: 50%;
         }
     }
     @media screen and (max-width: 420px) {

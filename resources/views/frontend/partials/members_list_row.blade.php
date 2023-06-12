@@ -135,7 +135,7 @@
             <img src="{{asset('assets/images/like.svg') }}" alt="icon">Like
         </a>
         <a href="#" class="btn-member-msg" data-memberidhash="{{ $member->hash_id}}"><img src="{{asset('assets/images/msg.svg') }}" alt="icon">Message</a>
-        
+
         <a href="#" class="interest-request" data-memberid="{{ $member->id }}" data-status="3"><img src="{{asset('assets/images/cross-ic.svg') }}" alt="icon">Ignore</a>
         <a href="#" class="favorite-btn" data-memberid="{{ $member->id }}" data-status="3"><img src="{{asset('assets/images/fav.svg') }}" alt="icon">Favourite</a>
         <a href="#" class="interest-request" data-memberid="{{ $member->id }}" data-status="3"><img src="{{asset('assets/images/report.svg') }}" alt="icon">Report</a> -->
@@ -150,9 +150,9 @@
             <a href="#" class="btn-custom-primary btn-member-msg w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
         </div>
         <div class="d-flex col-12 col-md-8 col-lg-9 justify-content-end  col-6 order-sm-2 order-1">
-            <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="../../../../public/images/Heart.png" alt=""></button>
-            <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="../../../../public/images/Close.png" alt=""></button>
-            <button class="report-request mx-1" data-memberid="{{ $member->id }}"><img src="../../../../public/images/Mark.png" alt=""></button>
+            <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="../images/Heart.png" alt=""></button>
+            <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="../images/Close.png" alt=""></button>
+            <button class="report-request mx-1" data-memberid="{{ $member->id }}"><img src="../images/Mark.png" alt=""></button>
         </div>
 
         <!-- </div> -->
