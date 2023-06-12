@@ -18,7 +18,8 @@ class PlanResource extends JsonResource
         return  [
             "id" => $this->id,
             "name" => $this->name,
-            'hash_id' => \Hashids::encode($this->id),
+//            'hash_id' => \Hashids::encode($this->id),
+            'hash_id' => $this->id,
             'price' => $this->price,
             'period' => $this->period,
             'start_color' => $this->start_color,

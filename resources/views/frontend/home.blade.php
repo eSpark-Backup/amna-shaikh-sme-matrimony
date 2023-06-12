@@ -123,9 +123,12 @@
                                     <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
 
                                 <div class=" img-icon d-flex">
-                                    <img src="{{ asset('images/Heart.png')}}" alt="heart">
-                                    <img src="{{ asset('images/Close.png')}}" alt="close">
-                                    <img src="{{ asset('images/Mark.png')}}" alt=mark>
+                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}"  data-status="1" alt="heart">
+                                    &nbsp; <img class="interest-request" src="{{ asset('images/Close.png')}}"  data-memberid="{{ $M['id'] }}"  data-status="3" alt="close">
+                                    &nbsp; <img class="report-request" src="{{ asset('images/Mark.png')}}"  data-memberid="{{ $M['id'] }}" alt=mark>
+{{--                                    <button class="interest-request likeMe mx-1" data-memberid="{{ $M['id'] }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>--}}
+{{--                                    <button class="interest-request mx-1" data-memberid="{{ $M['id'] }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>--}}
+{{--                                    <button class="report-request mx-1" data-memberid="{{ $M['id'] }}"><img src="{{ url("images/Mark.png") }}" alt=""></button>--}}
                                 </div>
                             </div>
 
@@ -180,7 +183,7 @@
                 <div class="about-text">
                     <div class="section-head">
                         <h2>{{ settings()->about_title }}</h2>
-                        <p>{!! settings()->about_description !!}</p>                        
+                        <p>{!! settings()->about_description !!}</p>
                         <a href="#"><img src="assets/images/link_icon.svg" alt="icon">Register Now</a>
                     </div>
                 </div>
@@ -345,6 +348,50 @@
 
 </section>
 
+<div class="alert_popup">
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="report-form" class="form-horizontal" action="{{route('user.report-user')}}" method="post">
+                        <div class="icon-show">!</div>
+                        <h2>Are you sure you want to Report this user?</h2>
+                        <!-- <p></p> -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="reasonList" class="form-label">Reason of reporting <span class="star"> :*</span></label>
+                                <select name="reasonList" id="reasonList" class="form-control required">
+                                    <option value="">-- Choose One --</option>
+                                    <option value="bad_manners">Bad Manners</option>
+                                    <option value="not_responsive">Not Responsive</option>
+                                    <option value="fake">Fake</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 reportComments" style="display:none;">
+                                <label for="comment" class="form-label">Comments <span class="star"> :*</span></label>
+                                <textarea class="form-control" name="comment"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="memberId" value="" id="reportMemberId">
+                        <div class="alert-action">
+
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-custom-primary">Submit</a>
+                        <button type="button" class="btn-custom-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @endsection
@@ -363,6 +410,168 @@
                 confirmButtonText: '<a href="/login">Login</div>'
             });
         });
+    });
+
+
+    $('body').on('click', '.interest-request', function (e) {
+
+
+        e.preventDefault();
+        var id = $(this).data('memberid');
+        var status = $(this).data('status');
+        var checkLikeLimitCondition = $(this).data('checklikelimitcondition');
+
+        if(checkLikeLimitCondition == 1)
+        {
+            $('#send-like').attr("data-memberid",id);
+            var chatUrl = "{{ url('user/chats') }}";
+            chatUrl = chatUrl+"?id="+id;
+            var a = "window.location.href = '"+chatUrl+"'"
+            $('#chatLink').attr('onclick',a);
+
+            // onclick="window.location.href = 'https://ide.geeksforgeeks.org';"
+        }
+
+        showOverlayLoader();
+        $.ajax({
+            url: "{{ url('/user/send-interest-request') }}",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            type: "post",
+            data: {
+                'member_interested_id': id,
+                'status': status,
+                'checkLikeLimitCondition':checkLikeLimitCondition
+            },
+            cache: false,
+
+            success: function (data) {
+                hideOverlayLoader();
+
+                var data = JSON.parse(data);
+
+                if (data.status == 1) {
+                    // oTable.ajax.reload();
+                    if(data.req_message != ''){
+                        Swal.fire({
+                            icon: 'info',
+                            // title: 'Why wait?',
+
+                            text:  data.req_message ,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            },
+                            showCloseButton: true,
+                            showCancelButton: false,
+                            focusConfirm: false,
+                            confirmButtonText:'OK',
+                            confirmButtonColor: '#21c2d6',
+                        });
+                    }
+                } else if(data.status == 0) {
+
+                    Swal.fire({
+                        icon: 'warning',
+                        title: data.title,
+                        text:   data.message,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        },
+
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:'OK',
+                        confirmButtonColor: '#21c2d6',
+                    });
+                    return false;
+                } else if(data.status == 3) {
+                    // alert('Update Plan')
+                    $('#like_for_approval').modal('show');
+                }
+                else if(data.status == 5) {
+                    $('#liked').modal('show');
+                }
+            }
+        });
+    });
+
+    $('body').on('click', '.report-request', function (e) {
+        var memberId = $(this).attr('data-memberid');
+        $('#reportMemberId').val(memberId);
+        $('#reportModal').modal('show');
+    });
+
+    $('#report-form').on('submit', function (e) {
+        e.preventDefault();
+        var _this = $(this);
+        var formData = new FormData(this);
+        $.ajax({
+            url: "{{ url('/user/report-user') }}",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            type:"POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                hideOverlayLoader();
+                $('#reportModal').modal('hide');
+                var data = JSON.parse(data);
+
+                if (data.status == 1) {
+                    // oTable.ajax.reload();
+                    if(data.req_message != ''){
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Reported User',
+
+                            text:  data.req_message ,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            },
+                            showCloseButton: true,
+                            showCancelButton: false,
+                            focusConfirm: false,
+                            confirmButtonText:
+                                'Okay',
+                            confirmButtonColor: '#21c2d6',
+                        });
+                    }
+                } else if(data.status == 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: data.title,
+
+                        text:   data.message,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        },
+                        showCloseButton: true,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonColor: '#21c2d6',
+
+                    });
+                    return false;
+                }
+            }
+        });
+
     });
 </script>
 @endsection

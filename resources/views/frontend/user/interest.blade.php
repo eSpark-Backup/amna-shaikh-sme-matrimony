@@ -43,7 +43,7 @@
                     <div class="tab-pane fade " id="interest" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="interest-wrapping">
                             <div class="members-list" id="request_send">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="tab-pane fade " id="rejected" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="interest-wrapping">
                             <div class="members-list" id="request_reject">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
 
 @section('js')
     <script>
-        var _assets = "{{ asset('assets/images/') }}" ; 
+        var _assets = "{{ asset('assets/images/') }}" ;
 
         $(document).ready(function(){
             //by default active users
@@ -79,11 +79,11 @@
                     url: "{{url('/user/update-interest-request') }}",
                     headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }, 
+                        },
                     type:"post",
                     data:{'member_id':id, 'status':status},
                     cache:false,
-                    
+
                     success:function(data){
                         hideOverlayLoader();
                         var _act = '';
@@ -92,37 +92,37 @@
                         }else if (status == 3) {
                             showInterest('request_reject',status);
                         }
-                        
+
 
                     }
                 });
             });
         });
         function showInterest(request,status,flag = 0){
-            
+
             showOverlayLoader();
             $.ajax({
                 url: "{{ url('/user/show-interest') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }, 
+                },
                 type:"post",
                 data:{'status':status, 'request_for':flag},
                 cache:false,
-                
+
                 success:function(data){
                     hideOverlayLoader();
                     if (data.status == 1) {
                         var members = data.success_data.data;
-                        
+
                         var _ul = '<ul class="requested">';
                         var country = '';
                         $('.requested').remove();
                         if (members.length > 0) {
                             $.each(members, function($in, mem){
                                 console.log(mem);
-                                
-                                 var url = "{{ url('user/members/') }}";   
+
+                                 var url = "{{ url('user/members/') }}";
                                 _ul += '<li>'+
                                     '<div class="single-member">'+
                                         '<img src="'+mem.profile_image_path+'" class="member-image '+ (mem.picture_privacy == "blur" ? 'blur_img' : '') +'"  alt="image">'+
@@ -135,17 +135,17 @@
                                             if (request == 'requested') {
                                                 _ul += '<div class="prof-actions prof-btn-wraper">'+
                                                     '<a href="#" class="likeMe request-action" data-member="'+mem.id+'" data-status="1"><img src="'+_assets+'/like.png" alt="icon">Accept</a>'+
-                                                    '<a href="#" class="request-action" data-member="'+mem.id+'" data-status="3"><img src="'+_assets+'/cross-ic.png" alt="icon">Reject</a>'+ 
+                                                    '<a href="#" class="request-action" data-member="'+mem.id+'" data-status="3"><img src="'+_assets+'/cross-ic.png" alt="icon">Reject</a>'+
                                                 '</div>';
                                             }else{
                                                 _ul += '<a href="'+url+'/'+mem.id+'">View Full Profile</a>';
                                             }
-                                            
+
 
                                         _ul += '</div>'+
                                     '</div>'+
                                 '</li>';
-                                    
+
                             });
                             _ul += '</ul>';
                             $('#'+request).append(_ul);
@@ -153,7 +153,7 @@
                             $('#'+request).append('<h3 class="requested" >No member found</h3>');
                         }
                     }
-                    
+
                 }
             });
         }

@@ -33,7 +33,7 @@ class MemberResource extends JsonResource
         if (!empty($occupation)) {
             $occupation_name = implode(', ', $occupation);
         }
-        
+
         $userimages = UserImageResource::collection(UserImage::where('member_id',$this->id)->get() );
 
         $plan_details = PlanResource::collection(Plan::where('id',$this->plan_id)->get() );
@@ -60,7 +60,8 @@ class MemberResource extends JsonResource
             "id" => $this->id,
             "plan_id" => $this->plan_id,
             "plan_details" => $plan_details,
-            'hash_id' => \Hashids::encode($this->id),
+//            'hash_id' => \Hashids::encode($this->id),
+            'hash_id' => $this->id,
             "first_name" => $this->first_name,
             "last_name" => $this->last_name,
             "display_user_name" => \Illuminate\Support\Str::title($this->first_name.' '.substr($this->last_name, 0, 1) ),
@@ -74,10 +75,10 @@ class MemberResource extends JsonResource
             "on_behalf_id" => $this->on_behalf_id,
             "gender" => $gender,
             "date_of_birth" => $this->date_of_birth,
-          
+
             "height" => $this->height,
             "kids" => $this->kids,
-            
+
             "about" => $this->about,
             "drinking" => $this->drinking,
             "smoking" => $this->smoking,
@@ -91,11 +92,11 @@ class MemberResource extends JsonResource
             "annual_income" => $this->annual_income,
             "timezone" => $this->timezone,
             "is_approved" => $this->is_approved,
-            "status" => $this->status,    
+            "status" => $this->status,
             "profile_image" => $this->profile_image,
             "profile_image_path" => checkImage(asset('storage/members/profile-image/' . $this->profile_image),'image-svgrepo-com.svg',$this->profile_image,1),
             'user_images' => $userimages,
-            
+
             "interst_status" => $this->member_interested_id,
             "member_interested_id" => $intereststatus,
             "created_at" => \Carbon\Carbon::createFromTimeStamp(strtotime($this->created_at), "UTC")->format('d M, Y'),
@@ -107,7 +108,7 @@ class MemberResource extends JsonResource
 
             "country_id" => $this->country_id,
             "country" => $country_name,
-           
+
             "city_id" => $this->city_id,
             "city" => $city_name,
             "state_id" => $this->state_id,
@@ -172,7 +173,7 @@ class MemberResource extends JsonResource
             "religion_id" => $this->religion_id,
             "immigration_status" => $this->immigration_status,
             "picture_privacy" => $this->picture_privacy
-            
+
         ];
     }
 }
