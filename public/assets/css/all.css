@@ -935,7 +935,7 @@ h2 {
 }
 
 .login-links a:first-child {
-    background: #3b5998 ;
+    background: #3b5998;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 5px;
@@ -948,7 +948,7 @@ h2 {
 }
 
 .login-links a:last-child {
-    background: #DB4437;
+    background: #db4437;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -3381,7 +3381,7 @@ h3.requested {
 }
 
 /** Fixes 14 August ***/
-.field-btn.fullBtn .btn-custom-primary{
+.field-btn.fullBtn .btn-custom-primary {
     width: 100%;
     /*margin: 30px 0 0;*/
 }
@@ -3601,6 +3601,9 @@ section.chat-section {
 }*/
 .swal2-styled.swal2-confirm:focus {
     box-shadow: none !important;
+}
+.swal2-confirm {
+    width: 200px;
 }
 h2#swal2-title {
     font-size: 20px;
@@ -4206,7 +4209,7 @@ div#swal2-html-container {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    background: linear-gradient(#e20f43, #6c2f75);
+    background: #ea147e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4699,6 +4702,15 @@ p.MsoNormal {
     /* margin-right: 40px; */
     display: flex;
     justify-content: center;
+}
+
+.member-infos button {
+    border: 0px;
+    background-color: #d31f1f00;
+    cursor: pointer;
+}
+.member-infos button img {
+    width: 35px;
 }
 /* .input-message input:focus,
 select:focus {
@@ -6544,4 +6556,3 @@ select:focus {
         background-image: url("../images/flags@2x.png");
     }
 }
-

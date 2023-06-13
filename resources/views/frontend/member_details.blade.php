@@ -11,10 +11,11 @@
             <div class="user-profile-left">
                 <?php $photo_url = checkImage(asset('storage/members/profile-image/' . $member->profile_image), '', $member->profile_image, 1);  ?>
                 <div class="user-profile-image"><img src="{{$photo_url }}" class="{{$member->picture_privacy == 'blur' ? 'blur_img' : ''}}" alt="image"></div>
-                <?php //$has_id = \Hashids::encode($member->id); ?>
-                    <?php $has_id = $member->id; ?>
+                <?php //$has_id = \Hashids::encode($member->id); 
+                ?>
+                <?php $has_id = $member->id; ?>
 
-                    <div class="profile-top-head flex">
+                <div class="profile-top-head flex">
                     <div class="profile-left-titles">
                         <h2>{{ getUserName($member->first_name.' '.$member['last_name']) }}. <span>({{(isset( $member->occupation->name))?  $member->occupation->name:'---' }})</span></h2>
 
@@ -30,11 +31,18 @@
                             <span><img src="{{ asset('assets/images/location_white.png') }}" alt="">{{ isset($member->city->name)?$member->city->name:'---' }}, {{ isset($member->country->name)?$member->country->name:'---' }}</span>
                         </div>
                         <!-- <span><img src="{{asset('assets/images/map.svg') }}" alt="icon">{{ $member['country_id'] }}</span> -->
-                        <div class=" img-icon d-flex">
-                            <img src="{{ asset('images/Heart.png')}}" alt="heart">
-                            <img src="{{ asset('images/Close.png')}}" alt="close">
-                            <img src="{{ asset('images/Mark.png')}}" alt=mark>
+                        <!-- <div class=" img-icon d-flex"> -->
+
+                        <div class="d-flex">
+                            <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>
+                            <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>
+                            <button class="report-request mx-1" data-memberid="{{ $member->id }}"><img src="{{ url("images/Mark.png") }}" alt=""></button>
                         </div>
+                        <!-- <img src="{{ asset('images/Heart.png')}}" alt="heart">
+                            <img src="{{ asset('images/Close.png')}}" alt="close">
+                            <img src="{{ asset('images/Mark.png')}}" alt=mark> -->
+
+
                     </div>
 
                     @auth('user')
