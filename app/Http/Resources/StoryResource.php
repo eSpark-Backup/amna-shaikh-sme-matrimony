@@ -25,7 +25,7 @@ class StoryResource extends JsonResource
             "description" => $this->description,
             "partner_name" => $this->partner_name,
             "member" => $member_name,
-            "image_path" => checkImage(asset('storage/stories/' . $this->image),'placeholder.png',$this->image),
+            "image_path" => checkImage(asset('storage/stories/' . $this->image),'image-svgrepo-com.svg',$this->image),
             "member_id" => $this->member_id,
             'hash_id' => \Hashids::encode($this->id),
             "status" => $this->status,

@@ -123,12 +123,9 @@
                                     <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
 
                                 <div class=" img-icon d-flex">
-                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}" data-status="1" data-checklikelimitcondition="1" alt="heart">
-                                    &nbsp; <img class="interest-request" src="{{ asset('images/Close.png')}}" data-memberid="{{ $M['id'] }}" data-status="3" data-checklikelimitcondition="0" alt="close">
-                                    &nbsp; <img class="report-request" src="{{ asset('images/Mark.png')}}" data-memberid="{{ $M['id'] }}" alt=mark>
-                                    <!-- {{-- <button class="interest-request likeMe mx-1" data-memberid="{{ $M['id'] }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>--}}
-                                    {{-- <button class="interest-request mx-1" data-memberid="{{ $M['id'] }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>--}}
-                                    {{-- <button class="report-request mx-1" data-memberid="{{ $M['id'] }}"><img src="{{ url("images/Mark.png") }}" alt=""></button>--}} -->
+                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}"  data-status="1" data-checklikelimitcondition="1" alt="heart">
+                                   <img class="interest-request" src="{{ asset('images/Close.png')}}"  data-memberid="{{ $M['id'] }}"  data-status="3" data-checklikelimitcondition="0" alt="close">
+                                  <img class="report-request" src="{{ asset('images/Mark.png')}}"  data-memberid="{{ $M['id'] }}" alt=mark>
                                 </div>
                             </div>
 

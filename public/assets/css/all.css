@@ -2824,11 +2824,21 @@ div#plan1 .close {
     padding: 0 10px;
     background: none;
     box-shadow: none;
+    width: 25% ;
+}
+@media (max-width: 992px) {
+    .interest-wrapping .members-list ul li {
+        padding: 0 10px;
+        background: none;
+        box-shadow: none;
+        width: 100% ;
+    }
+
 }
 
 .interest-wrapping .members-list ul li .single-member {
     box-shadow: 0px 4px 17px rgb(0 0 0 / 9%);
-    background-image: linear-gradient(to bottom, #efddf8 50%, #fff 50%);
+    /* background-image: linear-gradient(to bottom, #efddf8 50%, #fff 50%); */
     padding-top: 10px;
     border-radius: 10px;
     width: 100%;
@@ -3876,7 +3886,7 @@ div#swal2-html-container {
     height: 100%;
 }
 .member-image {
-    height: 190px !important;
+    height: 200px !important;
     border-radius: 50%;
     border: solid 1px #f1f1f1;
     overflow: hidden;

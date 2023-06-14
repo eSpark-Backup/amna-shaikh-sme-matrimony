@@ -10,7 +10,7 @@
 	{
 	    if (empty($placeholder))
 	    {
-	        $placeholder = 'placeholder.png';
+	        $placeholder = 'image-svgrepo-com.svg';
 	        //$placeholder = 'image-svgrepo-com.svg';
 	    }
 	    if (!empty($path))

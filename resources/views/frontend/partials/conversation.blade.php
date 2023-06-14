@@ -6,8 +6,8 @@
                     <?php
                         $photo_url = '';
                         if (!empty($chat_user)) {
-                            $photo_url = ($chat_user->profile_image) ? asset('storage/members/profile-image/'.$chat_user->profile_image) : asset('images/placeholder.png');
-                            $sender_photo_url = (auth()->user()->profile_image) ? asset('storage/members/profile-image/'.auth()->user()->profile_image) : asset('images/placeholder.png');
+                            $photo_url = ($chat_user->profile_image) ? asset('storage/members/profile-image/'.$chat_user->profile_image) : asset('images/image-svgrepo-com.svg');
+                            $sender_photo_url = (auth()->user()->profile_image) ? asset('storage/members/profile-image/'.auth()->user()->profile_image) : asset('images/image-svgrepo-com.svg');
                         }
                     ?>
                     <div class="chat-image {{$chat_user->picture_privacy == 'blur' ? 'blur_img' : ''}}" style="background-image: url({{ $photo_url}});">
