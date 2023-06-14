@@ -17,6 +17,7 @@
 
                 <div class="profile-top-head flex">
                     <div class="profile-left-titles">
+
                         <h2>{{ getUserName($member->first_name.' '.$member['last_name']) }}. <span>({{(isset( $member->occupation->name))?  $member->occupation->name:'---' }})</span></h2>
 
                         <!-- <span><img src="{{ asset('assets/images/location_white.png') }}" alt="">{{ isset($member->city->name)?$member->city->name:'---' }}, {{ isset($member->country->name)?$member->country->name:'---' }}</span> -->
@@ -33,7 +34,7 @@
                         <!-- <span><img src="{{asset('assets/images/map.svg') }}" alt="icon">{{ $member['country_id'] }}</span> -->
                         <!-- <div class=" img-icon d-flex"> -->
 
-                        <div class="d-flex">
+                        <div class="d-flex col-12 col-md-8 col-lg-9 justify-content-end  col-6 order-sm-2 order-1">
                             <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>
                             <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>
                             <button class="report-request mx-1" data-memberid="{{ $member->id }}"><img src="{{ url("images/Mark.png") }}" alt=""></button>
@@ -46,11 +47,11 @@
                     </div>
 
                     @auth('user')
-                    <a href="" class="btn-custom-primary btn-member-msg w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
+                    <a class="btn-custom-primary btn-member-msg w-100 text-center my-2 cursor" data-member="{{ $member->toJson() }}" data-status="{{Auth::user()->status}}" data-approved="{{ Auth::user()->is_approved }}" data-memberidhash="{{ $member->id }}">Send Message</a>
 
                     @else
                     <!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" onclick="openLoginModel()">View Full Profile</a> -->
-                    <a href="javascript:void(0);" class="custom_modal btn-custom-primary">View Full Profile</a>
+                    <a href="javascript:void(0);" class="custom_modal btn-custom-primary cursor">View Full Profile</a>
                     @endauth
                 </div>
 
@@ -448,16 +449,11 @@
         $('#reportModal').modal('show');
     });
     $('body').on('click', '.btn-member-msg', function() {
-        var aprved = {
-            {
-                auth() - > user() - > is_approved
-            }
-        };
-        var _status = {
-            {
-                auth() - > user() - > status
-            }
-        };
+
+        let aprved = $(this).attr('data-approved');
+        var _status = $(this).attr('data-status')
+
+
         if (aprved != 1 && _status == 4) {
             Swal.fire({
                 icon: 'warning',
@@ -502,7 +498,7 @@
                 confirmButtonColor: '#21c2d6',
             });
         } else if (aprved == 1) {
-            var hasid = $(this).data('memberidhash');
+            var hasid = $(this).attr('data-memberidhash');
             var chat_url = "{{ url('/user/chats?id=') }}";
             chat_url = chat_url + hasid;
             window.location.href = chat_url;

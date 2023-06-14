@@ -35,7 +35,7 @@
 <section class="events-section">
     <div class="container">
         <div class="section-head">
-            <h2>{{ settings()->events_title }}</h2>
+            <h2 class="event_head">{{ settings()->events_title }}</h2>
             {!! settings()->events_description !!}
         </div>
 

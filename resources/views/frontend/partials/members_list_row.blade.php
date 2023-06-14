@@ -87,7 +87,9 @@
                             </tr> -->
                             <!-- <tr>
                                 <td><span>Gender</span></td>
-                                <td><h6>{{ $member->gender }}</h6></td>
+                                <td>
+                                    <h6>{{ $member->gender }}</h6>
+                                </td>
                             </tr> -->
                             <tr>
                                 <td><span>Location</span></td>

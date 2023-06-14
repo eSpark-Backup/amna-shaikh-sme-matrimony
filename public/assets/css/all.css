@@ -381,7 +381,12 @@ a.u_cht.u_cht_active li {
     padding: 60px 0;
     position: relative;
 }
-
+.event_head::after {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+.cursor {
+    cursor: pointer !important;
+}
 .section-head p {
     margin-top: 10px;
     font-size: 20px;
@@ -956,6 +961,9 @@ h2 {
 }
 
 .registerNewUser {
+    color: #ea147e;
+}
+.LoginUser {
     color: #ea147e;
 }
 
@@ -2659,7 +2667,7 @@ span.tooltip-wrap {
     text-align: center;
     background: linear-gradient(90.97deg, #f093fb -41.6%, #f5576c 107.06%);
     border-radius: 10px;
-    padding: 18px;
+    /* padding: 18px; */
     color: #fff;
     font-weight: 700;
 }
@@ -3566,7 +3574,7 @@ section.chat-section {
 .plan-footer a {
     min-height: unset;
     width: 100%;
-    padding: 10px 20px;
+    padding: 3% 20%;
     height: unset !important;
     display: flex;
     align-items: center;
