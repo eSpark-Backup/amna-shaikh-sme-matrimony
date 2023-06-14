@@ -20,7 +20,7 @@ class UserImageResource extends JsonResource
             'hash_id'       => $this->id,
             'is_private'    => $this->is_private,
             'is_profile'    => $this->is_profile,
-            "user_image"    => checkImage(asset('storage/members/profile-image/' . $this->user_image),'placeholder.png',$this->user_image),
+            "user_image"    => checkImage(asset('storage/members/profile-image/' . $this->user_image),'image-svgrepo-com.svg',$this->user_image),
         ];
     }
 }

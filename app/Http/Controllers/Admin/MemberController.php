@@ -680,7 +680,7 @@ class MemberController extends Controller
 
                 }
                 $profile_image = $member->profile_image;
-                $pi =  checkImage(asset('storage/members/profile-image/' . $profile_image),'placeholder.png',$profile_image,1);
+                $pi =  checkImage(asset('storage/members/profile-image/' . $profile_image),'image-svgrepo-com.svg',$profile_image,1);
 
                 return  '<div style="width: 50px; height: auto"><img src="'.$pi.'" class="img-responsive" alt="Avatar"></div>';
             });

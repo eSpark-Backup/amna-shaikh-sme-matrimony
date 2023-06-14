@@ -53,7 +53,7 @@ class AppController extends Controller
 
             $memb[$K]['first_name'] =  Str::title($V->first_name.' '.substr($V->last_name, 0, 1) );
             // $memb[$K]['first_name'] =  Str::title($V->first_name.' '.$V->last_name);
-            $memb[$K]['profile_image'] = checkImage(asset('storage/members/profile-image/' . $V->profile_image),'image-svgrepo-com.png',$V->profile_image,1);
+            $memb[$K]['profile_image'] = checkImage(asset('storage/members/profile-image/' . $V->profile_image),'image-svgrepo-com.svg',$V->profile_image,1);
             if (isset($V->country_id) && !empty($V->country_id)) {
                 $memb[$K]['country_id'] = $V->country->name;
             }

@@ -36,7 +36,7 @@ class TransactionResource extends JsonResource
             "event_audiences_id" => $this->event_audiences_d,
             "stripe_status" => $this->stripe_status,
             "member" => $member_name,
-            "image_path" => checkImage(asset('storage/stories/' . $this->image),'placeholder.png',$this->image),
+            "image_path" => checkImage(asset('storage/stories/' . $this->image),'image-svgrepo-com.svg',$this->image),
             "details" =>$type,
             'hash_id' => \Hashids::encode($this->id),
             "status" => $this->status,

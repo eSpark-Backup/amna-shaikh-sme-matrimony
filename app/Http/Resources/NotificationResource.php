@@ -29,7 +29,7 @@ class NotificationResource extends JsonResource
             "image" => $this->image,
             "priority" => $this->priority,
             "is_readed" => $this->is_readed,
-            "image" => checkImage(asset('storage/members/profile-image/' . $this->image),'placeholder.png',$this->image),
+            "image" => checkImage(asset('storage/members/profile-image/' . $this->image),'image-svgrepo-com.svg',$this->image),
             "created_at" => \Carbon\Carbon::createFromTimeStamp(strtotime($this->created_at), "UTC")->format('d M, Y'),
             'user' => $member
 

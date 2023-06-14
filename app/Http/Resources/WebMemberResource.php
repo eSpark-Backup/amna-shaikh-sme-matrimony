@@ -87,7 +87,7 @@ class WebMemberResource extends JsonResource
             "timezone" => $this->timezone,
            
             "profile_image" => $this->profile_image,
-            "profile_image_path" => checkImage(asset('storage/members/profile-image/' . $this->profile_image),'placeholder.png',$this->profile_image),
+            "profile_image_path" => checkImage(asset('storage/members/profile-image/' . $this->profile_image),'image-svgrepo-com.svg',$this->profile_image),
             'user_images' => $userimages,
             "created_at" => \Carbon\Carbon::createFromTimeStamp(strtotime($this->created_at), "UTC")->format('d M, Y'),
             "ip_address" => $this->ip_address,

@@ -1141,7 +1141,7 @@ class UserController extends Controller
 
                 }
                 $profile_image = $member->profile_image;
-                return checkImage(asset('storage/members/profile-image/' . $profile_image),'placeholder.png',$profile_image,1);
+                return checkImage(asset('storage/members/profile-image/' . $profile_image),'image-svgrepo-com.svg',$profile_image,1);
             });
 
             $datatable = $datatable->addColumn('picture_privacy', function($row)

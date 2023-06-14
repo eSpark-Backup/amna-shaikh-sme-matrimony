@@ -12,7 +12,7 @@
         <div class="container">
         	<div class="row">
         		<?php 
-        			$photo_url = ($user->profile_image) ? asset('storage/members/profile-image/'.$user->profile_image) : asset('images/placeholder.png'); 
+        			$photo_url = ($user->profile_image) ? asset('storage/members/profile-image/'.$user->profile_image) : asset('images/image-svgrepo-com.svg'); 
         		?>
         		<div class="col-lg-4 user-profile-left">
     				<div class="card card-profile border-0">
