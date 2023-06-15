@@ -123,9 +123,9 @@
                                     <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
 
                                 <div class=" img-icon d-flex">
-                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}"  data-status="1" data-checklikelimitcondition="1" alt="heart">
-                                   <img class="interest-request" src="{{ asset('images/Close.png')}}"  data-memberid="{{ $M['id'] }}"  data-status="3" data-checklikelimitcondition="0" alt="close">
-                                  <img class="report-request" src="{{ asset('images/Mark.png')}}"  data-memberid="{{ $M['id'] }}" alt=mark>
+                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}" data-status="1" data-checklikelimitcondition="1" alt="heart">
+                                    <img class="interest-request" src="{{ asset('images/Close.png')}}" data-memberid="{{ $M['id'] }}" data-status="3" data-checklikelimitcondition="0" alt="close">
+                                    <img class="report-request" src="{{ asset('images/Mark.png')}}" data-memberid="{{ $M['id'] }}" alt=mark>
                                 </div>
                             </div>
 
@@ -212,6 +212,9 @@
                         <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
                         <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
                     </div>
+                    @if($V->type == 1)
+                    <span class="tag">Upcoming</span>
+                    @endif
                 </div>
             </div>
 
@@ -260,27 +263,27 @@
         <!-- End Past Events -->
     </div>
 
-    <div class="owl-carousel events-section">
-        <!-- <div class="owl-carousel members-slider"> -->
-        @foreach($events as $K => $V)
-        <div class="single-event-home">
-            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
-            <div class="event_details resize">
-                <h4>{{ $V->title }}</h4>
-                <p>{!! truncatedStr($V->short_description) !!} </p>
-                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
-                <div class="event_info">
-                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
-                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+    <!-- <div class="owl-carousel events-section">
+        <div class="owl-carousel members-slider">
+            @foreach($events as $K => $V)
+            <div class="single-event-home">
+                <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
+                <div class="event_details resize">
+                    <h4>{{ $V->title }}</h4>
+                    <p>{!! truncatedStr($V->short_description) !!} </p>
+                    <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
+                    <div class="event_info">
+                        <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
+                        <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+                    </div>
                 </div>
+                @if($V->type == 1)
+                <span class="tag">Upcoming</span>
+                @endif
             </div>
-            @if($V->type == 1)
-            <span class="tag">Upcoming</span>
-            @endif
+            @endforeach
         </div>
-        @endforeach
-        <!-- </div> -->
-    </div>
+    </div> -->
 
     @if(count($events))
     <div class="events-link">
