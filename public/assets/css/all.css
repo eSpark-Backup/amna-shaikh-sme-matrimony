@@ -2824,16 +2824,7 @@ div#plan1 .close {
     padding: 0 10px;
     background: none;
     box-shadow: none;
-    width: 25% ;
-}
-@media (max-width: 992px) {
-    .interest-wrapping .members-list ul li {
-        padding: 0 10px;
-        background: none;
-        box-shadow: none;
-        width: 100% ;
-    }
-
+    width: 340px;
 }
 
 .interest-wrapping .members-list ul li .single-member {
