@@ -60,7 +60,7 @@
                                 <textarea name="message" class="form-control required" id="message" placeholder="Message" rows="8"></textarea>
                             </div>
                             <div class="field-btn">
-                                <button type="submit">Submit</button>
+                                <button class="btn btn-custom-primary" type="submit ">Submit</button>
                             </div>
                         </form>
                     </div>

@@ -192,53 +192,68 @@
                                 console.log(mem);
 
                                  var url = "{{ url('user/members/') }}";
-                                _ul += '<li>'+
-                                    '<div class="single-member">'+
-                                        '<img src="'+mem.profile_image_path+'" class="member-image '+ (mem.picture_privacy == "blur" ? 'blur_img' : '') +'"  alt="image">'+
-                                        '<div class="member-info">'+
-                                            '<h5>'+mem.display_user_name+'</h5>'+
-                                            '<div class="member-infos">'+
-                                               '<span><img src="'+_assets+'/avatar.svg" alt="icon">'+mem.occupation+'</span>'+
-                                                '<span><img src="'+_assets+'/map.svg" alt="icon">('+mem.country+','+mem.city+')</span>';
-
-                                if(request == "request_accept")
-                                {
-                                    _ul += '<button class="interest-request likeMe mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>'+
-                                        '<button class="interest-request mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>'+
-                                        '<button class="report-request mx-1" style="max-width:20px;border: 1px; cursor:pointer" data-memberid="'+mem.id+'"><img src="{{ url("images/Mark.png") }}" alt=""></button>';
-                                }
-                                else if(request == "requested")
-                                {
-                                    _ul += '<button class="interest-request likeMe mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>'+
-                                        '<button class="interest-request mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>';
-                                }
-                                else if(request == "request_send")
-                                {
-                                    _ul += '<button class="interest-request mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>'+
-                                        '<button class="report-request mx-1" style="max-width:20px;border: 1px; cursor:pointer" data-memberid="'+mem.id+'"><img src="{{ url("images/Mark.png") }}" alt=""></button>';
-                                }
-                                else if(request == "request_reject")
-                                {
-                                    _ul += '<button class="interest-request likeMe mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>'+
-                                        '<button class="report-request mx-1" style="max-width:20px;border: 1px; cursor:pointer" data-memberid="'+mem.id+'"><img src="{{ url("images/Mark.png") }}" alt=""></button>';
-                                }
+                                 _ul += '<li >'+
+                                                '<div class="single-member ">'+
+                                                    '<div class="member-image">'+
+                                                        '<img src="'+mem.profile_image_path+'" class="member-image '+ (mem.picture_privacy == "blur" ? 'blur_img' : '') +'"  alt="image">'+
+                                                 '</div>'+
+                                                    '<div class="member-info">'+
+                                                        '<div class="member-heading-occupation d-flex">'+
+                                                         '<h5>'+mem.first_name+'</h5>'+
+                                                    '<span>'+mem.occupation+'</span>'+
+                                                 '</div>'+
+                                                        '<div class="member-infos d-flex">'+
+                                                            '<span><img src="'+_assets+'/map.svg" alt="icon">('+mem.country+')</span>'+
+                                                        '<div class=" img-icon d-flex">';
 
 
-                                _ul += '</div>';
 
-                                            if (request == 'requested') {
-                                                _ul += '<div class="prof-actions prof-btn-wraper">'+
-                                                    '<a href="#" class="likeMe request-action" data-member="'+mem.id+'" data-status="1" data-checklikelimitcondition="0"><img src="'+_assets+'/like.png" alt="icon">Accept</a>'+
-                                                    '<a href="#" class="request-action" data-member="'+mem.id+'" data-status="3"><img src="'+_assets+'/cross-ic.png" alt="icon">Reject</a>'+
-                                                '</div>';
-                                            }else{
-                                                _ul += '<a href="'+url+'/'+mem.id+'">View Full Profile</a>';
-                                            }
+                                                            // '<img class="report-request" src="'+_assets+'/Heart.png" data-memberid="mem.id+" alt=mark>'+
+                                                            // '<img class="report-request" src="'+_assets+'/Close.png" data-memberid="mem.id+" alt=mark>'+
+                                                            // '<img class="report-request" src="'+_assets+'/Mark.png" data-memberid="mem.id+" alt=mark>'+
 
 
-                                        _ul += '</div>'+
-                                    '</div>'+
-                                '</li>';
+                                                           if(request == "request_accept")
+                                                            {
+                                                                _ul += '<img class="interest-request likeMe" src="'+_assets+'/Heart.png" data-memberid="'+mem.id+'" data-memberid="'+mem.id+'" data-status="1" alt=mark>'+
+                                                                '<img class="interest-request" src="'+_assets+'/Close.png" data-memberid="'+mem.id+'"  data-status="3" alt=mark>'+
+                                                                '<img class="report-request" src="'+_assets+'/Mark.png" data-memberid="'+mem.id+'" alt=mark>';    
+                                                            }
+                                                            else if(request == "requested")
+                                                            {
+                                                                _ul += '<img class="interest-request likeMe" src="'+_assets+'/Heart.png" data-memberid="'+mem.id+'" data-memberid="'+mem.id+'" data-status="1" alt=mark>'+
+                                                                '<img class="interest-request" src="'+_assets+'/Close.png" data-memberid="'+mem.id+'"  data-status="3" alt=mark>';
+                                                            }
+                                                            else if(request == "request_send")
+                                                            {
+                                                                _ul += '<img class="interest-request" src="'+_assets+'/Close.png" data-memberid="'+mem.id+'"  data-status="3" alt=mark>'+
+                                                                '<img class="report-request" src="'+_assets+'/Mark.png" data-memberid="'+mem.id+'" alt=mark>';
+                                                            }
+                                                            else if(request == "request_reject")
+                                                            {
+                                                                _ul += '<img class="interest-request likeMe" src="'+_assets+'/Heart.png" data-memberid="'+mem.id+'" data-memberid="'+mem.id+'" data-status="1" alt=mark>'+
+                                                                '<img class="report-request" src="'+_assets+'/Mark.png" data-memberid="'+mem.id+'" alt=mark>';
+                                                            }
+
+
+
+
+
+                                                        '</div>'+
+                                                    '</div>';
+                                                        if (request == 'requested') {
+                                                            _ul += '<div class="prof-actions prof-btn-wraper">'+
+                                                                '<a href="#" class="likeMe request-action" data-member="'+mem.id+'" data-status="1"><img src="'+_assets+'/like.png" alt="icon">Accept</a>'+
+                                                                '<a href="#" class="request-action" data-member="'+mem.id+'" data-status="3"><img src="'+_assets+'/cross-ic.png" alt="icon">Reject</a>'+
+                                                            '</div>';
+                                                        }
+                                                        else{
+                                                            // _ul += '<a class="btn-custom-primary w-100" href="'+url+'/'+mem.id+'">View Full Profile</a>';
+                                                        }
+            
+                                                    _ul += '</div>'+
+                                                '</div><a class="btn-custom-primary w-100" href="'+url+'/'+mem.id+'">View Full Profile</a>'+
+                                         '</li>';
 
                             });
                             _ul += '</ul>';

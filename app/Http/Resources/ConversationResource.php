@@ -22,7 +22,7 @@ class ConversationResource extends JsonResource
             'chat_id' => $this->chat_user_id,
             'message' => $this->message,
             'msg_file' => $this->msg_file,
-            'msg_file_path' => checkImage(asset('storage/members/chat/'. $this->msg_file),'placeholder.png',$this->msg_file),
+            'msg_file_path' => checkImage(asset('storage/members/chat/'. $this->msg_file),'image-svgrepo-com.svg',$this->msg_file),
             'ip_address' => $this->ip_address,
             'instant_count' => $this->instant_count,
             'un_red' => $this->un_red,

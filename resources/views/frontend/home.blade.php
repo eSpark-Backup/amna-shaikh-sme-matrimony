@@ -123,12 +123,9 @@
                                     <img src="{{asset('assets/images/map.svg') }}" alt="icon">({{ $M['country_id'] }})</span>
 
                                 <div class=" img-icon d-flex">
-                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}"  data-status="1" data-checklikelimitcondition="1" alt="heart">
-                                    &nbsp; <img class="interest-request" src="{{ asset('images/Close.png')}}"  data-memberid="{{ $M['id'] }}"  data-status="3" data-checklikelimitcondition="0" alt="close">
-                                    &nbsp; <img class="report-request" src="{{ asset('images/Mark.png')}}"  data-memberid="{{ $M['id'] }}" alt=mark>
-{{--                                    <button class="interest-request likeMe mx-1" data-memberid="{{ $M['id'] }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>--}}
-{{--                                    <button class="interest-request mx-1" data-memberid="{{ $M['id'] }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>--}}
-{{--                                    <button class="report-request mx-1" data-memberid="{{ $M['id'] }}"><img src="{{ url("images/Mark.png") }}" alt=""></button>--}}
+                                    <img class="interest-request" src="{{ asset('images/Heart.png')}}" data-memberid="{{ $M['id'] }}" data-status="1" data-checklikelimitcondition="1" alt="heart">
+                                    <img class="interest-request" src="{{ asset('images/Close.png')}}" data-memberid="{{ $M['id'] }}" data-status="3" data-checklikelimitcondition="0" alt="close">
+                                    <img class="report-request" src="{{ asset('images/Mark.png')}}" data-memberid="{{ $M['id'] }}" alt=mark>
                                 </div>
                             </div>
 
@@ -197,7 +194,7 @@
 <section class="events-section">
     <div class="container">
         <div class="section-head">
-            <h2>{{ settings()->events_title }}</h2>
+            <h2 class="event_head">{{ settings()->events_title }}</h2>
             {!! settings()->events_description !!}
         </div>
 
@@ -215,6 +212,9 @@
                         <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
                         <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
                     </div>
+                    @if($V->type == 1)
+                    <span class="tag">Upcoming</span>
+                    @endif
                 </div>
             </div>
 
@@ -263,27 +263,27 @@
         <!-- End Past Events -->
     </div>
 
-    <div class="owl-carousel events-section">
-        <!-- <div class="owl-carousel members-slider"> -->
-        @foreach($events as $K => $V)
-        <div class="single-event-home">
-            <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
-            <div class="event_details resize">
-                <h4>{{ $V->title }}</h4>
-                <p>{!! truncatedStr($V->short_description) !!} </p>
-                <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
-                <div class="event_info">
-                    <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
-                    <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+    <!-- <div class="owl-carousel events-section">
+        <div class="owl-carousel members-slider">
+            @foreach($events as $K => $V)
+            <div class="single-event-home">
+                <div class="event_image" style="background-image: url('{{ getImage($V->gallary,'events') }}');"></div>
+                <div class="event_details resize">
+                    <h4>{{ $V->title }}</h4>
+                    <p>{!! truncatedStr($V->short_description) !!} </p>
+                    <a href="{{ url('events/'.$V->id) }}"><img src="assets/images/link_icon.svg" alt="icon">View detail</a>
+                    <div class="event_info">
+                        <span><img src="assets/images/calender.svg" alt="icon">{{ dateCustomFormat($V->event_date) }}</span>
+                        <span><img src="assets/images/map.svg" alt="icon">({{ $V->location }}, {{ $V->country}} )</span>
+                    </div>
                 </div>
+                @if($V->type == 1)
+                <span class="tag">Upcoming</span>
+                @endif
             </div>
-            @if($V->type == 1)
-            <span class="tag">Upcoming</span>
-            @endif
+            @endforeach
         </div>
-        @endforeach
-        <!-- </div> -->
-    </div>
+    </div> -->
 
     @if(count($events))
     <div class="events-link">
@@ -399,7 +399,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                {{--                <h4 class="modal-title">Modal Heading</h4>--}}
+                {{-- <h4 class="modal-title">Modal Heading</h4>--}}
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -431,9 +431,9 @@
                     <h2>Upgrade Now</h2>
                     <span class="msg_ic_cls">
                         <svg xmlns="http://www.w3.org/2000/svg" width="118.983" height="124.121" viewBox="0 0 118.983 124.121">
-                          <g id="Layer_x0020_1" transform="translate(-1044.458 -308.009)">
-                            <path id="Path_21360" data-name="Path 21360" d="M52.194,105.489v24.794a3.08,3.08,0,0,0,5.3,2.129l29.224-26.924h24.64a13.986,13.986,0,0,0,13.954-13.954V37.829a13.986,13.986,0,0,0-13.954-13.953H41.334A13.985,13.985,0,0,0,27.38,37.829V91.535a13.986,13.986,0,0,0,13.954,13.954h10.86Zm49.812-48.117a5.268,5.268,0,1,0,5.268,5.268,5.268,5.268,0,0,0-5.268-5.268Zm-51.325,0A5.268,5.268,0,1,0,55.95,62.64a5.268,5.268,0,0,0-5.268-5.268Zm17.108,0a5.268,5.268,0,1,0,5.268,5.268,5.268,5.268,0,0,0-5.268-5.268Zm17.108,0a5.268,5.268,0,1,0,5.268,5.268A5.268,5.268,0,0,0,84.9,57.372Zm46.511,28.366c-4.046,0-4.046,6.155,0,6.155a13.986,13.986,0,0,0,13.954-13.954V24.233A13.986,13.986,0,0,0,131.409,10.28H61.388c-4.046,0-4.046,6.153,0,6.153h70.021a7.831,7.831,0,0,1,7.8,7.8V77.938a7.831,7.831,0,0,1-7.8,7.8ZM58.347,123.274V102.411a3.077,3.077,0,0,0-3.077-3.077H41.334a7.832,7.832,0,0,1-7.8-7.8V37.829a7.832,7.832,0,0,1,7.8-7.8h70.02a7.831,7.831,0,0,1,7.8,7.8V91.535a7.831,7.831,0,0,1-7.8,7.8l-25.831.007a3.058,3.058,0,0,0-2.08.81Z" transform="translate(1017.579 298.23)" fill="#d92483" stroke="#d92483" stroke-width="1"/>
-                          </g>
+                            <g id="Layer_x0020_1" transform="translate(-1044.458 -308.009)">
+                                <path id="Path_21360" data-name="Path 21360" d="M52.194,105.489v24.794a3.08,3.08,0,0,0,5.3,2.129l29.224-26.924h24.64a13.986,13.986,0,0,0,13.954-13.954V37.829a13.986,13.986,0,0,0-13.954-13.953H41.334A13.985,13.985,0,0,0,27.38,37.829V91.535a13.986,13.986,0,0,0,13.954,13.954h10.86Zm49.812-48.117a5.268,5.268,0,1,0,5.268,5.268,5.268,5.268,0,0,0-5.268-5.268Zm-51.325,0A5.268,5.268,0,1,0,55.95,62.64a5.268,5.268,0,0,0-5.268-5.268Zm17.108,0a5.268,5.268,0,1,0,5.268,5.268,5.268,5.268,0,0,0-5.268-5.268Zm17.108,0a5.268,5.268,0,1,0,5.268,5.268A5.268,5.268,0,0,0,84.9,57.372Zm46.511,28.366c-4.046,0-4.046,6.155,0,6.155a13.986,13.986,0,0,0,13.954-13.954V24.233A13.986,13.986,0,0,0,131.409,10.28H61.388c-4.046,0-4.046,6.153,0,6.153h70.021a7.831,7.831,0,0,1,7.8,7.8V77.938a7.831,7.831,0,0,1-7.8,7.8ZM58.347,123.274V102.411a3.077,3.077,0,0,0-3.077-3.077H41.334a7.832,7.832,0,0,1-7.8-7.8V37.829a7.832,7.832,0,0,1,7.8-7.8h70.02a7.831,7.831,0,0,1,7.8,7.8V91.535a7.831,7.831,0,0,1-7.8,7.8l-25.831.007a3.058,3.058,0,0,0-2.08.81Z" transform="translate(1017.579 298.23)" fill="#d92483" stroke="#d92483" stroke-width="1" />
+                            </g>
                         </svg>
                     </span>
                     <h3>Choose your Package</h3>
@@ -442,25 +442,25 @@
                         <div class="plan_inner">
 
                             @foreach($plans as $K => $V)
-                                <div class="plan_col {{ $K == 1 ? 'most_popular_main' : '' }}">
+                            <div class="plan_col {{ $K == 1 ? 'most_popular_main' : '' }}">
 
-                                    @if ($K == 1)
-                                        <div class="most_popular">
-                                            <span class="btn_popular">Most Popular</span>
-                                        </div>
-                                    @endif
-                                    <div class="plan_cont">
-                                        <div class="plan_inner_cont">
-                                            <h2>{{ $V->period }}</h2>
-                                            <h5>Days</h5>
-
-                                            @if($K == 1)
-                                                <p>Best Seller</p>
-                                            @endif
-                                        </div>
-                                        <h3>${{ $V->price }}</h3>
-                                    </div>
+                                @if ($K == 1)
+                                <div class="most_popular">
+                                    <span class="btn_popular">Most Popular</span>
                                 </div>
+                                @endif
+                                <div class="plan_cont">
+                                    <div class="plan_inner_cont">
+                                        <h2>{{ $V->period }}</h2>
+                                        <h5>Days</h5>
+
+                                        @if($K == 1)
+                                        <p>Best Seller</p>
+                                        @endif
+                                    </div>
+                                    <h3>${{ $V->price }}</h3>
+                                </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -494,7 +494,7 @@
     });
 
 
-    $('body').on('click', '.interest-request', function (e) {
+    $('body').on('click', '.interest-request', function(e) {
 
 
         e.preventDefault();
@@ -502,13 +502,12 @@
         var status = $(this).data('status');
         var checkLikeLimitCondition = $(this).data('checklikelimitcondition');
 
-        if(checkLikeLimitCondition == 1)
-        {
-            $('#send-like').attr("data-memberid",id);
+        if (checkLikeLimitCondition == 1) {
+            $('#send-like').attr("data-memberid", id);
             var chatUrl = "{{ url('user/chats') }}";
-            chatUrl = chatUrl+"?id="+id;
-            var a = "window.location.href = '"+chatUrl+"'"
-            $('#chatLink').attr('onclick',a);
+            chatUrl = chatUrl + "?id=" + id;
+            var a = "window.location.href = '" + chatUrl + "'"
+            $('#chatLink').attr('onclick', a);
 
             // onclick="window.location.href = 'https://ide.geeksforgeeks.org';"
         }
@@ -523,23 +522,23 @@
             data: {
                 'member_interested_id': id,
                 'status': status,
-                'checkLikeLimitCondition':checkLikeLimitCondition
+                'checkLikeLimitCondition': checkLikeLimitCondition
             },
             cache: false,
 
-            success: function (data) {
+            success: function(data) {
                 hideOverlayLoader();
 
                 var data = JSON.parse(data);
 
                 if (data.status == 1) {
                     // oTable.ajax.reload();
-                    if(data.req_message != ''){
+                    if (data.req_message != '') {
                         Swal.fire({
                             icon: 'info',
                             // title: 'Why wait?',
 
-                            text:  data.req_message ,
+                            text: data.req_message,
                             showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
                             },
@@ -549,16 +548,16 @@
                             showCloseButton: true,
                             showCancelButton: false,
                             focusConfirm: false,
-                            confirmButtonText:'OK',
+                            confirmButtonText: 'OK',
                             confirmButtonColor: '#21c2d6',
                         });
                     }
-                } else if(data.status == 0) {
+                } else if (data.status == 0) {
 
                     Swal.fire({
                         icon: 'warning',
                         title: data.title,
-                        text:   data.message,
+                        text: data.message,
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                         },
@@ -568,28 +567,27 @@
 
                         showCancelButton: false,
                         focusConfirm: false,
-                        confirmButtonText:'OK',
+                        confirmButtonText: 'OK',
                         confirmButtonColor: '#21c2d6',
                     });
                     return false;
-                } else if(data.status == 3) {
+                } else if (data.status == 3) {
                     // alert('Update Plan')
                     $('#like_for_approval').modal('show');
-                }
-                else if(data.status == 5) {
+                } else if (data.status == 5) {
                     $('#liked').modal('show');
                 }
             }
         });
     });
 
-    $('body').on('click', '.report-request', function (e) {
+    $('body').on('click', '.report-request', function(e) {
         var memberId = $(this).attr('data-memberid');
         $('#reportMemberId').val(memberId);
         $('#reportModal').modal('show');
     });
 
-    $('#report-form').on('submit', function (e) {
+    $('#report-form').on('submit', function(e) {
         e.preventDefault();
         var _this = $(this);
         var formData = new FormData(this);
@@ -598,24 +596,24 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            type:"POST",
+            type: "POST",
             data: formData,
             processData: false,
             contentType: false,
             cache: false,
-            success: function (data) {
+            success: function(data) {
                 hideOverlayLoader();
                 $('#reportModal').modal('hide');
                 var data = JSON.parse(data);
 
                 if (data.status == 1) {
                     // oTable.ajax.reload();
-                    if(data.req_message != ''){
+                    if (data.req_message != '') {
                         Swal.fire({
                             icon: 'warning',
                             title: 'Reported User',
 
-                            text:  data.req_message ,
+                            text: data.req_message,
                             showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
                             },
@@ -625,17 +623,16 @@
                             showCloseButton: true,
                             showCancelButton: false,
                             focusConfirm: false,
-                            confirmButtonText:
-                                'Okay',
+                            confirmButtonText: 'Okay',
                             confirmButtonColor: '#21c2d6',
                         });
                     }
-                } else if(data.status == 0) {
+                } else if (data.status == 0) {
                     Swal.fire({
                         icon: 'warning',
                         title: data.title,
 
-                        text:   data.message,
+                        text: data.message,
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                         },

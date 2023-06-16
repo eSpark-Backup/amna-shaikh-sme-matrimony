@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title> Login - {{ env('APP_NAME') }} </title>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/all.css">
 </head>
+
 <body>
     @include('frontend.sections.header')
     <!-- Accounts -->
@@ -24,11 +26,11 @@
                         <h3>Login</h3>
                         <form action="{{ route('user.auth.loginUser') }}" method="POST" id="login-form">
                             {{ csrf_field() }}
-                            
+
                             @include('../../../admin.message')
                             <div class="field">
                                 <label for="email">Enter Email</label>
-                                <input type="email" class="required" placeholder="" name="email" id="email" value="{{old('email', '')}}" >
+                                <input type="email" class="required" placeholder="" name="email" id="email" value="{{old('email', '')}}">
                             </div>
                             <div class="field">
                                 <label for="password">Password</label>
@@ -56,7 +58,7 @@
                         </div>
                         <div class="newUser">
                             <span>New Member?
-                            <a href="{{ route('register') }}" class="registerNewUser">Register Now</a>
+                                <a href="{{ route('register') }}" class="registerNewUser"> Register Now</a>
                             </span>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
     </section>
     <!--Footer-->
     @include('frontend.sections.footer')
-    
+
     <!-- Scripts -->
     <script src="assets/js/jquery-3.1.1.js"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
@@ -74,13 +76,13 @@
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="{{ asset('admin-assets/assets/vendor/jquery.validate.min.js') }}"></script>
     <script src="assets/js/custom.js"></script>
-    
+
     <script>
-        $(function(){
+        $(function() {
             $('#login-form').validate();
 
             const togglePassword = document.querySelector('#togglePassword');
-            togglePassword.addEventListener('click', function (e) {
+            togglePassword.addEventListener('click', function(e) {
                 // toggle the type attribute
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
@@ -89,6 +91,7 @@
             });
         });
     </script>
-    
+
 </body>
+
 </html>

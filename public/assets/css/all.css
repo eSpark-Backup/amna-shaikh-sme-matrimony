@@ -381,6 +381,15 @@ a.u_cht.u_cht_active li {
     padding: 60px 0;
     position: relative;
 }
+.event_head::after {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+.cursor {
+    cursor: pointer !important;
+}
+.events-section .section-head h2{
+  text-align: center;
+}
 
 .section-head p {
     margin-top: 10px;
@@ -935,7 +944,7 @@ h2 {
 }
 
 .login-links a:first-child {
-    background: #3b5998 ;
+    background: #3b5998;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 5px;
@@ -948,7 +957,7 @@ h2 {
 }
 
 .login-links a:last-child {
-    background: #DB4437;
+    background: #db4437;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -956,6 +965,9 @@ h2 {
 }
 
 .registerNewUser {
+    color: #ea147e;
+}
+.LoginUser {
     color: #ea147e;
 }
 
@@ -996,7 +1008,7 @@ h2 {
 
 .navbar-dropdown-account-wrapper:focus,
 .navbar-dropdown-account-wrapper:hover {
-    background-color: rgba(55, 125, 255, 0.1);
+    background-color: rgba(2, 39, 107, 0.1);
 }
 
 .avatar-img {
@@ -1008,9 +1020,8 @@ h2 {
 }
 
 .dropdown-menu.show {
-    /* top: 100% !important; */
     right: 0;
-    left: auto !important;
+    left: auto !important;   
 }
 
 .site-menu .dropdown-menu {
@@ -2659,7 +2670,7 @@ span.tooltip-wrap {
     text-align: center;
     background: linear-gradient(90.97deg, #f093fb -41.6%, #f5576c 107.06%);
     border-radius: 10px;
-    padding: 18px;
+    /* padding: 18px; */
     color: #fff;
     font-weight: 700;
 }
@@ -2816,11 +2827,12 @@ div#plan1 .close {
     padding: 0 10px;
     background: none;
     box-shadow: none;
+    width: 340px;
 }
 
 .interest-wrapping .members-list ul li .single-member {
     box-shadow: 0px 4px 17px rgb(0 0 0 / 9%);
-    background-image: linear-gradient(to bottom, #efddf8 50%, #fff 50%);
+    /* background-image: linear-gradient(to bottom, #efddf8 50%, #fff 50%); */
     padding-top: 10px;
     border-radius: 10px;
     width: 100%;
@@ -3381,7 +3393,7 @@ h3.requested {
 }
 
 /** Fixes 14 August ***/
-.field-btn.fullBtn .btn-custom-primary{
+.field-btn.fullBtn .btn-custom-primary {
     width: 100%;
     /*margin: 30px 0 0;*/
 }
@@ -3566,7 +3578,7 @@ section.chat-section {
 .plan-footer a {
     min-height: unset;
     width: 100%;
-    padding: 10px 20px;
+    padding: 3% 20%;
     height: unset !important;
     display: flex;
     align-items: center;
@@ -3601,6 +3613,9 @@ section.chat-section {
 }*/
 .swal2-styled.swal2-confirm:focus {
     box-shadow: none !important;
+}
+.swal2-confirm {
+    width: 200px;
 }
 h2#swal2-title {
     font-size: 20px;
@@ -3865,7 +3880,7 @@ div#swal2-html-container {
     height: 100%;
 }
 .member-image {
-    height: 190px !important;
+    height: 200px !important;
     border-radius: 50%;
     border: solid 1px #f1f1f1;
     overflow: hidden;
@@ -4127,7 +4142,7 @@ div#swal2-html-container {
 .tab-content > .active .profiles-section {
     margin: 35px 0;
 }
-.user-profile-left .profile-main-body ul. li {
+.user-profile-left .profile-main-body ul li {
     padding: 0;
     margin: 0;
 }
@@ -4206,7 +4221,7 @@ div#swal2-html-container {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    background: linear-gradient(#e20f43, #6c2f75);
+    background: #ea147e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4700,6 +4715,15 @@ p.MsoNormal {
     display: flex;
     justify-content: center;
 }
+
+.member-infos button {
+    border: 0px;
+    background-color: #d31f1f00;
+    cursor: pointer;
+}
+.member-infos button img {
+    width: 35px;
+}
 /* .input-message input:focus,
 select:focus {
     outline: none;
@@ -5022,6 +5046,13 @@ select:focus {
 }
 
 @media screen and (max-width: 991px) {
+    .dropdown-menu.show {
+        right: auto !important;
+        
+    }
+    .log-out-list{
+        display: none !important ;
+    }
     .site-menu .log a {
         font-size: 15px;
         display: flex;
@@ -6544,4 +6575,3 @@ select:focus {
         background-image: url("../images/flags@2x.png");
     }
 }
-

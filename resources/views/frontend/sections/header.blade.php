@@ -30,8 +30,9 @@
 
                     <div class="site-menu2 d-flex align-items-center ">
                         <li>
-                            <div class="dropdown">
-                                <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-toggle="dropdown" aria-expanded="true" data-auto-close="outside" data-dropdown-animation="">
+                            <div class="dropdown " >
+                                <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-toggle="dropdown" aria-expanded="true" data-auto-close="outside" data-dropdown-animation="" 
+                                >
 
                                     <div class="avatar avatar-sm avatar-circle">
                                         <img class="avatar-img" src="{{ checkImage(asset('storage/members/profile-image/' . Session::get('user')->profile_image),'image-svgrepo-com.svg',Session::get('user')->profile_image,1) }}" alt="Image Description">
@@ -40,7 +41,8 @@
 
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="accountNavbarDropdown" style="width: 16rem; opacity: 1; transform: translateY(10px) translateY(-10px); transition: transform 300ms ease 0s, opacity 300ms ease 0s;">
+                                <div class="dropdown-menu" aria-labelledby="accountNavbarDropdown" style="width: 16rem; opacity: 1; transform: translateY(10px) translateY(-10px); transition: transform 300ms ease 0s, opacity 300ms ease 0s;" 
+                                >
                                     <div class="dropdown-item-text">
                                         <div class="d-flex align-items-center">
 
@@ -61,9 +63,9 @@
                                     <a class="dropdown-item" href="{{ route('user.transactions') }}">Payment History</a>
 
 
-                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider log-out-list"></div>
 
-                                    <!-- <a class="dropdown-item" href="{{ route('user.auth.logout') }}">Logout</a> -->
+                                    <a class="dropdown-item log-out-list" href="{{ route('user.auth.logout') }}">Logout</a> 
                                 </div>
                         <li class="log"><a href="{{ route('user.auth.logout') }}">Logout</a></li>
                         </li>
