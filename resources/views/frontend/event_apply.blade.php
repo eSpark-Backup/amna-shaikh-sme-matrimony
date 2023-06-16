@@ -168,7 +168,7 @@
                                         </div>
                                         <div class="col-md-1">
                                             <label for="gender" class="form-label"></label>
-                                            <button class="btn btn-success btn-small" id="add_more" style="    margin-top: 7px;">+</button>
+                                            <button class="btn btn-custom-secondary " id="add_more" style="margin-top: 7px;">+ Add</button>
                                         </div>
                                     </div>
                                 </div>
