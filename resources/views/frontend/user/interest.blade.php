@@ -60,9 +60,78 @@
         </div>
     </section>
 </main>
+<div class="modal fade" id="liked">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                {{--                <h4 class="modal-title">Modal Heading</h4>--}}
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>You can send message</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn interest-request" id="send-like" data-dismiss="modal" data-status="1" data-checklikelimitcondition="0">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="chatLink">Send Message</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="alert_popup">
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="report-form" class="form-horizontal" action="{{route('user.report-user')}}" method="post">
+                        <div class="icon-show">!</div>
+                        <h2>Are you sure you want to Report this user?</h2>
+                        <!-- <p></p> -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="reasonList" class="form-label">Reason of reporting <span class="star"> :*</span></label>
+                                <select name="reasonList" id="reasonList" class="form-control required">
+                                    <option value="">-- Choose One --</option>
+                                    <option value="bad_manners">Bad Manners</option>
+                                    <option value="not_responsive">Not Responsive</option>
+                                    <option value="fake">Fake</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 reportComments" style="display:none;">
+                                <label for="comment" class="form-label">Comments <span class="star"> :*</span></label>
+                                <textarea class="form-control" name="comment"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="memberId" value="" id="reportMemberId">
+                        <div class="alert-action">
+
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-custom-primary">Submit</a>
+                        <button type="button" class="btn-custom-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         var _assets = "{{ asset('assets/images/') }}" ;
 
@@ -130,11 +199,36 @@
                                             '<h5>'+mem.display_user_name+'</h5>'+
                                             '<div class="member-infos">'+
                                                '<span><img src="'+_assets+'/avatar.svg" alt="icon">'+mem.occupation+'</span>'+
-                                                '<span><img src="'+_assets+'/map.svg" alt="icon">('+mem.country+','+mem.city+')</span>'+
-                                            '</div>';
+                                                '<span><img src="'+_assets+'/map.svg" alt="icon">('+mem.country+','+mem.city+')</span>';
+
+                                if(request == "request_accept")
+                                {
+                                    _ul += '<button class="interest-request likeMe mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>'+
+                                        '<button class="interest-request mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>'+
+                                        '<button class="report-request mx-1" style="max-width:20px;border: 1px; cursor:pointer" data-memberid="'+mem.id+'"><img src="{{ url("images/Mark.png") }}" alt=""></button>';
+                                }
+                                else if(request == "requested")
+                                {
+                                    _ul += '<button class="interest-request likeMe mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>'+
+                                        '<button class="interest-request mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>';
+                                }
+                                else if(request == "request_send")
+                                {
+                                    _ul += '<button class="interest-request mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>'+
+                                        '<button class="report-request mx-1" style="max-width:20px;border: 1px; cursor:pointer" data-memberid="'+mem.id+'"><img src="{{ url("images/Mark.png") }}" alt=""></button>';
+                                }
+                                else if(request == "request_reject")
+                                {
+                                    _ul += '<button class="interest-request likeMe mx-1" style="max-width:20px; border: 1px; cursor:pointer" data-memberid="'+mem.id+'" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>'+
+                                        '<button class="report-request mx-1" style="max-width:20px;border: 1px; cursor:pointer" data-memberid="'+mem.id+'"><img src="{{ url("images/Mark.png") }}" alt=""></button>';
+                                }
+
+
+                                _ul += '</div>';
+
                                             if (request == 'requested') {
                                                 _ul += '<div class="prof-actions prof-btn-wraper">'+
-                                                    '<a href="#" class="likeMe request-action" data-member="'+mem.id+'" data-status="1"><img src="'+_assets+'/like.png" alt="icon">Accept</a>'+
+                                                    '<a href="#" class="likeMe request-action" data-member="'+mem.id+'" data-status="1" data-checklikelimitcondition="0"><img src="'+_assets+'/like.png" alt="icon">Accept</a>'+
                                                     '<a href="#" class="request-action" data-member="'+mem.id+'" data-status="3"><img src="'+_assets+'/cross-ic.png" alt="icon">Reject</a>'+
                                                 '</div>';
                                             }else{
@@ -157,5 +251,164 @@
                 }
             });
         }
+        $('body').on('click', '.interest-request', function (e) {
+
+
+            e.preventDefault();
+            var id = $(this).data('memberid');
+            var status = $(this).data('status');
+            var checkLikeLimitCondition = $(this).data('checklikelimitcondition');
+
+            if(checkLikeLimitCondition == 1)
+            {
+                $('#send-like').attr("data-memberid",id);
+                var chatUrl = "{{ url('user/chats') }}";
+                chatUrl = chatUrl+"?id="+id;
+                var chatPageUrl = "window.location.href = '"+chatUrl+"'"
+                $('#chatLink').attr('onclick',chatPageUrl);
+
+                // onclick="window.location.href = 'https://ide.geeksforgeeks.org';"
+            }
+            showOverlayLoader();
+            $.ajax({
+                url: "{{ url('/user/send-interest-request') }}",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: "post",
+                data: {
+                    'member_interested_id': id,
+                    'status': status,
+                    'checkLikeLimitCondition':checkLikeLimitCondition
+                },
+                cache: false,
+
+                success: function (data) {
+                    hideOverlayLoader();
+
+                    var data = JSON.parse(data);
+
+                    if (data.status == 1) {
+                        oTable.ajax.reload();
+                        if(data.req_message != ''){
+                            Swal.fire({
+                                icon: 'info',
+                                // title: 'Why wait?',
+
+                                text:  data.req_message ,
+                                showClass: {
+                                    popup: 'animate__animated animate__fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate__animated animate__fadeOutUp'
+                                },
+                                showCloseButton: true,
+                                showCancelButton: false,
+                                focusConfirm: false,
+                                confirmButtonText:'OK',
+                                confirmButtonColor: '#21c2d6',
+                            });
+                        }
+                    } else if(data.status == 0) {
+
+                        Swal.fire({
+                            icon: 'warning',
+                            title: data.title,
+                            text:   data.message,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            },
+
+                            showCancelButton: false,
+                            focusConfirm: false,
+                            confirmButtonText:'OK',
+                            confirmButtonColor: '#21c2d6',
+                        });
+                        return false;
+                    } else if(data.status == 3) {
+                        // alert('Update Plan')
+                        $('#like_for_approval').modal('show');
+                    }
+                    else if(data.status == 5) {
+                        $('#liked').modal('show');
+                    }
+                }
+            });
+        });
+
+        $('body').on('click', '.report-request', function (e) {
+            var memberId = $(this).attr('data-memberid');
+            $('#reportMemberId').val(memberId);
+            $('#reportModal').modal('show');
+        });
+
+        $('#report-form').on('submit', function (e) {
+            e.preventDefault();
+            var _this = $(this);
+            var formData = new FormData(this);
+            $.ajax({
+                url: "{{ url('/user/report-user') }}",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type:"POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    hideOverlayLoader();
+                    $('#reportModal').modal('hide');
+                    var data = JSON.parse(data);
+
+                    if (data.status == 1) {
+                        oTable.ajax.reload();
+                        if(data.req_message != ''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Reported User',
+
+                                text:  data.req_message ,
+                                showClass: {
+                                    popup: 'animate__animated animate__fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate__animated animate__fadeOutUp'
+                                },
+                                showCloseButton: true,
+                                showCancelButton: false,
+                                focusConfirm: false,
+                                confirmButtonText:
+                                    'Okay',
+                                confirmButtonColor: '#21c2d6',
+                            });
+                        }
+                    } else if(data.status == 0) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: data.title,
+
+                            text:   data.message,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            },
+                            showCloseButton: true,
+                            showCancelButton: false,
+                            focusConfirm: false,
+                            confirmButtonColor: '#21c2d6',
+
+                        });
+                        return false;
+                    }
+                }
+            });
+
+        });
     </script>
 @endsection

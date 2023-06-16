@@ -150,7 +150,7 @@
             <a href="#" class="btn-custom-primary btn-member-msg w-100 text-center my-2" data-memberidhash="{{ $member->hash_id}}">Send Message</a>
         </div>
         <div class="d-flex col-12 col-md-8 col-lg-9 justify-content-end  col-6 order-sm-2 order-1">
-            <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>
+            <button class="interest-request likeMe mx-1" data-memberid="{{ $member->id }}" data-status="1" data-checklikelimitcondition="1"><img src="{{ url("images/Heart.png") }}" alt=""></button>
             <button class="interest-request mx-1" data-memberid="{{ $member->id }}" data-status="3"><img src="{{ url("images/Close.png") }}" alt=""></button>
             <button class="report-request mx-1" data-memberid="{{ $member->id }}"><img src="{{ url("images/Mark.png") }}" alt=""></button>
         </div>
