@@ -28,7 +28,7 @@
                             <div class="chat-sidebar active">
                         @endif
                             <div class="caht-head">
-                                <h4>Chats</h4>
+                                <h4 style="color: white">Chats</h4>
                                 <!-- <span>6 active chats</span> -->
                             </div>
 

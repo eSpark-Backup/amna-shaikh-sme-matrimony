@@ -2,10 +2,10 @@
 
 @font-face {
     font-family: "Helvetica";
-    src: url("Helvetica.eot?#iefix") format("embedded-opentype"),
-        url("Helvetica.woff") format("woff"),
-        url("Helvetica.ttf") format("truetype"),
-        url("Helvetica.svg#Helvetica") format("svg");
+    src: url("fonts/Helvetica.eot?#iefix") format("embedded-opentype"),
+        asset("fonts/Helvetica.woff") format("woff"),
+        asset("fonts/Helvetica.ttf") format("truetype"),
+        url("fonts/Helvetica.svg#Helvetica") format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -3583,7 +3583,7 @@ section.chat-section {
 .swal2-actions button.swal2-styled {
     margin: 0;
     border-radius: 10px;
-    background: linear-gradient(98.41deg, #4fa6c9 -22.46%, #6c41b6 82.65%) !important; 
+    background: linear-gradient(98.41deg, #4fa6c9 -22.46%, #6c41b6 82.65%) !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100%;
