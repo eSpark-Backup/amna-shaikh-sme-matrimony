@@ -212,8 +212,11 @@ class EventController extends Controller
                 //$filename = 'member-'.$file->getClientOriginalName();
                 foreach ($files as $K => $file) {
                    $filename = 'event_image-' . uniqid() . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('events', $filename);
+//                    $filename = $file->store('photos');
+                    $file->move(public_path('storage/events'), $filename);
+//                    $path = $file->storeAs('events', $filename);
                     $ArGal[] = $filename;
+
                 }
 
                 $Rs3 =  $model; //Event::where(['id' => $input['id'] ])->first();
@@ -294,7 +297,9 @@ class EventController extends Controller
                 }
             }
 
-            $path = $file->storeAs('events', $v_filename);
+//            $path = $file->storeAs('events', $v_filename);
+            $path = $request->event_video->move('storage/events', $v_filename);
+
             $input['event_video'] = $v_filename;
 
             /*$ov = $file->getClientOriginalName();
@@ -333,7 +338,7 @@ class EventController extends Controller
     public function edit($id)
     {
 
-        $id = Hashids::decode($id)[0];
+//        $id = Hashids::decode($id)[0];
 
         //if($id == 1)
         //access_denied();
