@@ -168,7 +168,7 @@ $alreadySelectedRelation = '';
                                         </div>
                                         <div class="col-md-2 col-lg-1">
                                             <label for="gender" class="form-label"></label>
-                                            <button class="btn btn-custom-secondary btn-small px-3 mt-7 mr-4" id="add_more">+</button>
+                                            <button class="btn btn-custom-secondary " id="add_more" style="margin-top: 7px;">+ Add</button>
                                         </div>
                                     </div>
                                 </div>

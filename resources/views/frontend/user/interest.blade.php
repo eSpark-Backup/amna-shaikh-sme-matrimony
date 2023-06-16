@@ -141,10 +141,6 @@
                                                             '<img class="report-request" src="'+_assets+'/Mark.png" data-memberid="mem.id+" alt=mark>'+
                                                         '</div>'+
                                                     '</div>';
-                                                      
-            
-            
-            
                                                         if (request == 'requested') {
                                                             _ul += '<div class="prof-actions prof-btn-wraper">'+
                                                                 '<a href="#" class="likeMe request-action" data-member="'+mem.id+'" data-status="1"><img src="'+_assets+'/like.png" alt="icon">Accept</a>'+
